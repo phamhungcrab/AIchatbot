@@ -114,10 +114,28 @@ http://localhost:5000/
 ---------------------------------------------------------------
 bonus:
 + pip freeze > requirements.txt         (xuất thư viện vào requirements)
+
 + pip list --format=columns     (liệt kê thư viện)
+
 + where python      (check phiên bản python đang có)
+
 + where python
 py --list   (kiểm tra các python đang có)
+
+
++ # Tạo 1 commit mới duy nhất
+
+git checkout --orphan latest_branch (tạo lastest_branch mất lịch sử commit nhưng file code vẫn có)
+git add -A (Thêm tất cả file hiện có (A = all) vào staging area.)
+git commit -m "Initial clean commit" (Tạo commit đầu tiên (duy nhất) cho branch này.)
+
+# Xóa branch cũ và đổi tên
+git branch -D main (XÓA branch main cũ trên máy local (không phải GitHub)
+git branch -m main (Đổi tên branch hiện tại (latest_branch) thành main.)
+
+# Force push lên GitHub (ghi đè toàn bộ lịch sử)
+git push -f origin main (Gửi branch main mới này lên GitHub và GHI ĐÈ lịch sử cũ)
+
 
 
 ---------------------------------------------------------------
