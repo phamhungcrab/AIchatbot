@@ -76,17 +76,17 @@ python -m nltk.downloader punkt punkt_tab
 3️⃣. Khởi tạo cơ sở dữ liệu (nếu chưa có)
 ---------------------------------------------------------------
 cd app
-python datastore.py
+python -m app.datastore
 → File knowledge.db sẽ được tạo trong thư mục /data
 
 4️⃣. Huấn luyện mô hình
 ---------------------------------------------------------------
-python app/train_models.py
+python -m app.train_models
 → Tạo các file model .pkl trong thư mục /models
 
 5️⃣. Chạy web server Flask
 ---------------------------------------------------------------
-python app/chatbot_app.py
+python -m app/chatbot_app
 
 → Mở trình duyệt truy cập:
 http://127.0.0.1:5000/
