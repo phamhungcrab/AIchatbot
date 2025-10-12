@@ -62,13 +62,16 @@ AICHATBOT/
 
 1️⃣. Tạo môi trường ảo Python
 ---------------------------------------------------------------
-python -m venv venv
+py -3.12 -m venv venv
 venv\Scripts\activate.bat       (Windows)
 source venv/bin/activate    (Linux/Mac)
 
 2️⃣. Cài đặt thư viện cần thiết
 ---------------------------------------------------------------
 pip install -r requirements.txt
+python -m nltk.downloader stopwords punkt wordnet omw-1.4
+pip install pyvi
+python -m nltk.downloader punkt punkt_tab
 
 3️⃣. Khởi tạo cơ sở dữ liệu (nếu chưa có)
 ---------------------------------------------------------------
@@ -136,7 +139,6 @@ git branch -m main (Đổi tên branch hiện tại (latest_branch) thành main.
 git push -f origin main (Gửi branch main mới này lên GitHub và GHI ĐÈ lịch sử cũ)
 
 + https://www.python.org/downloads/release/python-3126/	(tải bản python 3.12)
-
 
 ---------------------------------------------------------------
 👨‍💻 TÁC GIẢ
