@@ -122,7 +122,6 @@ bonus:
 + where python
 py --list   (kiểm tra các python đang có)
 
-
 + # Tạo 1 commit mới duy nhất
 
 git checkout --orphan latest_branch (tạo lastest_branch mất lịch sử commit nhưng file code vẫn có)
@@ -136,6 +135,7 @@ git branch -m main (Đổi tên branch hiện tại (latest_branch) thành main.
 # Force push lên GitHub (ghi đè toàn bộ lịch sử)
 git push -f origin main (Gửi branch main mới này lên GitHub và GHI ĐÈ lịch sử cũ)
 
++ https://www.python.org/downloads/release/python-3126/	(tải bản python 3.12)
 
 
 ---------------------------------------------------------------
