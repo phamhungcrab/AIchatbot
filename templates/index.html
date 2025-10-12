@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}Chatbot Nhập Môn AI{% endblock %}
+
+{% block content %}
+<main class="chat-container">
+    <section class="chat-box" id="chat-box">
+        {% if chat_history %}
+            {% for msg in chat_history %}
+                <div class="message user"><strong>Bạn:</strong> {{ msg.user }}</div>
+                <div class="message bot"><strong>Bot:</strong> {{ msg.bot }}</div>
+            {% endfor %}
+        {% else %}
+            <p class="placeholder">Chào mừng bạn đến với Chatbot AI! Hãy đặt câu hỏi liên quan đến môn Nhập môn Trí tuệ nhân tạo.</p>
+        {% endif %}
+    </section>
+
+    <section class="input-area">
+        <form action="/" method="POST" class="input-form">
+            <input type="text" id="user-input" name="user_message" placeholder="Nhập câu hỏi của bạn..." required autofocus>
+            <button type="submit" class="send-btn">Gửi</button>
+        </form>
+
+        <form action="/clear" method="POST">
+            <button type="submit" class="clear-btn">Xóa hội thoại</button>
+        </form>
+    </section>
+</main>
+{% endblock %}

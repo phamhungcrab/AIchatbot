@@ -1,0 +1,161 @@
+/* ----------- Tổng thể ----------- */
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background-color: #f4f7f9;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+/* ----------- Header ----------- */
+.site-header {
+    background-color: #004d61;
+    color: white;
+    text-align: center;
+    padding: 1rem;
+}
+
+.nav-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+}
+
+.nav-list a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.nav-list a:hover {
+    text-decoration: underline;
+}
+
+/* ----------- Chat container ----------- */
+.chat-container {
+    max-width: 700px;
+    margin: 2rem auto;
+    padding: 1rem;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.chat-box {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 1rem;
+    height: 400px;
+    overflow-y: auto;
+    background-color: #fafafa;
+}
+
+.placeholder {
+    color: #777;
+    font-style: italic;
+    text-align: center;
+    margin-top: 150px;
+}
+
+/* ----------- Tin nhắn ----------- */
+.message {
+    margin: 0.8rem 0;
+    padding: 0.8rem;
+    border-radius: 6px;
+    max-width: 90%;
+}
+
+.message.user {
+    background-color: #d1f5d3;
+    align-self: flex-end;
+    text-align: right;
+}
+
+.message.bot {
+    background-color: #e3ecff;
+    align-self: flex-start;
+}
+
+/* ----------- Form nhập ----------- */
+.input-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+.input-form {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    max-width: 600px;
+}
+
+.input-form input[type="text"] {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+}
+
+.send-btn {
+    background-color: #004d61;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 15px;
+    margin-left: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.send-btn:hover {
+    background-color: #00788a;
+}
+
+.clear-btn {
+    margin-top: 0.8rem;
+    background-color: #d9534f;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 12px;
+    cursor: pointer;
+}
+
+.clear-btn:hover {
+    background-color: #c9302c;
+}
+
+/* ----------- Footer ----------- */
+.site-footer {
+    background-color: #004d61;
+    color: white;
+    text-align: center;
+    padding: 0.8rem;
+    margin-top: 2rem;
+    font-size: 0.9rem;
+}
+
+/* ----------- Cuộn mượt và hiệu ứng ----------- */
+html {
+    scroll-behavior: smooth;
+}
+
+button:active {
+    transform: scale(0.97);
+    transition: 0.1s ease;
+}
+
+#chat-box::-webkit-scrollbar {
+    width: 8px;
+}
+
+#chat-box::-webkit-scrollbar-thumb {
+    background-color: #bbb;
+    border-radius: 4px;
+}

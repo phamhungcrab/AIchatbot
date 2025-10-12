@@ -1,0 +1,9 @@
+question,answer,topic
+"KNN là gì?","K-Nearest Neighbors (KNN) là thuật toán học máy thuộc nhóm giám sát, phân loại dữ liệu mới dựa trên khoảng cách đến các điểm lân cận trong tập huấn luyện.","MachineLearning"
+"Naïve Bayes hoạt động như thế nào?","Naïve Bayes dựa trên định lý Bayes, giả định các đặc trưng độc lập có điều kiện, tính xác suất của mỗi lớp và chọn lớp có xác suất cao nhất.","MachineLearning"
+"Tác tử là gì?","Tác tử (Agent) là thực thể có khả năng cảm nhận môi trường xung quanh qua cảm biến và hành động thông qua bộ phận chấp hành.","Agents"
+"PEAS gồm những thành phần nào?","PEAS gồm bốn thành phần: Performance measure, Environment, Actuators, Sensors – dùng để mô tả tác tử và môi trường hoạt động.","Agents"
+"Tìm kiếm theo chiều rộng (BFS) là gì?","BFS mở rộng các nút ở cùng độ sâu trước khi đi sâu hơn – thường dùng hàng đợi (queue) để lưu trữ trạng thái.","Search"
+"DFS khác BFS như thế nào?","DFS (Depth-First Search) đi sâu theo một nhánh trước, dùng ngăn xếp (stack); BFS (Breadth-First Search) mở rộng theo từng lớp, dùng hàng đợi (queue).","Search"
+"Logic mệnh đề là gì?","Logic mệnh đề là hệ thống logic trong đó các phát biểu có giá trị Đúng hoặc Sai, được dùng để biểu diễn và suy luận tri thức.","Logic"
+"Logic vị từ khác logic mệnh đề ở điểm nào?","Logic vị từ (First-Order Logic) mở rộng logic mệnh đề bằng biến, hàm và lượng từ, cho phép biểu diễn tri thức phức tạp hơn.","Logic"

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Chatbot AI{% endblock %}</title>
+
+    <!-- Liên kết CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <!-- Liên kết favicon (nếu có) -->
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/hust.png') }}">
+</head>
+<body>
+    <header class="site-header">
+        <h1>🤖 Chatbot - Nhập môn Trí tuệ Nhân tạo</h1>
+        <nav>
+            <ul class="nav-list">
+                <li><a href="/">Trang chủ</a></li>
+                <li><a href="#">Giới thiệu</a></li>
+                <li><a href="#">Liên hệ</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    {% block content %}{% endblock %}
+
+    <footer class="site-footer">
+        <p>Phạm Ngọc Hưng - MSSV: 20235342 | © 2025 Trường ĐHBK Hà Nội</p>
+    </footer>
+
+    <!-- Liên kết JavaScript -->
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
