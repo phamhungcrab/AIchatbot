@@ -9,10 +9,10 @@
 
 import pandas as pd
 import pickle
-from app.datastore import get_all_qa                  # Lấy dữ liệu Q&A từ database
-from app.preprocess import preprocess_text, train_vectorizer
-from app.nb_module import train_naive_bayes
-from app.knn_module import train_knn
+from datastore import get_all_qa                  # Lấy dữ liệu Q&A từ database
+from preprocess import preprocess_text, train_vectorizer
+from nb_module import train_naive_bayes
+from knn_module import train_knn
 
 import nltk
 import os

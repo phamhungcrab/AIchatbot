@@ -7,10 +7,10 @@
 from flask import Flask, render_template, request, redirect, url_for  # Flask framework để xây web app
 import pandas as pd              # Xử lý dữ liệu dạng bảng
 import pickle                    # Đọc file model đã lưu (Naive Bayes, KNN, vectorizer)
-from app.preprocess import preprocess_text       # Hàm tiền xử lý văn bản (loại bỏ stopword, ký tự đặc biệt...)
-from app.nb_module import predict_topic          # Hàm dự đoán chủ đề bằng mô hình Naïve Bayes
-from app.knn_module import find_best_answer      # Hàm tìm câu trả lời gần nhất bằng KNN
-from app.datastore import get_all_qa, get_qa_by_topic  # Các hàm truy xuất dữ liệu Q&A từ SQLite
+from preprocess import preprocess_text       # Hàm tiền xử lý văn bản (loại bỏ stopword, ký tự đặc biệt...)
+from nb_module import predict_topic          # Hàm dự đoán chủ đề bằng mô hình Naïve Bayes
+from knn_module import find_best_answer      # Hàm tìm câu trả lời gần nhất bằng KNN
+from datastore import get_all_qa, get_qa_by_topic  # Các hàm truy xuất dữ liệu Q&A từ SQLite
 import os                       # Thư viện thao tác với đường dẫn file/thư mục
 
 # -------------------------------
