@@ -7,8 +7,43 @@
     <section class="chat-box" id="chat-box">
         {% if chat_history %}
             {% for msg in chat_history %}
-                <div class="message user"><strong>Bạn:</strong> {{ msg.user }}</div>
-                <div class="message bot"><strong>Bot:</strong> {{ msg.bot }}</div>
+                <div class="message user">
+                    <strong>Bạn:</strong> {{ msg.user }}
+                </div>
+                <div class="message bot">
+                    <strong>Bot:</strong> {{ msg.bot }}
+                    
+                    <!-- ✅ HIỂN THỊ CONFIDENCE -->
+                    {% if msg.confidence is defined and msg.confidence > 0 %}
+                    <div class="confidence-info">
+                        <div class="confidence-bar-container">
+                            <div class="confidence-bar" style="width: {{ (msg.confidence * 100)|round }}%">
+                                {{ (msg.confidence * 100)|round }}%
+                            </div>
+                        </div>
+                        
+                        <!-- Badge mức độ tin cậy -->
+                        {% if msg.confidence >= 0.85 %}
+                            <span class="confidence-badge high">✓ Rất tin cậy</span>
+                        {% elif msg.confidence >= 0.70 %}
+                            <span class="confidence-badge medium">~ Tin cậy</span>
+                        {% elif msg.confidence >= 0.55 %}
+                            <span class="confidence-badge low">? Chưa chắc chắn</span>
+                        {% else %}
+                            <span class="confidence-badge very-low">⚠ Độ tin cậy thấp</span>
+                        {% endif %}
+                        
+                        <!-- Chi tiết (có thể collapse) -->
+                        <details class="confidence-details">
+                            <summary>Chi tiết</summary>
+                            <ul>
+                                <li>Chủ đề: <strong>{{ msg.topic }}</strong> ({{ (msg.topic_conf * 100)|round }}%)</li>
+                                <li>Độ tương đồng câu hỏi: {{ (msg.question_sim * 100)|round }}%</li>
+                            </ul>
+                        </details>
+                    </div>
+                    {% endif %}
+                </div>
             {% endfor %}
         {% else %}
             <p class="placeholder">Chào mừng bạn đến với Chatbot AI! Hãy đặt câu hỏi liên quan đến môn Nhập môn Trí tuệ nhân tạo.</p>
@@ -26,4 +61,101 @@
         </form>
     </section>
 </main>
+
+<style>
+/* ===== STYLING CHO CONFIDENCE ===== */
+
+.confidence-info {
+    margin-top: 12px;
+    padding: 12px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    font-size: 0.9em;
+}
+
+/* Progress bar */
+.confidence-bar-container {
+    width: 100%;
+    height: 24px;
+    background: #e0e0e0;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 8px;
+}
+
+.confidence-bar {
+    height: 100%;
+    background: linear-gradient(90deg, #4caf50, #8bc34a);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    transition: width 0.5s ease;
+}
+
+/* Badges */
+.confidence-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-weight: bold;
+    font-size: 0.85em;
+    margin-top: 6px;
+}
+
+.confidence-badge.high {
+    background: #4caf50;
+    color: white;
+}
+
+.confidence-badge.medium {
+    background: #ff9800;
+    color: white;
+}
+
+.confidence-badge.low {
+    background: #ff5722;
+    color: white;
+}
+
+.confidence-badge.very-low {
+    background: #f44336;
+    color: white;
+}
+
+/* Chi tiết collapse */
+.confidence-details {
+    margin-top: 8px;
+    font-size: 0.85em;
+    color: #666;
+}
+
+.confidence-details summary {
+    cursor: pointer;
+    color: #667eea;
+    font-weight: 600;
+}
+
+.confidence-details summary:hover {
+    text-decoration: underline;
+}
+
+.confidence-details ul {
+    margin-top: 8px;
+    padding-left: 20px;
+    list-style: none;
+}
+
+.confidence-details li {
+    padding: 4px 0;
+}
+
+.confidence-details li:before {
+    content: "▸ ";
+    color: #667eea;
+    font-weight: bold;
+}
+</style>
+
 {% endblock %}

@@ -1,92 +1,89 @@
 # -------------------------------
-# 🧹 preprocess.py — Mô-đun tiền xử lý văn bản
-# Chức năng: làm sạch, chuẩn hóa dữ liệu ngôn ngữ tự nhiên
-# để mô hình Naïve Bayes & KNN hiểu được.
+# 🧹 preprocess.py — Tiền xử lý văn bản Tiếng Việt tối ưu
 # -------------------------------
 
-import re                # Regular Expressions → xử lý ký tự đặc biệt, lọc chuỗi
-import string            # Dùng để truy cập dấu câu (punctuation)
-import nltk              # Natural Language Toolkit — thư viện xử lý ngôn ngữ tự nhiên
-# Dùng để vector hóa văn bản (TF-IDF)
+import re
+import pickle
+# Thư viện tách từ chuyên dụng cho tiếng Việt
+from pyvi import ViTokenizer 
+# Thư viện vector hóa văn bản
 from sklearn.feature_extraction.text import TfidfVectorizer
 
 # -------------------------------
-# ⚙️ Thiết lập stopwords (từ dừng)
+# 🛑 1. DANH SÁCH STOPWORDS TIẾNG VIỆT (TỪ DỪNG)
 # -------------------------------
-# Nếu là lần đầu chạy trên máy mới, bạn cần tải về dữ liệu stopwords:
-# → Bỏ dấu "#" ở 2 dòng sau và chạy một lần
-# nltk.download('stopwords')
-# nltk.download('punkt')
-
-from nltk.corpus import stopwords
-# Tập hợp các từ dừng tiếng Anh (có thể mở rộng thêm tiếng Việt)
-stop_words = set(stopwords.words('english'))
-
+# Đây là những từ xuất hiện nhiều nhưng ít mang ý nghĩa phân loại.
+# Loại bỏ chúng giúp bot tập trung vào từ khóa chính (như "học máy", "giải thuật").
+VIETNAMESE_STOPWORDS = {
+    'thì', 'là', 'mà', 'và', 'của', 'những', 'các', 'như', 'thế', 'nào', 
+    'được', 'về', 'với', 'trong', 'có', 'không', 'cho', 'tôi', 'bạn', 
+    'cậu', 'tớ', 'mình', 'nó', 'hắn', 'gì', 'cái', 'con', 'người', 
+    'sự', 'việc', 'đó', 'đây', 'kia', 'này', 'nhé', 'ạ', 'ơi', 'đi', 
+    'làm', 'khi', 'lúc', 'nơi', 'tại', 'đã', 'đang', 'sẽ', 'muốn', 
+    'phải', 'biết', 'hãy', 'rồi', 'chứ', 'nhỉ'
+}
 
 # =========================================================
-# 🧠 1️⃣ HÀM TIỀN XỬ LÝ CHUỖI VĂN BẢN
+# 🧠 2. HÀM TIỀN XỬ LÝ CHUỖI VĂN BẢN
 # =========================================================
 def preprocess_text(text: str) -> str:
     """
-    ✅ Mục đích:
-        Làm sạch và chuẩn hóa văn bản đầu vào để mô hình học máy xử lý tốt hơn.
-
-    📌 Các bước thực hiện:
-        1️⃣ Chuyển toàn bộ sang chữ thường.
-        2️⃣ Loại bỏ ký tự đặc biệt, dấu câu, và số.
-        3️⃣ Tách văn bản thành các từ riêng lẻ (tokenize).
-        4️⃣ Xóa bỏ các từ dừng (stopwords) không mang nhiều ý nghĩa.
-        5️⃣ Ghép lại thành chuỗi sạch cuối cùng.
-
-    🔁 Trả về:
-        clean_text: chuỗi văn bản đã được xử lý.
+    Quy trình: Lowercase -> Xóa ký tự lạ -> Tách từ (PyVi) -> Lọc Stopwords
     """
+    if not text:
+        return ""
 
-    # 1️⃣ Chuyển tất cả ký tự về chữ thường để thống nhất
+    # 1️⃣ Chuyển thành chữ thường
     text = text.lower()
 
-    # 2️⃣ Loại bỏ ký tự đặc biệt, dấu chấm, dấu hỏi, v.v.
-    # [^\w\s] nghĩa là giữ lại ký tự chữ và khoảng trắng, bỏ tất cả còn lại
+    # 2️⃣ Xóa các ký tự đặc biệt (giữ lại chữ cái, số và dấu cách)
+    # Loại bỏ dấu chấm, phẩy, hỏi chấm... để tránh nhiễu
     text = re.sub(r'[^\w\s]', '', text)
-
-    # 3️⃣ Loại bỏ chữ số (số 0–9) để tránh nhiễu
+    
+    # 3️⃣ Loại bỏ số (Tùy chọn: Nếu bot cần xử lý toán học thì bỏ dòng này)
     text = re.sub(r'\d+', '', text)
 
-    # 4️⃣ Tokenization — tách văn bản thành danh sách các từ (tokens)
-    tokens = nltk.word_tokenize(text)
+    # 4️⃣ Tách từ chuẩn tiếng Việt bằng PyVi
+    # Quan trọng: "học máy" -> "học_máy", "trí tuệ nhân tạo" -> "trí_tuệ_nhân_tạo"
+    # Giúp Bot hiểu đây là 1 cụm từ chứ không phải các từ rời rạc.
+    tokenized_text = ViTokenizer.tokenize(text)
 
-    # 5️⃣ Loại bỏ stopwords (ví dụ: "the", "is", "are", "and"...)
-    # → giúp mô hình tập trung vào từ khóa chính
-    filtered_tokens = [word for word in tokens if word not in stop_words]
+    # 5️⃣ Tách thành danh sách để lọc Stopwords
+    tokens = tokenized_text.split()
+    
+    # 6️⃣ Lọc bỏ từ dừng và các từ quá ngắn (<= 1 ký tự)
+    filtered_tokens = [
+        word for word in tokens 
+        if word not in VIETNAMESE_STOPWORDS and len(word) > 1
+    ]
 
-    # 6️⃣ Ghép lại danh sách từ thành chuỗi hoàn chỉnh (ngăn cách bằng khoảng trắng)
-    clean_text = ' '.join(filtered_tokens)
-
-    # 🏁 Trả về văn bản đã làm sạch
-    return clean_text
+    # 7️⃣ Ghép lại thành chuỗi hoàn chỉnh
+    return ' '.join(filtered_tokens)
 
 
 # =========================================================
-# 📊 2️⃣ HÀM HUẤN LUYỆN TF-IDF VECTORIZER
+# 📊 3. HÀM HUẤN LUYỆN TF-IDF VECTORIZER (CÓ N-GRAM)
 # =========================================================
 def train_vectorizer(corpus):
     """
-    ✅ Mục đích:
-        Huấn luyện TF-IDF vectorizer từ danh sách văn bản (corpus).
-        Sau đó có thể lưu vectorizer vào file .pkl để sử dụng lại.
-
-    📌 Tham số:
-        corpus: danh sách chuỗi văn bản (list[str]), ví dụ là các câu hỏi trong cơ sở dữ liệu
-
-    🔁 Trả về:
-        vectorizer: đối tượng TF-IDF đã được huấn luyện
+    Huấn luyện bộ chuyển đổi văn bản sang số (Vector).
+    Cập nhật: Sử dụng N-gram để tăng độ tin cậy cho Naïve Bayes.
     """
+    
+    vectorizer = TfidfVectorizer(
+        # Chỉ giữ lại tối đa 5000 từ/cụm từ quan trọng nhất
+        max_features=5000,
+        
+        # ⭐️ QUAN TRỌNG: N-gram range (1, 2)
+        # Giúp model học cả từ đơn ("học") và cụm 2 từ ("học_máy").
+        # Điều này giúp tăng độ tin cậy (confidence score) lên rất nhiều.
+        ngram_range=(1, 2),
+        
+        # Bỏ qua các từ xuất hiện quá ít (dưới 1 lần - mặc định)
+        min_df=1
+    )
 
-    # max_features=3000 → chỉ giữ lại 3000 từ quan trọng nhất (giúp giảm kích thước)
-    vectorizer = TfidfVectorizer(max_features=3000)
-
-    # "fit" để học ra bộ từ vựng và trọng số TF-IDF
+    # Học từ dữ liệu đầu vào
     vectorizer.fit(corpus)
 
-    # 🏁 Trả về mô hình vectorizer đã huấn luyện
     return vectorizer

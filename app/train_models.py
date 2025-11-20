@@ -6,17 +6,25 @@
 #   - Huấn luyện TF-IDF vectorizer, mô hình Naïve Bayes, và KNN
 #   - Lưu các mô hình ra thư mục "models/"
 # -------------------------------
-
 import pandas as pd
 import pickle
-from datastore import get_all_qa                  # Lấy dữ liệu Q&A từ database
-from preprocess import preprocess_text, train_vectorizer
-from nb_module import train_naive_bayes
-from knn_module import train_knn
-
 import nltk
 import os
+import ssl # <--- Fix lỗi SSL
 
+# --- ĐOẠN CODE FIX LỖI SSL (Bạn vừa thêm) ---
+try:
+    _create_unverified_https_context = ssl._create_unverified_context
+except AttributeError:
+    pass
+else:
+    ssl._create_default_https_context = _create_unverified_https_context
+
+# --- CÁC IMPORT QUAN TRỌNG (Kiểm tra kĩ đoạn này) ---
+# 👇 Bạn đang thiếu hoặc bị lỗi dòng này:
+from datastore import get_all_qa                  
+from preprocess import preprocess_text, train_vectorizer
+from nb_module import train_naive_bayes
 # -------------------------------
 # 📦 TẢI DỮ LIỆU HỖ TRỢ TỪ NLTK (lần đầu tiên chạy)
 # -------------------------------
@@ -94,14 +102,6 @@ def train_all_models():
     # 5️⃣ Huấn luyện mô hình KNN
     # ------------------------------------
     # Mô hình này dùng để tìm câu hỏi tương tự nhất → chọn câu trả lời gần nhất
-    print('🔍 Đang huấn luyện mô hình KNN...')
-    knn_model = train_knn(
-        vectorizer,                # Bộ vector hóa TF-IDF
-        df['clean_text'],          # Dữ liệu huấn luyện
-        df['topic'],               # Nhãn chủ đề (topic)
-        n_neighbors=8              # Số lượng láng giềng gần nhất (k)
-    )
-
     # ------------------------------------
     # 6️⃣ Kết thúc quá trình huấn luyện
     # ------------------------------------
@@ -109,7 +109,6 @@ def train_all_models():
     print('📦 Các mô hình đã được lưu trong thư mục: models/')
     print('   ├── vectorizer.pkl')
     print('   ├── nb_model.pkl')
-    print('   └── knn_model.pkl')
 
 
 # =========================================================

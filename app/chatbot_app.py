@@ -9,7 +9,7 @@ import pandas as pd              # Xử lý dữ liệu dạng bảng
 import pickle                    # Đọc file model đã lưu (Naive Bayes, KNN, vectorizer)
 from preprocess import preprocess_text       # Hàm tiền xử lý văn bản (loại bỏ stopword, ký tự đặc biệt...)
 from nb_module import predict_topic          # Hàm dự đoán chủ đề bằng mô hình Naïve Bayes
-from knn_module import find_best_answer      # Hàm tìm câu trả lời gần nhất bằng KNN
+from find_answer import find_best_answer      # Hàm tìm câu trả lời gần nhất bằng KNN
 from datastore import get_all_qa, get_qa_by_topic  # Các hàm truy xuất dữ liệu Q&A từ SQLite
 import os                       # Thư viện thao tác với đường dẫn file/thư mục
 
@@ -60,43 +60,67 @@ chat_history = []
 # -------------------------------
 @app.route('/', methods=['GET', 'POST'])
 def chatbot():
-    """
-    Xử lý 2 trường hợp:
-    - GET: hiển thị giao diện chatbot cùng lịch sử trò chuyện
-    - POST: nhận câu hỏi từ người dùng, xử lý và tạo phản hồi
-    """
-    global chat_history  # Sử dụng biến toàn cục để lưu lịch sử hội thoại
-
-    # Khi người dùng gửi tin nhắn từ form HTML
+    global chat_history
+    
     if request.method == 'POST':
-        user_message = request.form['user_message']  # Lấy nội dung người dùng nhập
-
-        # Kiểm tra tin nhắn không rỗng
+        user_message = request.form['user_message']
+        
         if user_message.strip():
-            # 🧹 Bước 1: Tiền xử lý văn bản (chuẩn hóa, xóa ký tự đặc biệt, chuyển thường,...)
+            # Bước 1: Tiền xử lý
             processed = preprocess_text(user_message)
-
-            # 🧩 Bước 2: Dự đoán chủ đề (topic) bằng mô hình Naïve Bayes
-            # predict_topic trả về (tên_chủ_đề, độ_tin_cậy)
-            topic, confidence = predict_topic(nb_model, vectorizer, processed)
-
-            # 🗂️ Bước 3: Lấy các câu hỏi - câu trả lời cùng chủ đề từ database
+            
+            # Bước 2: Dự đoán topic
+            topic, topic_confidence = predict_topic(nb_model, vectorizer, processed)
+            
+            # Bước 3: Lấy câu hỏi trong topic
             df_topic = get_qa_by_topic(topic)
-
-            # 🔍 Bước 4: Tìm câu trả lời gần nhất với câu hỏi người dùng bằng KNN
-            answer = find_best_answer(knn_model, vectorizer, user_message, df_topic)
-
-            # Nếu không tìm thấy câu trả lời phù hợp thì phản hồi mặc định
-            if not answer:
-                answer = "Xin lỗi, tôi chưa có thông tin về câu hỏi này."
-
-            # 📝 Lưu hội thoại (user hỏi - bot trả lời) vào danh sách lịch sử
-            chat_history.append({"user": user_message, "bot": answer})
-
-        # Sau khi xử lý xong → quay lại route "/" để hiển thị tin nhắn mới
+            
+            # Bước 4: Tìm best match với threshold
+            result = find_best_answer(
+                vectorizer, 
+                processed,  # ✅ Dùng processed thay vì user_message
+                df_topic, 
+                threshold=0.5  # ✅ Ngưỡng confidence tối thiểu
+            )
+            
+            answer, question_similarity, matched_question = result
+            
+            # ✅ Tính final confidence
+            if answer is None:
+                # Không tìm thấy câu hỏi phù hợp
+                final_confidence = 0.0
+                answer = "Xin lỗi, tôi không tìm thấy câu trả lời phù hợp cho câu hỏi này."
+            else:
+                # Tính confidence tổng hợp
+                final_confidence = (
+                    0.10 * topic_confidence +      # 10% từ topic
+                    0.60 * question_similarity +   # 60% từ question matching
+                    0.30 * 0.8                     # 30% giả định các yếu tố khác = 0.8
+                )
+                
+                # ✅ Thêm disclaimer dựa trên confidence
+                if final_confidence >= 0.85:
+                    pass  # Rất tin cậy, không cần disclaimer
+                elif final_confidence >= 0.70:
+                    answer += "\n\n💡 Nếu câu trả lời chưa chính xác, hãy hỏi chi tiết hơn."
+                elif final_confidence >= 0.55:
+                    answer += "\n\n⚠️ Tôi không hoàn toàn chắc chắn. Bạn có thể hỏi theo cách khác?"
+                else:
+                    answer = "🤔 Tôi không chắc lắm về câu trả lời này:\n\n" + answer
+                    answer += "\n\n⚠️ Đề xuất: Hãy đặt câu hỏi rõ ràng hơn hoặc liên hệ giảng viên."
+            
+            # ✅ Lưu kèm confidence (optional - để debug/analysis)
+            chat_history.append({
+                "user": user_message,
+                "bot": answer,
+                "confidence": round(final_confidence, 3),
+                "topic": topic,
+                "topic_conf": round(topic_confidence, 3),
+                "question_sim": round(question_similarity, 3) if question_similarity else 0.0
+            })
+        
         return redirect(url_for('chatbot'))
-
-    # Nếu là GET → hiển thị trang index.html cùng lịch sử hội thoại
+    
     return render_template('index.html', chat_history=chat_history)
 
 
