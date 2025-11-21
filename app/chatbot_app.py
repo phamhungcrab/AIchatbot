@@ -11,6 +11,7 @@ from preprocess import preprocess_text       # Hàm tiền xử lý văn bản (
 from nb_module import predict_topic          # Hàm dự đoán chủ đề bằng mô hình Naïve Bayes
 from find_answer import find_best_answer      # Hàm tìm câu trả lời gần nhất bằng KNN
 from datastore import get_all_qa, get_qa_by_topic  # Các hàm truy xuất dữ liệu Q&A từ SQLite
+from genai_module import generate_answer_with_ai # Module tích hợp Gemini AI
 import os                       # Thư viện thao tác với đường dẫn file/thư mục
 
 # -------------------------------
@@ -86,28 +87,54 @@ def chatbot():
             answer, question_similarity, matched_question = result
             
             # ✅ Tính final confidence
+            # ✅ Tính final confidence
             if answer is None:
-                # Không tìm thấy câu hỏi phù hợp
+                # Case 1: Không tìm thấy câu hỏi nào trong DB (do threshold của find_best_answer)
                 final_confidence = 0.0
-                answer = "Xin lỗi, tôi không tìm thấy câu trả lời phù hợp cho câu hỏi này."
+                print("DEBUG: answer is None -> final_confidence = 0.0")
             else:
-                # Tính confidence tổng hợp
+                # Case 2: Tìm thấy, nhưng cần kiểm tra độ tin cậy tổng hợp
                 final_confidence = (
                     0.10 * topic_confidence +      # 10% từ topic
                     0.60 * question_similarity +   # 60% từ question matching
                     0.30 * 0.8                     # 30% giả định các yếu tố khác = 0.8
                 )
-                
-                # ✅ Thêm disclaimer dựa trên confidence
+                print(f"DEBUG: Found answer. final_confidence = {final_confidence}")
+
+            # ---------------------------------------------------------
+            # 🤖 QUYẾT ĐỊNH: Dùng câu trả lời từ DB hay gọi AI?
+            # ---------------------------------------------------------
+            
+            # Ngưỡng để chấp nhận câu trả lời từ DB (ví dụ: 0.55)
+            CONFIDENCE_THRESHOLD = 0.55
+
+            if final_confidence >= CONFIDENCE_THRESHOLD:
+                # --- ĐỦ ĐỘ TIN CẬY ---
+                print("DEBUG: Confidence >= Threshold. Using DB answer.")
                 if final_confidence >= 0.85:
                     pass  # Rất tin cậy, không cần disclaimer
                 elif final_confidence >= 0.70:
                     answer += "\n\n💡 Nếu câu trả lời chưa chính xác, hãy hỏi chi tiết hơn."
                 elif final_confidence >= 0.55:
                     answer += "\n\n⚠️ Tôi không hoàn toàn chắc chắn. Bạn có thể hỏi theo cách khác?"
+            else:
+                # --- KHÔNG ĐỦ ĐỘ TIN CẬY (hoặc không tìm thấy) -> GỌI AI ---
+                print(f"DEBUG: Confidence thấp ({final_confidence:.2f}) < {CONFIDENCE_THRESHOLD}. Calling AI...")
+                
+                # Gọi Google Gemini
+                ai_answer = generate_answer_with_ai(user_message)
+                print(f"DEBUG: AI Response: {ai_answer[:50]}..." if ai_answer else "DEBUG: AI Response is None/Empty")
+                
+                if ai_answer:
+                    answer = ai_answer + "\n\n✨ Câu trả lời được sinh bởi trí tuệ nhân tạo (Gemini)."
+                    
+                    # Gán lại confidence giả định cho AI (để không bị coi là thấp nữa)
+                    final_confidence = 0.9
+                    topic = "AI_Generated"
                 else:
-                    answer = "🤔 Tôi không chắc lắm về câu trả lời này:\n\n" + answer
-                    answer += "\n\n⚠️ Đề xuất: Hãy đặt câu hỏi rõ ràng hơn hoặc liên hệ giảng viên."
+                    # Trường hợp AI cũng lỗi
+                    print("DEBUG: AI failed. Using fallback error message.")
+                    answer = "Xin lỗi, tôi không tìm thấy câu trả lời và cũng không thể kết nối với AI lúc này."
             
             # ✅ Lưu kèm confidence (optional - để debug/analysis)
             chat_history.append({
