@@ -140,6 +140,8 @@ git push -f origin main (Gửi branch main mới này lên GitHub và GHI ĐÈ l
 
 + https://www.python.org/downloads/release/python-3126/	(tải bản python 3.12)
 
++ pip install matplotlib numpy pandas (for jupyter)
+
 ---------------------------------------------------------------
 👨‍💻 TÁC GIẢ
 ---------------------------------------------------------------
