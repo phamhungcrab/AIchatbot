@@ -145,7 +145,11 @@ git push -f origin main (Gửi branch main mới này lên GitHub và GHI ĐÈ l
 ---------------------------------------------------------------
 👨‍💻 TÁC GIẢ
 ---------------------------------------------------------------
-Phạm Ngọc Hưng — MSSV: 20235342
+Pham Ngoc Hung 20235342
+Nguyen Minh Khoi 202416249
+Bui Trung Hoang 20235333
+Pham Ngoc Manh 202416277
+
 Trường Công nghệ Thông tin & Truyền thông
 Đại học Bách khoa Hà Nội (HUST)
 Môn học: IT3160 - Nhập môn Trí tuệ Nhân tạo
