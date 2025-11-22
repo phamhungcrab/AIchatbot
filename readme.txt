@@ -73,6 +73,13 @@ python -m nltk.downloader stopwords punkt wordnet omw-1.4
 pip install pyvi
 python -m nltk.downloader punkt punkt_tab
 
+.\venv\Scripts\activate
+pip install google-generativeai
+pip install -r requirements.txt
+pip install flask==3.0.0
+pip install pyvi
+pip install python-dotenv
+
 3️⃣. Khởi tạo cơ sở dữ liệu (nếu chưa có)
 ---------------------------------------------------------------
 cd app

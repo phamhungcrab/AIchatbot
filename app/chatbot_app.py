@@ -7,12 +7,12 @@
 from flask import Flask, render_template, request, redirect, url_for  # Flask framework để xây web app
 import pandas as pd              # Xử lý dữ liệu dạng bảng
 import pickle                    # Đọc file model đã lưu (Naive Bayes, KNN, vectorizer)
-from preprocess import preprocess_text       # Hàm tiền xử lý văn bản (loại bỏ stopword, ký tự đặc biệt...)
-from nb_module import predict_topic          # Hàm dự đoán chủ đề bằng mô hình Naïve Bayes
-from find_answer import find_best_answer      # Hàm tìm câu trả lời gần nhất bằng KNN
-from datastore import get_all_qa, get_qa_by_topic  # Các hàm truy xuất dữ liệu Q&A từ SQLite
-from genai_module import generate_answer_with_ai # Module tích hợp Gemini AI
-import os                       # Thư viện thao tác với đường dẫn file/thư mục
+from app.preprocess import preprocess_text       # Hàm tiền xử lý văn bản (loại bỏ stopword, ký tự đặc biệt...)
+from app.nb_module import predict_topic          # Hàm dự đoán chủ đề bằng mô hình Naïve Bayes
+from app.find_answer import find_best_answer      # Hàm tìm câu trả lời gần nhất bằng KNN
+from app.datastore import get_all_qa, get_qa_by_topic  # Các hàm truy xuất dữ liệu Q&A từ SQLite
+from app.m genai_module import generate_answer_with_ai # Module tích hợp Gemini AI
+import os, sys                       # Thư viện thao tác với đường dẫn file/thư mục
 
 # -------------------------------
 # ⚙️ Thiết lập đường dẫn cho Flask
@@ -62,30 +62,30 @@ chat_history = []
 @app.route('/', methods=['GET', 'POST'])
 def chatbot():
     global chat_history
-    
+
     if request.method == 'POST':
         user_message = request.form['user_message']
-        
+
         if user_message.strip():
             # Bước 1: Tiền xử lý
             processed = preprocess_text(user_message)
-            
+
             # Bước 2: Dự đoán topic
             topic, topic_confidence = predict_topic(nb_model, vectorizer, processed)
-            
+
             # Bước 3: Lấy câu hỏi trong topic
             df_topic = get_qa_by_topic(topic)
-            
+
             # Bước 4: Tìm best match với threshold
             result = find_best_answer(
-                vectorizer, 
+                vectorizer,
                 processed,  # ✅ Dùng processed thay vì user_message
-                df_topic, 
+                df_topic,
                 threshold=0.5  # ✅ Ngưỡng confidence tối thiểu
             )
-            
+
             answer, question_similarity, matched_question = result
-            
+
             # ✅ Tính final confidence
             # ✅ Tính final confidence
             if answer is None:
@@ -104,7 +104,7 @@ def chatbot():
             # ---------------------------------------------------------
             # 🤖 QUYẾT ĐỊNH: Dùng câu trả lời từ DB hay gọi AI?
             # ---------------------------------------------------------
-            
+
             # Ngưỡng để chấp nhận câu trả lời từ DB (ví dụ: 0.55)
             CONFIDENCE_THRESHOLD = 0.55
 
@@ -120,14 +120,14 @@ def chatbot():
             else:
                 # --- KHÔNG ĐỦ ĐỘ TIN CẬY (hoặc không tìm thấy) -> GỌI AI ---
                 print(f"DEBUG: Confidence thấp ({final_confidence:.2f}) < {CONFIDENCE_THRESHOLD}. Calling AI...")
-                
+
                 # Gọi Google Gemini
                 ai_answer = generate_answer_with_ai(user_message)
                 print(f"DEBUG: AI Response: {ai_answer[:50]}..." if ai_answer else "DEBUG: AI Response is None/Empty")
-                
+
                 if ai_answer:
                     answer = ai_answer + "\n\n✨ Câu trả lời được sinh bởi trí tuệ nhân tạo (Gemini)."
-                    
+
                     # Gán lại confidence giả định cho AI (để không bị coi là thấp nữa)
                     final_confidence = 0.9
                     topic = "AI_Generated"
@@ -135,7 +135,7 @@ def chatbot():
                     # Trường hợp AI cũng lỗi
                     print("DEBUG: AI failed. Using fallback error message.")
                     answer = "Xin lỗi, tôi không tìm thấy câu trả lời và cũng không thể kết nối với AI lúc này."
-            
+
             # ✅ Lưu kèm confidence (optional - để debug/analysis)
             chat_history.append({
                 "user": user_message,
@@ -145,9 +145,9 @@ def chatbot():
                 "topic_conf": round(topic_confidence, 3),
                 "question_sim": round(question_similarity, 3) if question_similarity else 0.0
             })
-        
+
         return redirect(url_for('chatbot'))
-    
+
     return render_template('index.html', chat_history=chat_history)
 
 
