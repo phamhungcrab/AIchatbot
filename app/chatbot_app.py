@@ -45,9 +45,9 @@ with open('models/vectorizer.pkl', 'rb') as f:
 with open('models/nb_model.pkl', 'rb') as f:
     nb_model = pickle.load(f)
 
-# knn_model.pkl: mô hình KNN → dùng để tìm câu trả lời gần nhất trong tập câu hỏi cùng chủ đề
-with open('models/knn_model.pkl', 'rb') as f:
-    knn_model = pickle.load(f)
+# knn_model.pkl: KHÔNG SỬ DỤNG (đã chuyển sang Cosine Similarity)
+# with open('models/knn_model.pkl', 'rb') as f:
+#     knn_model = pickle.load(f)
 
 # -------------------------------
 # 💬 Biến lưu lịch sử hội thoại
@@ -94,10 +94,11 @@ def chatbot():
                 print("DEBUG: answer is None -> final_confidence = 0.0")
             else:
                 # Case 2: Tìm thấy, nhưng cần kiểm tra độ tin cậy tổng hợp
+                # ✅ Công thức mới (NB-Centric): Naive Bayes quyết định chính
                 final_confidence = (
-                    0.10 * topic_confidence +      # 10% từ topic
-                    0.60 * question_similarity +   # 60% từ question matching
-                    0.30 * 0.8                     # 30% giả định các yếu tố khác = 0.8
+                    0.60 * topic_confidence +      # 60% - Naive Bayes quyết định chính
+                    0.30 * question_similarity +   # 30% - Hỗ trợ tìm câu trả lời cụ thể
+                    0.10 * 0.8                     # 10% - Yếu tố khác
                 )
                 print(f"DEBUG: Found answer. final_confidence = {final_confidence}")
 
@@ -111,9 +112,9 @@ def chatbot():
             if final_confidence >= CONFIDENCE_THRESHOLD:
                 # --- ĐỦ ĐỘ TIN CẬY ---
                 print("DEBUG: Confidence >= Threshold. Using DB answer.")
-                if final_confidence >= 0.85:
-                    pass  # Rất tin cậy, không cần disclaimer
-                elif final_confidence >= 0.70:
+                if final_confidence >= 0.80:
+                    pass  # Rất tin cậy (>= 80%), không cần disclaimer
+                elif final_confidence >= 0.65:
                     answer += "\n\n💡 Nếu câu trả lời chưa chính xác, hãy hỏi chi tiết hơn."
                 elif final_confidence >= 0.55:
                     answer += "\n\n⚠️ Tôi không hoàn toàn chắc chắn. Bạn có thể hỏi theo cách khác?"

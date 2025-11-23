@@ -71,8 +71,8 @@ def train_vectorizer(corpus):
     """
     
     vectorizer = TfidfVectorizer(
-        # Chỉ giữ lại tối đa 5000 từ/cụm từ quan trọng nhất
-        max_features=5000,
+        # ⭐️ Giảm xuống 800 để tối ưu cho Naive Bayes (tránh ma trận quá thưa)
+        max_features=800,
         
         # ⭐️ QUAN TRỌNG: N-gram range (1, 2)
         # Giúp model học cả từ đơn ("học") và cụm 2 từ ("học_máy").
@@ -80,7 +80,11 @@ def train_vectorizer(corpus):
         ngram_range=(1, 2),
         
         # Bỏ qua các từ xuất hiện quá ít (dưới 1 lần - mặc định)
-        min_df=1
+        min_df=1,
+        
+        # ⭐️ Sublinear TF scaling: sử dụng log(tf) thay vì tf
+        # Giúp giảm ảnh hưởng của từ xuất hiện quá nhiều lần
+        sublinear_tf=True
     )
 
     # Học từ dữ liệu đầu vào
