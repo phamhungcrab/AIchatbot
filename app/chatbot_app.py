@@ -11,18 +11,41 @@ from preprocess import preprocess_text       # Hàm tiền xử lý văn bản (
 from nb_module import predict_topic          # Hàm dự đoán chủ đề bằng mô hình Naïve Bayes
 from find_answer import find_best_answer      # Hàm tìm câu trả lời gần nhất bằng KNN
 from datastore import get_all_qa, get_qa_by_topic  # Các hàm truy xuất dữ liệu Q&A từ SQLite
-from genai_module import generate_answer_with_ai # Module tích hợp Gemini AI
+
 import os                       # Thư viện thao tác với đường dẫn file/thư mục
+from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
+import torch
 
 # -------------------------------
 # ⚙️ Thiết lập đường dẫn cho Flask
 # -------------------------------
-
-# BASE_DIR: đường dẫn tuyệt đối tới thư mục hiện tại (thư mục "app/")
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-
-# ROOT_DIR: lùi lên một cấp (thư mục cha chứa "app", "templates", "static"…)
 ROOT_DIR = os.path.join(BASE_DIR, "..")
+
+# -------------------------------
+# 📂 Nạp mô hình Generative (Fallback)
+# -------------------------------
+MODEL_PATH = os.path.join(ROOT_DIR, 'models', 'my_generative_bot')
+print("⏳ Đang tải model Generative Bot (Fallback)...")
+try:
+    gen_tokenizer = AutoTokenizer.from_pretrained(MODEL_PATH)
+    gen_model = AutoModelForSeq2SeqLM.from_pretrained(MODEL_PATH)
+    print("✅ Generative Model đã sẵn sàng!")
+except Exception as e:
+    print(f"❌ Lỗi load Generative Model: {e}")
+    gen_model = None
+
+def generate_answer_local(question):
+    if not gen_model:
+        return None
+    try:
+        input_text = f"question: {question}"
+        input_ids = gen_tokenizer(input_text, return_tensors="pt").input_ids
+        outputs = gen_model.generate(input_ids, max_length=128, num_beams=4, early_stopping=True)
+        return gen_tokenizer.decode(outputs[0], skip_special_tokens=True)
+    except Exception as e:
+        print(f"❌ Lỗi sinh câu trả lời: {e}")
+        return None
 
 # -------------------------------
 # 🚀 Khởi tạo ứng dụng Flask
@@ -119,23 +142,17 @@ def chatbot():
                 elif final_confidence >= 0.55:
                     answer += "\n\n⚠️ Tôi không hoàn toàn chắc chắn. Bạn có thể hỏi theo cách khác?"
             else:
-                # --- KHÔNG ĐỦ ĐỘ TIN CẬY (hoặc không tìm thấy) -> GỌI AI ---
-                print(f"DEBUG: Confidence thấp ({final_confidence:.2f}) < {CONFIDENCE_THRESHOLD}. Calling AI...")
+                # --- KHÔNG ĐỦ ĐỘ TIN CẬY (hoặc không tìm thấy) -> DÙNG GENERATIVE MODEL ---
+                print(f"DEBUG: Confidence thấp ({final_confidence:.2f}). Chuyển sang Generative Model...")
                 
-                # Gọi Google Gemini
-                ai_answer = generate_answer_with_ai(user_message)
-                print(f"DEBUG: AI Response: {ai_answer[:50]}..." if ai_answer else "DEBUG: AI Response is None/Empty")
+                gen_answer = generate_answer_local(user_message)
                 
-                if ai_answer:
-                    answer = ai_answer + "\n\n✨ Câu trả lời được sinh bởi trí tuệ nhân tạo (Gemini)."
-                    
-                    # Gán lại confidence giả định cho AI (để không bị coi là thấp nữa)
-                    final_confidence = 0.9
-                    topic = "AI_Generated"
+                if gen_answer:
+                    answer = gen_answer + "\n\n🤖 (Câu trả lời tự động từ AI)"
+                    final_confidence = 0.9 # Giả định confidence cao cho AI
+                    topic = "Generative AI"
                 else:
-                    # Trường hợp AI cũng lỗi
-                    print("DEBUG: AI failed. Using fallback error message.")
-                    answer = "Xin lỗi, tôi không tìm thấy câu trả lời và cũng không thể kết nối với AI lúc này."
+                    answer = "Xin lỗi, tôi chưa được học về vấn đề này và AI cũng không trả lời được."
             
             # ✅ Lưu kèm confidence (optional - để debug/analysis)
             chat_history.append({
@@ -170,4 +187,4 @@ def clear_history():
 # -------------------------------
 if __name__ == '__main__':
     # debug=True giúp auto reload khi thay đổi code và hiển thị log lỗi chi tiết
-    app.run(debug=True)
+    app.run(debug=True, host='0.0.0.0', port=5002) # Chạy port 5002 để tránh AirPlay (port 5000)
