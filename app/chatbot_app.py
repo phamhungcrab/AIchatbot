@@ -3,18 +3,29 @@
 # File này là "main.py" – file chính khởi chạy ứng dụng Flask
 # -------------------------------
 
+# -------------------------------
 # 📦 Import các thư viện cần thiết
 from flask import Flask, render_template, request, redirect, url_for  # Flask framework để xây web app
 import pandas as pd              # Xử lý dữ liệu dạng bảng
 import pickle                    # Đọc file model đã lưu (Naive Bayes, KNN, vectorizer)
-from preprocess import preprocess_text       # Hàm tiền xử lý văn bản (loại bỏ stopword, ký tự đặc biệt...)
-from nb_module import predict_topic          # Hàm dự đoán chủ đề bằng mô hình Naïve Bayes
-from find_answer import find_best_answer      # Hàm tìm câu trả lời gần nhất bằng KNN
-from datastore import get_all_qa, get_qa_by_topic  # Các hàm truy xuất dữ liệu Q&A từ SQLite
-
 import os                       # Thư viện thao tác với đường dẫn file/thư mục
-from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
-import torch
+import numpy as np
+
+# Import TensorFlow cho Deep Learning (Safe Import)
+try:
+    import tensorflow as tf
+    from tensorflow.keras.models import load_model
+    from tensorflow.keras.preprocessing.sequence import pad_sequences
+    TF_AVAILABLE = True
+except ImportError:
+    print("⚠️ TensorFlow not found. Deep Learning features will be disabled.")
+    TF_AVAILABLE = False
+
+# Import các module xử lý NLP
+from preprocess import preprocess_text, expand_query, detect_negation, weighted_keyword_match # 🆕 Module NLU đã gộp
+from nb_module import predict_topic          # Hàm dự đoán chủ đề
+from find_answer import find_best_answer      # Hàm tìm câu trả lời
+from datastore import get_all_qa, get_qa_by_topic  # Các hàm truy xuất dữ liệu
 
 # -------------------------------
 # ⚙️ Thiết lập đường dẫn cho Flask
@@ -23,138 +34,176 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 ROOT_DIR = os.path.join(BASE_DIR, "..")
 
 # -------------------------------
-# 📂 Nạp mô hình Generative (Fallback)
-# -------------------------------
-MODEL_PATH = os.path.join(ROOT_DIR, 'models', 'my_generative_bot')
-print("⏳ Đang tải model Generative Bot (Fallback)...")
-try:
-    gen_tokenizer = AutoTokenizer.from_pretrained(MODEL_PATH)
-    gen_model = AutoModelForSeq2SeqLM.from_pretrained(MODEL_PATH)
-    print("✅ Generative Model đã sẵn sàng!")
-except Exception as e:
-    print(f"❌ Lỗi load Generative Model: {e}")
-    gen_model = None
-
-def generate_answer_local(question):
-    if not gen_model:
-        return None
-    try:
-        input_text = f"question: {question}"
-        input_ids = gen_tokenizer(input_text, return_tensors="pt").input_ids
-        outputs = gen_model.generate(input_ids, max_length=128, num_beams=4, early_stopping=True)
-        return gen_tokenizer.decode(outputs[0], skip_special_tokens=True)
-    except Exception as e:
-        print(f"❌ Lỗi sinh câu trả lời: {e}")
-        return None
-
-# -------------------------------
 # 🚀 Khởi tạo ứng dụng Flask
 # -------------------------------
 app = Flask(
     __name__,
-    template_folder=os.path.join(ROOT_DIR, "templates"),  # Thư mục chứa file .html (Jinja2 templates)
-    static_folder=os.path.join(ROOT_DIR, "static")        # Thư mục chứa CSS, JS, ảnh, favicon, v.v.
+    template_folder=os.path.join(ROOT_DIR, "templates"),
+    static_folder=os.path.join(ROOT_DIR, "static")
 )
+
+# -------------------------------
+# 🎛️ CẤU HÌNH MÔ HÌNH (MODEL CONFIGURATION)
+# -------------------------------
+# Chỉ bật DL nếu có thư viện TensorFlow VÀ người dùng muốn dùng
+USE_DEEP_LEARNING = True if TF_AVAILABLE else False
 
 # -------------------------------
 # 📂 Nạp mô hình học máy đã huấn luyện sẵn
 # -------------------------------
 
-# vectorizer.pkl: mô hình chuyển văn bản thành vector số (TF-IDF, Bag-of-Words, v.v.)
-with open('models/vectorizer.pkl', 'rb') as f:
-    vectorizer = pickle.load(f)
+# 1. Naive Bayes & TF-IDF (Luôn nạp làm fallback)
+try:
+    with open('models/vectorizer.pkl', 'rb') as f:
+        vectorizer = pickle.load(f)
+    with open('models/nb_model.pkl', 'rb') as f:
+        nb_model = pickle.load(f)
+    print("✅ Loaded Naive Bayes model.")
+except Exception as e:
+    print(f"⚠️ Could not load Naive Bayes model: {e}")
 
-# nb_model.pkl: mô hình Naïve Bayes → dùng để dự đoán chủ đề (topic)
-with open('models/nb_model.pkl', 'rb') as f:
-    nb_model = pickle.load(f)
+# 2. Deep Learning (LSTM/GRU) - Chỉ nạp nếu cần hoặc file tồn tại
+dl_model = None
+dl_tokenizer = None
+dl_label_encoder = None
 
-# knn_model.pkl: KHÔNG SỬ DỤNG (đã chuyển sang Cosine Similarity)
-# with open('models/knn_model.pkl', 'rb') as f:
-#     knn_model = pickle.load(f)
+if USE_DEEP_LEARNING:
+    try:
+        dl_model = load_model('models/dl_model.h5')
+        with open('models/tokenizer.pickle', 'rb') as f:
+            dl_tokenizer = pickle.load(f)
+        with open('models/label_encoder.pickle', 'rb') as f:
+            dl_label_encoder = pickle.load(f)
+        print("✅ Loaded Deep Learning model.")
+    except Exception as e:
+        print(f"⚠️ Could not load Deep Learning model: {e}")
+        print("➡️ Switching back to Naive Bayes.")
+        USE_DEEP_LEARNING = False
 
-# -------------------------------
-# 💬 Biến lưu lịch sử hội thoại
-# -------------------------------
-# Lưu tạm trong bộ nhớ RAM (dạng list), sẽ mất khi reload server
-chat_history = []
+# =========================================================
+# 🧠 ENSEMBLE PREDICTION (Soft Voting)
+# =========================================================
+def predict_ensemble(text):
+    """
+    Kết hợp kết quả từ Naive Bayes và Deep Learning (nếu có).
+    Chiến lược: Soft Voting (Trung bình cộng xác suất).
+    """
+    # 1. Dự đoán bằng Naive Bayes (Luôn khả dụng)
+    nb_probs = None
+    if nb_model and vectorizer:
+        try:
+            # Preprocess riêng cho NB
+            expanded = expand_query(text)
+            processed = preprocess_text(expanded)
+            final_input = detect_negation(processed)
 
+            X_nb = vectorizer.transform([final_input])
+            nb_probs = nb_model.predict_proba(X_nb)[0]
+            classes = nb_model.classes_
+        except Exception as e:
+            print(f"⚠️ NB Error: {e}")
+            return "Unknown", 0.0
 
-# -------------------------------
-# 🌐 ROUTE CHÍNH: Trang Chatbot
-# -------------------------------
-@app.route('/', methods=['GET', 'POST'])
-def chatbot():
-    global chat_history
+    # 2. Dự đoán bằng Deep Learning (Nếu khả dụng)
+    dl_probs = None
+    if USE_DEEP_LEARNING and dl_model and dl_tokenizer:
+        try:
+            # Preprocess riêng cho DL
+            expanded = expand_query(text)
+            processed = preprocess_text(expanded)
+            final_input = detect_negation(processed)
+            
+            seq = dl_tokenizer.texts_to_sequences([final_input])
+            padded = pad_sequences(seq, maxlen=100) # Max len khớp với lúc train
+            
+            dl_probs_raw = dl_model.predict(padded)[0]
+            
+            # Map DL probs sang đúng thứ tự classes của NB
+            # (Giả sử LabelEncoder của DL khớp với classes của NB - Cần đồng bộ)
+            # Để an toàn, ta dùng LabelEncoder của DL để map tên class -> prob
+            dl_class_map = {dl_label_encoder.inverse_transform([i])[0]: p for i, p in enumerate(dl_probs_raw)}
+            
+            # Tạo vector prob theo thứ tự của NB classes
+            dl_probs = np.zeros(len(classes))
+            for i, cls in enumerate(classes):
+                dl_probs[i] = dl_class_map.get(cls, 0.0)
+                
+        except Exception as e:
+            print(f"⚠️ DL Error: {e}")
+            dl_probs = None
+
+    # 3. Kết hợp (Ensemble)
+    if dl_probs is not None:
+        # Trọng số: NB (0.4) + DL (0.6) - Ưu tiên DL vì hiểu ngữ cảnh tốt hơn
+        final_probs = 0.4 * nb_probs + 0.6 * dl_probs
+        print(f"🤖 Ensemble: NB({np.max(nb_probs):.2f}) + DL({np.max(dl_probs):.2f}) -> Final")
+    else:
+        # Fallback về NB 100%
+        final_probs = nb_probs
+        print(f"🤖 Ensemble: Only NB used ({np.max(nb_probs):.2f})")
+
+    # 4. Lấy kết quả cuối cùng
+    max_idx = np.argmax(final_probs)
+    predicted_topic = classes[max_idx]
+    confidence = final_probs[max_idx]
     
-    if request.method == 'POST':
-        user_message = request.form['user_message']
-        
-        if user_message.strip():
-            # Bước 1: Tiền xử lý
-            processed = preprocess_text(user_message)
-            
-            # Bước 2: Dự đoán topic
-            topic, topic_confidence = predict_topic(nb_model, vectorizer, processed)
-            
-            # Bước 3: Lấy câu hỏi trong topic
-            df_topic = get_qa_by_topic(topic)
-            
-            # Bước 4: Tìm best match với threshold
-            result = find_best_answer(
+    return predicted_topic, confidence
+
+# =========================================================
+# 🌐 ROUTES
+# =========================================================
+@app.route("/")
+def home():
+    return render_template("index.html")
+
+from inference_engine import inference_engine
+
+@app.route("/get_response", methods=["POST"])
+def chatbot():
                 vectorizer, 
-                processed,  # ✅ Dùng processed thay vì user_message
+                final_input,  # ✅ Dùng input đã qua xử lý NLU
                 df_topic, 
-                threshold=0.5  # ✅ Ngưỡng confidence tối thiểu
+                original_query=user_message, # 🆕 Dùng query gốc cho Jaccard
+                threshold=0.5
             )
             
             answer, question_similarity, matched_question = result
             
-            # ✅ Tính final confidence
+            # Bước 4: Tính điểm bổ sung từ từ khóa trọng số (Weighted Keywords)
+            keyword_score = weighted_keyword_match(user_message) # Tính trên message gốc
+            
             # ✅ Tính final confidence
             if answer is None:
-                # Case 1: Không tìm thấy câu hỏi nào trong DB (do threshold của find_best_answer)
                 final_confidence = 0.0
-                print("DEBUG: answer is None -> final_confidence = 0.0")
             else:
-                # Case 2: Tìm thấy, nhưng cần kiểm tra độ tin cậy tổng hợp
-                # ✅ Công thức mới (NB-Centric): Naive Bayes quyết định chính
-                final_confidence = (
-                    0.60 * topic_confidence +      # 60% - Naive Bayes quyết định chính
-                    0.30 * question_similarity +   # 30% - Hỗ trợ tìm câu trả lời cụ thể
-                    0.10 * 0.8                     # 10% - Yếu tố khác
-                )
-                print(f"DEBUG: Found answer. final_confidence = {final_confidence}")
+                # Công thức mới có tính thêm keyword_score (nhẹ)
+                base_conf = (0.60 * topic_confidence + 0.30 * question_similarity + 0.10 * 0.8)
+                
+                # Bonus điểm nếu khớp từ khóa quan trọng (tối đa +0.1)
+                bonus = min(keyword_score * 0.05, 0.1)
+                final_confidence = min(base_conf + bonus, 1.0)
+                
+                print(f"DEBUG: Base Conf={base_conf:.2f}, Bonus={bonus:.2f} -> Final={final_confidence:.2f}")
 
             # ---------------------------------------------------------
-            # 🤖 QUYẾT ĐỊNH: Dùng câu trả lời từ DB hay gọi AI?
+            # 🤖 QUYẾT ĐỊNH TRẢ LỜI (PURE NLU - NO GEN AI)
             # ---------------------------------------------------------
-            
-            # Ngưỡng để chấp nhận câu trả lời từ DB (ví dụ: 0.55)
             CONFIDENCE_THRESHOLD = 0.55
 
             if final_confidence >= CONFIDENCE_THRESHOLD:
                 # --- ĐỦ ĐỘ TIN CẬY ---
-                print("DEBUG: Confidence >= Threshold. Using DB answer.")
                 if final_confidence >= 0.80:
-                    pass  # Rất tin cậy (>= 80%), không cần disclaimer
+                    pass
                 elif final_confidence >= 0.65:
-                    answer += "\n\n💡 Nếu câu trả lời chưa chính xác, hãy hỏi chi tiết hơn."
+                    answer += "\n\n💡 (Tôi khá chắc chắn về câu trả lời này)"
                 elif final_confidence >= 0.55:
-                    answer += "\n\n⚠️ Tôi không hoàn toàn chắc chắn. Bạn có thể hỏi theo cách khác?"
+                    answer += "\n\n⚠️ (Tôi không chắc lắm, bạn kiểm tra lại nhé)"
             else:
-                # --- KHÔNG ĐỦ ĐỘ TIN CẬY (hoặc không tìm thấy) -> DÙNG GENERATIVE MODEL ---
-                print(f"DEBUG: Confidence thấp ({final_confidence:.2f}). Chuyển sang Generative Model...")
-                
-                gen_answer = generate_answer_local(user_message)
-                
-                if gen_answer:
-                    answer = gen_answer + "\n\n🤖 (Câu trả lời tự động từ AI)"
-                    final_confidence = 0.9 # Giả định confidence cao cho AI
-                    topic = "Generative AI"
-                else:
-                    answer = "Xin lỗi, tôi chưa được học về vấn đề này và AI cũng không trả lời được."
+                # --- KHÔNG TÌM THẤY ---
+                answer = "Xin lỗi, tôi chưa hiểu câu hỏi của bạn hoặc chưa được học về vấn đề này. Bạn hãy thử diễn đạt lại xem sao?"
+                topic = "Unknown"
             
-            # ✅ Lưu kèm confidence (optional - để debug/analysis)
+            # Lưu lịch sử
             chat_history.append({
                 "user": user_message,
                 "bot": answer,
@@ -174,17 +223,13 @@ def chatbot():
 # -------------------------------
 @app.route('/clear', methods=['POST'])
 def clear_history():
-    """
-    Khi người dùng bấm nút 'Xóa lịch sử' → reset lại danh sách chat_history
-    """
     global chat_history
-    chat_history = []  # Làm trống danh sách hội thoại
-    return redirect(url_for('chatbot'))  # Quay lại trang chatbot chính
+    chat_history = []
+    return redirect(url_for('chatbot'))
 
 
 # -------------------------------
 # ▶️ Chạy Flask app
 # -------------------------------
 if __name__ == '__main__':
-    # debug=True giúp auto reload khi thay đổi code và hiển thị log lỗi chi tiết
-    app.run(debug=True, host='0.0.0.0', port=5002) # Chạy port 5002 để tránh AirPlay (port 5000)
+    app.run(debug=True, host='0.0.0.0', port=5002)
