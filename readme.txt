@@ -73,6 +73,13 @@ python -m nltk.downloader stopwords punkt wordnet omw-1.4
 pip install pyvi
 python -m nltk.downloader punkt punkt_tab
 
+.\venv\Scripts\activate
+pip install google-generativeai
+pip install -r requirements.txt
+pip install flask==3.0.0
+pip install pyvi
+pip install python-dotenv
+
 3️⃣. Khởi tạo cơ sở dữ liệu (nếu chưa có)
 ---------------------------------------------------------------
 cd app
@@ -140,10 +147,16 @@ git push -f origin main (Gửi branch main mới này lên GitHub và GHI ĐÈ l
 
 + https://www.python.org/downloads/release/python-3126/	(tải bản python 3.12)
 
++ pip install matplotlib numpy pandas (for jupyter)
+
 ---------------------------------------------------------------
 👨‍💻 TÁC GIẢ
 ---------------------------------------------------------------
-Phạm Ngọc Hưng — MSSV: 20235342
+Pham Ngoc Hung 20235342
+Nguyen Minh Khoi 202416249
+Bui Trung Hoang 20235333
+Pham Ngoc Manh 202416277
+
 Trường Công nghệ Thông tin & Truyền thông
 Đại học Bách khoa Hà Nội (HUST)
 Môn học: IT3160 - Nhập môn Trí tuệ Nhân tạo
