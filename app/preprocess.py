@@ -94,7 +94,11 @@ class TextPreprocessor:
 
         self.WEIGHTED_KEYWORDS = {
             "giá": 2.0, "mua": 1.5, "bán": 1.5, "lỗi": 2.0,
-            "không": 1.5, "tại sao": 1.5, "là gì": 1.2
+            "không": 1.5, "tại sao": 1.5, "là gì": 1.2,
+            # 🔥 Từ khóa so sánh - ưu tiên cao để nhận diện câu hỏi so sánh
+            "khác": 3.0, "khác gì": 3.0, "khác nhau": 3.0, 
+            "so sánh": 3.0, "so với": 2.5, "giống": 2.5,
+            "khác biệt": 3.0, "điểm khác": 3.0
         }
 
         self.NEGATION_WORDS = {"không", "chẳng", "chả", "đừng", "chưa", "kém", "đâu"}
