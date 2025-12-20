@@ -1,93 +1,247 @@
 # -------------------------------
-# 🧹 preprocess.py — Tiền xử lý văn bản Tiếng Việt tối ưu
+# 🧹 preprocess.py — Tiền xử lý văn bản Tiếng Việt tối ưu (Refactored)
 # -------------------------------
 
 import re
 import pickle
-# Thư viện tách từ chuyên dụng cho tiếng Việt
 from pyvi import ViTokenizer 
-# Thư viện vector hóa văn bản
 from sklearn.feature_extraction.text import TfidfVectorizer
 
-# -------------------------------
-# 🛑 1. DANH SÁCH STOPWORDS TIẾNG VIỆT (TỪ DỪNG)
-# -------------------------------
-# Đây là những từ xuất hiện nhiều nhưng ít mang ý nghĩa phân loại.
-# Loại bỏ chúng giúp bot tập trung vào từ khóa chính (như "học máy", "giải thuật").
-VIETNAMESE_STOPWORDS = {
-    'thì', 'là', 'mà', 'và', 'của', 'những', 'các', 'như', 'thế', 'nào', 
-    'được', 'về', 'với', 'trong', 'có', 'không', 'cho', 'tôi', 'bạn', 
-    'cậu', 'tớ', 'mình', 'nó', 'hắn', 'gì', 'cái', 'con', 'người', 
-    'sự', 'việc', 'đó', 'đây', 'kia', 'này', 'nhé', 'ạ', 'ơi', 'đi', 
-    'làm', 'khi', 'lúc', 'nơi', 'tại', 'đã', 'đang', 'sẽ', 'muốn', 
-    'phải', 'biết', 'hãy', 'rồi', 'chứ', 'nhỉ'
-}
+# =========================================================
+# 🧠 CLASS TEXT PREPROCESSOR (SINGLETON)
+# =========================================================
+class TextPreprocessor:
+    _instance = None
+
+    def __new__(cls):
+        if cls._instance is None:
+            cls._instance = super(TextPreprocessor, cls).__new__(cls)
+            cls._instance._initialize()
+        return cls._instance
+
+    def _initialize(self):
+        """Khởi tạo các tài nguyên, compile regex một lần duy nhất."""
+        
+        # 1. Compile Regex Patterns (Tối ưu tốc độ)
+        self.re_special_chars = re.compile(r'[^\w\s]')
+        self.re_numbers = re.compile(r'\d+')
+        
+        # 2. Load Data Dictionaries
+        self._load_dictionaries()
+        
+        # 3. Build Synonym Regex (Tối ưu tìm kiếm O(1))
+        # Tạo pattern dạng: \b(phrase1|phrase2|...)\b
+        # Sắp xếp theo độ dài giảm dần để ưu tiên cụm từ dài trước (Longest Match)
+        all_phrases = [p for p in self.SYNONYMS.keys() if " " in p]
+        all_phrases.sort(key=len, reverse=True)
+        if all_phrases:
+            pattern = r'\b(' + '|'.join(map(re.escape, all_phrases)) + r')\b'
+            self.re_synonym_phrases = re.compile(pattern, re.IGNORECASE)
+        else:
+            self.re_synonym_phrases = None
+
+    def _load_dictionaries(self):
+        """Định nghĩa các từ điển dữ liệu."""
+        self.VIETNAMESE_STOPWORDS = {
+            'thì', 'là', 'mà', 'và', 'của', 'những', 'các', 'như', 'thế', 'nào', 
+            'được', 'về', 'với', 'trong', 'có', 'không', 'cho', 'tôi', 'bạn', 
+            'cậu', 'tớ', 'mình', 'nó', 'hắn', 'gì', 'cái', 'con', 'người', 
+            'sự', 'việc', 'đó', 'đây', 'kia', 'này', 'nhé', 'ạ', 'ơi', 'đi', 
+            'làm', 'khi', 'lúc', 'nơi', 'tại', 'đã', 'đang', 'sẽ', 'muốn', 
+            'phải', 'biết', 'hãy', 'rồi', 'chứ', 'nhỉ'
+        }
+
+        self.SYNONYMS = {
+            # 1. Thuật toán & Khái niệm cơ bản
+            "knn": ["k-nearest neighbors", "k nearest neighbors", "lân cận gần nhất", "k lân cận"],
+            "naive bayes": ["naïve bayes", "bayes ngây thơ", "bayes"],
+            "bfs": ["breadth-first search", "tìm kiếm theo chiều rộng", "chiều rộng"],
+            "dfs": ["depth-first search", "tìm kiếm theo chiều sâu", "chiều sâu"],
+            "a*": ["a star", "a sao", "thuật toán a*"],
+            
+            # 2. Logic & Suy diễn
+            "logic mệnh đề": ["propositional logic", "logic phát biểu"],
+            "logic vị từ": ["first-order logic", "fol", "logic bậc nhất"],
+            "kb": ["knowledge base", "cơ sở tri thức"],
+            
+            # 3. Học máy (Machine Learning)
+            "học có giám sát": ["supervised learning", "học giám sát"],
+            "học không giám sát": ["unsupervised learning", "học không giám sát"],
+            "học tăng cường": ["reinforcement learning", "rl"],
+            "học máy": ["machine learning", "ml"],
+            "trí tuệ nhân tạo": ["ai", "artificial intelligence"],
+            "xử lý ngôn ngữ": ["nlp", "natural language processing"],
+            
+            # 4. Tác tử & Môi trường
+            "tác tử": ["agent", "đại lý"],
+            "peas": ["performance environment actuators sensors", "độ đo môi trường bộ chấp hành cảm biến"],
+            "môi trường": ["environment"],
+            "cảm biến": ["sensors"],
+            "bộ chấp hành": ["actuators"],
+
+            # 6. Từ khóa hỏi đáp thông dụng
+            "là gì": ["là cái gì", "nghĩa là gì", "định nghĩa", "khái niệm", "chức năng", "tác dụng", "công dụng", "vai trò", "ý nghĩa", "dùng để làm gì"],
+            "tại sao": ["vì sao", "lý do", "nguyên nhân"],
+            "như thế nào": ["ra sao", "làm sao", "cách nào"],
+            
+            # 5. Thiết bị & Đời sống
+            "xe hơi": ["ô tô", "xế hộp", "bốn bánh"],
+            "điện thoại": ["dế", "smartphone", "mobile", "di động"],
+            "máy tính": ["laptop", "pc", "computer", "desktop"],
+            "kém": ["tệ", "xấu", "yếu", "dở"],
+            "tốt": ["ngon", "xịn", "đỉnh", "tuyệt", "hay"]
+        }
+
+        self.WEIGHTED_KEYWORDS = {
+            "giá": 2.0, "mua": 1.5, "bán": 1.5, "lỗi": 2.0,
+            "không": 1.5, "tại sao": 1.5, "là gì": 1.2,
+            # 🔥 Từ khóa so sánh - ưu tiên cao để nhận diện câu hỏi so sánh
+            "khác": 3.0, "khác gì": 3.0, "khác nhau": 3.0, 
+            "so sánh": 3.0, "so với": 2.5, "giống": 2.5,
+            "khác biệt": 3.0, "điểm khác": 3.0
+        }
+
+        self.NEGATION_WORDS = {"không", "chẳng", "chả", "đừng", "chưa", "kém", "đâu"}
+
+        # Tạo mapping ngược (Canonicalization)
+        self.REVERSE_SYNONYMS = {}
+        for canonical, variations in self.SYNONYMS.items():
+            for var in variations:
+                self.REVERSE_SYNONYMS[var] = canonical
+            self.REVERSE_SYNONYMS[canonical] = canonical
+
+    def preprocess_text(self, text: str) -> str:
+        """Quy trình: Lowercase -> Xóa ký tự lạ -> Tách từ (PyVi) -> Lọc Stopwords"""
+        if not text: return ""
+
+        # 1. Lowercase & Clean (Dùng Compiled Regex)
+        text = text.lower()
+        text = self.re_special_chars.sub('', text)
+        text = self.re_numbers.sub('', text)
+
+        # 2. Tokenize (PyVi)
+        tokenized_text = ViTokenizer.tokenize(text)
+
+        # 3. Filter Stopwords
+        tokens = tokenized_text.split()
+        filtered_tokens = [
+            word for word in tokens 
+            if word not in self.VIETNAMESE_STOPWORDS and len(word) > 1
+        ]
+
+        return ' '.join(filtered_tokens)
+
+    def expand_query(self, text: str) -> str:
+        """Mở rộng truy vấn bằng cách thêm từ đồng nghĩa (Optimized)."""
+        if not text: return ""
+        
+        expanded_words = []
+        text_lower = text.lower()
+        
+        # 1. Mở rộng từ đơn
+        words = text.split()
+        for word in words:
+            expanded_words.append(word)
+            if word.lower() in self.SYNONYMS:
+                expanded_words.extend(self.SYNONYMS[word.lower()])
+        
+        # 2. Mở rộng cụm từ (Dùng Regex thay vì Loop)
+        if self.re_synonym_phrases:
+            matches = self.re_synonym_phrases.findall(text_lower)
+            for match in matches:
+                # match là cụm từ tìm thấy (ví dụ "xe hơi") -> lấy synonyms của nó
+                if match in self.SYNONYMS:
+                    expanded_words.extend(self.SYNONYMS[match])
+
+        return " ".join(expanded_words)
+
+    def detect_negation(self, text: str) -> str:
+        """Phát hiện và xử lý phủ định."""
+        if not text: return ""
+        tokens = text.split()
+        processed = []
+        negation_active = False
+        
+        for token in tokens:
+            if token.lower() in self.NEGATION_WORDS:
+                negation_active = True
+                processed.append(token)
+            elif negation_active:
+                processed.append(f"NOT_{token}")
+                negation_active = False
+            else:
+                processed.append(token)
+        return " ".join(processed)
+
+    def weighted_keyword_match(self, text: str) -> float:
+        """Tính điểm khớp từ khóa quan trọng."""
+        if not text: return 0.0
+        score = 0.0
+        text_lower = text.lower()
+        for kw, weight in self.WEIGHTED_KEYWORDS.items():
+            if kw in text_lower:
+                score += weight
+        return score
+
+    def canonicalize_text(self, text: str) -> set:
+        """Chuẩn hóa văn bản về dạng từ khóa gốc."""
+        if not text: return set()
+        
+        # Gọi preprocess_text nội bộ
+        tokens = self.preprocess_text(text).split()
+        canonical_tokens = set()
+        
+        for token in tokens:
+            if token in self.REVERSE_SYNONYMS:
+                canonical_tokens.add(self.REVERSE_SYNONYMS[token])
+            else:
+                canonical_tokens.add(token)
+        return canonical_tokens
+
+    def calculate_jaccard_similarity(self, text1: str, text2: str) -> float:
+        """Tính độ tương đồng Jaccard trên tập từ đã chuẩn hóa."""
+        if not text1 or not text2: return 0.0
+        
+        set1 = self.canonicalize_text(text1)
+        set2 = self.canonicalize_text(text2)
+        
+        if not set1 and not set2: return 0.0
+        
+        intersection = set1.intersection(set2)
+        union = set1.union(set2)
+        
+        return len(intersection) / len(union) if union else 0.0
 
 # =========================================================
-# 🧠 2. HÀM TIỀN XỬ LÝ CHUỖI VĂN BẢN
+# 🚀 MODULE LEVEL INTERFACE (BACKWARD COMPATIBILITY)
 # =========================================================
+
+# Khởi tạo Singleton
+preprocessor = TextPreprocessor()
+
+# Expose các hàm để các module khác import như cũ
 def preprocess_text(text: str) -> str:
-    """
-    Quy trình: Lowercase -> Xóa ký tự lạ -> Tách từ (PyVi) -> Lọc Stopwords
-    """
-    if not text:
-        return ""
+    return preprocessor.preprocess_text(text)
 
-    # 1️⃣ Chuyển thành chữ thường
-    text = text.lower()
+def expand_query(text: str) -> str:
+    return preprocessor.expand_query(text)
 
-    # 2️⃣ Xóa các ký tự đặc biệt (giữ lại chữ cái, số và dấu cách)
-    # Loại bỏ dấu chấm, phẩy, hỏi chấm... để tránh nhiễu
-    text = re.sub(r'[^\w\s]', '', text)
-    
-    # 3️⃣ Loại bỏ số (Tùy chọn: Nếu bot cần xử lý toán học thì bỏ dòng này)
-    text = re.sub(r'\d+', '', text)
+def detect_negation(text: str) -> str:
+    return preprocessor.detect_negation(text)
 
-    # 4️⃣ Tách từ chuẩn tiếng Việt bằng PyVi
-    # Quan trọng: "học máy" -> "học_máy", "trí tuệ nhân tạo" -> "trí_tuệ_nhân_tạo"
-    # Giúp Bot hiểu đây là 1 cụm từ chứ không phải các từ rời rạc.
-    tokenized_text = ViTokenizer.tokenize(text)
+def weighted_keyword_match(text: str) -> float:
+    return preprocessor.weighted_keyword_match(text)
 
-    # 5️⃣ Tách thành danh sách để lọc Stopwords
-    tokens = tokenized_text.split()
-    
-    # 6️⃣ Lọc bỏ từ dừng và các từ quá ngắn (<= 1 ký tự)
-    filtered_tokens = [
-        word for word in tokens 
-        if word not in VIETNAMESE_STOPWORDS and len(word) > 1
-    ]
+def calculate_jaccard_similarity(text1: str, text2: str) -> float:
+    return preprocessor.calculate_jaccard_similarity(text1, text2)
 
-    # 7️⃣ Ghép lại thành chuỗi hoàn chỉnh
-    return ' '.join(filtered_tokens)
-
-
-# =========================================================
-# 📊 3. HÀM HUẤN LUYỆN TF-IDF VECTORIZER (CÓ N-GRAM)
-# =========================================================
 def train_vectorizer(corpus):
-    """
-    Huấn luyện bộ chuyển đổi văn bản sang số (Vector).
-    Cập nhật: Sử dụng N-gram để tăng độ tin cậy cho Naïve Bayes.
-    """
-    
+    """Giữ nguyên hàm train_vectorizer vì nó độc lập."""
     vectorizer = TfidfVectorizer(
-        # ⭐️ Giảm xuống 800 để tối ưu cho Naive Bayes (tránh ma trận quá thưa)
         max_features=800,
-        
-        # ⭐️ QUAN TRỌNG: N-gram range (1, 2)
-        # Giúp model học cả từ đơn ("học") và cụm 2 từ ("học_máy").
-        # Điều này giúp tăng độ tin cậy (confidence score) lên rất nhiều.
         ngram_range=(1, 2),
-        
-        # Bỏ qua các từ xuất hiện quá ít (dưới 1 lần - mặc định)
         min_df=1,
-        
-        # ⭐️ Sublinear TF scaling: sử dụng log(tf) thay vì tf
-        # Giúp giảm ảnh hưởng của từ xuất hiện quá nhiều lần
         sublinear_tf=True
     )
-
-    # Học từ dữ liệu đầu vào
     vectorizer.fit(corpus)
-
     return vectorizer

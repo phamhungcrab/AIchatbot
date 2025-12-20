@@ -99,3 +99,11 @@ pnpm-debug.log*
 /dist
 /build
 /public/build
+
+# =========================
+#  LARGE FILES (AI MODELS)
+# =========================
+models/
+*.pkl
+*.safetensors
+*.bin
