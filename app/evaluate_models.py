@@ -14,7 +14,10 @@ from datetime import datetime
 from preprocess import preprocess_text, preprocess_for_knn, train_vectorizer
 from nb_module import CustomMultinomialNB, predict_topic
 from knn_module import CustomKNN, find_answer_knn
-from datastore import get_all_qa
+# CSV-based data loading (thay thế datastore.py)
+def get_all_qa():
+    \"\"\"Load toàn bộ Q&A từ CSV\"\"\"
+    return pd.read_csv(os.path.join(DATA_DIR, 'qa_train.csv'))
 from confidence_utils import UnifiedCalibrator, NaiveBayesCalibrator, KNNCalibrator
 
 # =========================================================

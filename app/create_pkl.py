@@ -12,7 +12,12 @@ except AttributeError:
 else:
     ssl._create_default_https_context = _create_unverified_https_context
 
-from datastore import get_all_qa
+# CSV-based data loading (thay thế datastore.py)
+DATA_DIR = os.path.join(BASE_DIR, '..', 'data')
+
+def get_all_qa():
+    \"\"\"Load toàn bộ Q&A từ CSV\"\"\"
+    return pd.read_csv(os.path.join(DATA_DIR, 'qa_train.csv'))
 from preprocess import preprocess_text, train_vectorizer
 from nb_module import train_naive_bayes
 from knn_module import train_knn_model  # 🆕 Import KNN

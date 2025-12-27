@@ -24,7 +24,20 @@ from preprocess import preprocess_text, expand_query, detect_negation
 from nb_module import predict_topic
 from find_answer import find_best_answer
 from knn_module import find_answer_knn  # 🆕 Import KNN
-from datastore import get_all_qa, get_qa_by_topic
+import pandas as pd
+
+# CSV-based data loading (thay thế datastore.py)
+DATA_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'data')
+
+def get_all_qa():
+    """Load toàn bộ Q&A từ CSV"""
+    df = pd.read_csv(os.path.join(DATA_DIR, 'qa_train.csv'))
+    return df
+
+def get_qa_by_topic(topic):
+    """Lọc Q&A theo topic"""
+    df = get_all_qa()
+    return df[df['topic'] == topic]
 
 # -------------------------------
 # 🚀 Khởi tạo ứng dụng Flask
