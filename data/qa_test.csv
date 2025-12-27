@@ -1,0 +1,239 @@
+
+question,answer,topic
+"Hãy trình bày Trong A*, nếu một nút có chi phí đã đi g(n)=61 và heuristic h(n)=11, giá trị f(n) bằng bao nhiêu?",f(n)=g(n)+h(n)=61+11=72.,SearchInformed
+Bốn nhóm quan điểm phổ biến khi định nghĩa AI được định nghĩa như thế nào?,"Gồm: (1) suy nghĩ như con người, (2) suy nghĩ hợp lý, (3) hành động như con người, (4) hành động hợp lý.",IntroAI
+"Bạn hãy giải thích Trong A*, nếu một nút có chi phí đã đi g(n)=58 và heuristic h(n)=12, giá trị f(n) bằng bao nhiêu?",f(n)=g(n)+h(n)=58+12=70.,SearchInformed
+"Bạn hãy nêu Trong phân tích không gian của DFS, nếu hệ số phân nhánh b=3 và độ sâu cực đại m=5, ước lượng O(bm) tương ứng với b·m bằng bao nhiêu?","O(bm) cho biết bộ nhớ tỷ lệ với b·m. Với b=3, m=5 thì b·m = 15 (đơn vị tỷ lệ, bỏ hằng số).",Search
+Giả sử cây tìm kiếm đều có hệ số phân nhánh b=3 và lời giải nông nhất ở độ sâu d=6. BFS sẽ sinh tối đa bao nhiêu nút (từ độ sâu 0 đến d)?,Số nút tối đa là 1 + 3 + 3^2 + … + 3^6 = (b^(d+1)−1)/(b−1) = 1093.,Search
+"Bạn hãy giải thích Trong A*, nếu một nút có chi phí đã đi g(n)=64 và heuristic h(n)=46, giá trị f(n) bằng bao nhiêu?",f(n)=g(n)+h(n)=64+46=110.,SearchInformed
+"Bạn có thể cho biết Trong phân tích không gian của DFS, nếu hệ số phân nhánh b=7 và độ sâu cực đại m=8, ước lượng O(bm) tương ứng với b·m bằng bao nhiêu?","O(bm) cho biết bộ nhớ tỷ lệ với b·m. Với b=7, m=8 thì b·m = 56 (đơn vị tỷ lệ, bỏ hằng số).",Search
+"Hãy trình bày Hãy viết phủ định tương đương của công thức ∀i ∃j Teaches(i,j).","Phủ định: ¬∀i∃jTeaches(i,j) ≡ ∃i ∀j ¬Teaches(i,j).",LogicFOL
+"Hãy trình bày Hãy viết phủ định tương đương của công thức ∀m ∃n R(m,n).","Phủ định: ¬∀m∃nR(m,n) ≡ ∃m ∀n ¬R(m,n).",LogicFOL
+"Bạn hãy nêu Trong A*, nếu một nút có chi phí đã đi g(n)=66 và heuristic h(n)=42, giá trị f(n) bằng bao nhiêu?",f(n)=g(n)+h(n)=66+42=108.,SearchInformed
+"Hãy trình bày Trong phân tích không gian của DFS, nếu hệ số phân nhánh b=3 và độ sâu cực đại m=8, ước lượng O(bm) tương ứng với b·m bằng bao nhiêu?","O(bm) cho biết bộ nhớ tỷ lệ với b·m. Với b=3, m=8 thì b·m = 24 (đơn vị tỷ lệ, bỏ hằng số).",Search
+"Bạn hãy nêu Trong phân tích không gian của DFS, nếu hệ số phân nhánh b=9 và độ sâu cực đại m=8, ước lượng O(bm) tương ứng với b·m bằng bao nhiêu?","O(bm) cho biết bộ nhớ tỷ lệ với b·m. Với b=9, m=8 thì b·m = 72 (đơn vị tỷ lệ, bỏ hằng số).",Search
+Bạn hãy giải thích Giả sử cây tìm kiếm đều có hệ số phân nhánh b=6 và lời giải nông nhất ở độ sâu d=7. BFS sẽ sinh tối đa bao nhiêu nút (từ độ sâu 0 đến d)?,Số nút tối đa là 1 + 6 + 6^2 + … + 6^7 = (b^(d+1)−1)/(b−1) = 335923.,Search
+Môi trường quan sát hoàn toàn khác môi trường quan sát một phần như thế nào?,Quan sát hoàn toàn: cảm biến cho trạng thái đầy đủ; quan sát một phần: cảm biến chỉ cung cấp thông tin không đầy đủ/không chính xác.,Agents
+Hãy trình bày Giả sử cây tìm kiếm đều có hệ số phân nhánh b=2 và lời giải nông nhất ở độ sâu d=8. BFS sẽ sinh tối đa bao nhiêu nút (từ độ sâu 0 đến d)?,Số nút tối đa là 1 + 2 + 2^2 + … + 2^8 = (b^(d+1)−1)/(b−1) = 511.,Search
+Bạn có thể cho biết Giả sử cây tìm kiếm đều có hệ số phân nhánh b=7 và lời giải nông nhất ở độ sâu d=3. BFS sẽ sinh tối đa bao nhiêu nút (từ độ sâu 0 đến d)?,Số nút tối đa là 1 + 7 + 7^2 + … + 7^3 = (b^(d+1)−1)/(b−1) = 400.,Search
+Thuật ngữ Arc consistency (nhất quán cung) nghĩa là gì?,Một cung X→Y là nhất quán nếu với mọi giá trị của X luôn tồn tại ít nhất một giá trị của Y thỏa ràng buộc giữa chúng.,CSP
+Bạn hãy nêu Giả sử cây tìm kiếm đều có hệ số phân nhánh b=5 và lời giải nông nhất ở độ sâu d=1. BFS sẽ sinh tối đa bao nhiêu nút (từ độ sâu 0 đến d)?,Số nút tối đa là 1 + 5 + 5^2 + … + 5^1 = (b^(d+1)−1)/(b−1) = 6.,Search
+"Hãy trình bày Trong A*, nếu một nút có chi phí đã đi g(n)=10 và heuristic h(n)=12, giá trị f(n) bằng bao nhiêu?",f(n)=g(n)+h(n)=10+12=22.,SearchInformed
+"Bạn hãy giải thích Trò chơi deterministic, zero-sum, perfect information có ý nghĩa gì?",Deterministic: không ngẫu nhiên; zero-sum: lợi ích tổng bằng 0; perfect information: mọi trạng thái đều quan sát được đầy đủ.,Adversarial
+Bạn hãy giải thích Skolem hóa (Skolemization) dùng để làm gì?,Loại lượng từ tồn tại bằng cách thay bằng hằng/hàm Skolem để đưa công thức về dạng thuận lợi cho suy diễn.,LogicFOL
+"Bạn hãy cho biết Trong phân tích không gian của DFS, nếu hệ số phân nhánh b=5 và độ sâu cực đại m=26, ước lượng O(bm) tương ứng với b·m bằng bao nhiêu?","O(bm) cho biết bộ nhớ tỷ lệ với b·m. Với b=5, m=26 thì b·m = 130 (đơn vị tỷ lệ, bỏ hằng số).",Search
+KNN được định nghĩa như thế nào?,KNN (k-nearest neighbors) là thuật toán học máy phân loại hoặc hồi quy dựa trên việc tìm k láng giềng gần nhất theo một khoảng cách và đưa ra nhãn của điểm mới bằng đa số phiếu hoặc trung bình.,KNN
+"Bạn hãy giải thích Trong Iterative Deepening Search (IDS), với cây đều b=5 và độ sâu lời giải d=8, tổng số nút được sinh (tính cả các lần lặp) xấp xỉ bao nhiêu theo công thức tổng (d−i+1)·b^i?","Tổng số nút ≈ ∑_{i=0..d} (d−i+1)·b^i. Với b=5, d=8 thì giá trị là 610349.",Search
+Bạn hãy cho biết Giải CSP khác gì tìm kiếm đường đi truyền thống?,"CSP tìm gán giá trị cho biến thỏa mọi ràng buộc; đường đi không quan trọng, thường dùng backtracking và suy luận ràng buộc.",CSP
+Bạn hãy nêu Logic vị từ (FOL) mở rộng logic mệnh đề bằng gì?,"Bằng biến, hằng, hàm, quan hệ (predicate) và lượng từ ∀, ∃ để biểu diễn cấu trúc đối tượng và quan hệ.",LogicFOL
+"Bạn hãy giải thích Trong phân tích không gian của DFS, nếu hệ số phân nhánh b=6 và độ sâu cực đại m=14, ước lượng O(bm) tương ứng với b·m bằng bao nhiêu?","O(bm) cho biết bộ nhớ tỷ lệ với b·m. Với b=6, m=14 thì b·m = 84 (đơn vị tỷ lệ, bỏ hằng số).",Search
+"Bạn hãy giải thích Trong A*, nếu một nút có chi phí đã đi g(n)=1 và heuristic h(n)=8, giá trị f(n) bằng bao nhiêu?",f(n)=g(n)+h(n)=1+8=9.,SearchInformed
+"Hãy trình bày Trong Iterative Deepening Search (IDS), với cây đều b=2 và độ sâu lời giải d=3, tổng số nút được sinh (tính cả các lần lặp) xấp xỉ bao nhiêu theo công thức tổng (d−i+1)·b^i?","Tổng số nút ≈ ∑_{i=0..d} (d−i+1)·b^i. Với b=2, d=3 thì giá trị là 26.",Search
+"Hãy trình bày Trong A*, nếu một nút có chi phí đã đi g(n)=45 và heuristic h(n)=45, giá trị f(n) bằng bao nhiêu?",f(n)=g(n)+h(n)=45+45=90.,SearchInformed
+"Bạn có thể cho biết Trong A*, nếu một nút có chi phí đã đi g(n)=65 và heuristic h(n)=2, giá trị f(n) bằng bao nhiêu?",f(n)=g(n)+h(n)=65+2=67.,SearchInformed
+Bạn hãy nêu Giả sử cây tìm kiếm đều có hệ số phân nhánh b=3 và lời giải nông nhất ở độ sâu d=7. BFS sẽ sinh tối đa bao nhiêu nút (từ độ sâu 0 đến d)?,Số nút tối đa là 1 + 3 + 3^2 + … + 3^7 = (b^(d+1)−1)/(b−1) = 3280.,Search
+Bạn hãy cho biết Giả sử cây tìm kiếm đều có hệ số phân nhánh b=7 và lời giải nông nhất ở độ sâu d=4. BFS sẽ sinh tối đa bao nhiêu nút (từ độ sâu 0 đến d)?,Số nút tối đa là 1 + 7 + 7^2 + … + 7^4 = (b^(d+1)−1)/(b−1) = 2801.,Search
+Bạn có thể cho biết Giả sử cây tìm kiếm đều có hệ số phân nhánh b=3 và lời giải nông nhất ở độ sâu d=1. BFS sẽ sinh tối đa bao nhiêu nút (từ độ sâu 0 đến d)?,Số nút tối đa là 1 + 3 + 3^2 + … + 3^1 = (b^(d+1)−1)/(b−1) = 4.,Search
+Khái niệm Dạng chuẩn CNF trong logic mệnh đề là gì?,Công thức dạng hội (AND) của các mệnh đề tuyển (OR) các literal; thuận tiện cho resolution.,Logic
+"Hãy trình bày Trong A*, nếu một nút có chi phí đã đi g(n)=68 và heuristic h(n)=40, giá trị f(n) bằng bao nhiêu?",f(n)=g(n)+h(n)=68+40=108.,SearchInformed
+"Trong A*, nếu một nút có chi phí đã đi g(n)=73 và heuristic h(n)=49, giá trị f(n) bằng bao nhiêu?",f(n)=g(n)+h(n)=73+49=122.,SearchInformed
+"Bạn có thể cho biết Trong A*, nếu một nút có chi phí đã đi g(n)=50 và heuristic h(n)=49, giá trị f(n) bằng bao nhiêu?",f(n)=g(n)+h(n)=50+49=99.,SearchInformed
+"Bạn hãy cho biết Trong A*, nếu một nút có chi phí đã đi g(n)=76 và heuristic h(n)=38, giá trị f(n) bằng bao nhiêu?",f(n)=g(n)+h(n)=76+38=114.,SearchInformed
+Bạn hãy cho biết Giả sử cây tìm kiếm đều có hệ số phân nhánh b=7 và lời giải nông nhất ở độ sâu d=3. BFS sẽ sinh tối đa bao nhiêu nút (từ độ sâu 0 đến d)?,Số nút tối đa là 1 + 7 + 7^2 + … + 7^3 = (b^(d+1)−1)/(b−1) = 400.,Search
+Bạn hãy nêu Giả sử cây tìm kiếm đều có hệ số phân nhánh b=6 và lời giải nông nhất ở độ sâu d=9. BFS sẽ sinh tối đa bao nhiêu nút (từ độ sâu 0 đến d)?,Số nút tối đa là 1 + 6 + 6^2 + … + 6^9 = (b^(d+1)−1)/(b−1) = 12093235.,Search
+"Bạn có thể cho biết Trong phân tích không gian của DFS, nếu hệ số phân nhánh b=6 và độ sâu cực đại m=11, ước lượng O(bm) tương ứng với b·m bằng bao nhiêu?","O(bm) cho biết bộ nhớ tỷ lệ với b·m. Với b=6, m=11 thì b·m = 66 (đơn vị tỷ lệ, bỏ hằng số).",Search
+"Bạn có thể cho biết Trong A*, nếu một nút có chi phí đã đi g(n)=66 và heuristic h(n)=42, giá trị f(n) bằng bao nhiêu?",f(n)=g(n)+h(n)=66+42=108.,SearchInformed
+Bạn hãy định nghĩa Suy diễn (inference) trong AI,Là quá trình rút ra kết luận mới từ một tập các mệnh đề/tri thức đã biết theo các quy tắc suy luận hợp lệ.,Logic
+Bạn có thể cho biết Heuristic h(n) trong tìm kiếm có vai trò gì?,"Ước lượng chi phí còn lại từ nút n đến đích, giúp ưu tiên mở rộng nút hứa hẹn và giảm số nút duyệt.",SearchInformed
+Khái niệm Suy diễn (inference) trong AI là gì?,Là quá trình rút ra kết luận mới từ một tập các mệnh đề/tri thức đã biết theo các quy tắc suy luận hợp lệ.,Logic
+"Bạn hãy cho biết Trong Iterative Deepening Search (IDS), với cây đều b=5 và độ sâu lời giải d=3, tổng số nút được sinh (tính cả các lần lặp) xấp xỉ bao nhiêu theo công thức tổng (d−i+1)·b^i?","Tổng số nút ≈ ∑_{i=0..d} (d−i+1)·b^i. Với b=5, d=3 thì giá trị là 194.",Search
+"Bạn hãy cho biết Trong phân tích không gian của DFS, nếu hệ số phân nhánh b=8 và độ sâu cực đại m=11, ước lượng O(bm) tương ứng với b·m bằng bao nhiêu?","O(bm) cho biết bộ nhớ tỷ lệ với b·m. Với b=8, m=11 thì b·m = 88 (đơn vị tỷ lệ, bỏ hằng số).",Search
+"Bạn hãy nêu Hãy viết phủ định tương đương của công thức ∀m ∃n R(m,n).","Phủ định: ¬∀m∃nR(m,n) ≡ ∃m ∀n ¬R(m,n).",LogicFOL
+"Trong A*, nếu một nút có chi phí đã đi g(n)=18 và heuristic h(n)=41, giá trị f(n) bằng bao nhiêu?",f(n)=g(n)+h(n)=18+41=59.,SearchInformed
+Bạn hãy nêu UCS (Uniform Cost Search) đảm bảo tối ưu trong điều kiện nào?,UCS tối ưu khi mọi chi phí bước không âm; nó luôn mở rộng nút có chi phí đường đi nhỏ nhất.,Search
+"Bạn có thể cho biết Hãy viết phủ định tương đương của công thức ∃i ∀j S(i,j).","Phủ định: ¬∃i∀jS(i,j) ≡ ∀i ∃j ¬S(i,j).",LogicFOL
+Bạn hãy cho biết Bộ nhớ làm việc (working memory) trong hệ suy diễn dựa trên luật chứa gì?,Chứa các sự kiện/giả thiết hiện thời (các fact) đã có hoặc đã suy ra trong quá trình suy diễn.,Knowledge
+"Hãy trình bày Trong A*, nếu một nút có chi phí đã đi g(n)=41 và heuristic h(n)=16, giá trị f(n) bằng bao nhiêu?",f(n)=g(n)+h(n)=41+16=57.,SearchInformed
+Bạn hãy nêu BFS đảm bảo tối ưu trong điều kiện nào?,"BFS tối ưu khi mọi bước đi có cùng chi phí (chi phí bước bằng nhau), vì BFS tìm lời giải nông nhất.",Search
+Giả sử cây tìm kiếm đều có hệ số phân nhánh b=4 và lời giải nông nhất ở độ sâu d=4. BFS sẽ sinh tối đa bao nhiêu nút (từ độ sâu 0 đến d)?,Số nút tối đa là 1 + 4 + 4^2 + … + 4^4 = (b^(d+1)−1)/(b−1) = 341.,Search
+"Bạn hãy cho biết Trong phân tích không gian của DFS, nếu hệ số phân nhánh b=9 và độ sâu cực đại m=20, ước lượng O(bm) tương ứng với b·m bằng bao nhiêu?","O(bm) cho biết bộ nhớ tỷ lệ với b·m. Với b=9, m=20 thì b·m = 180 (đơn vị tỷ lệ, bỏ hằng số).",Search
+Bạn hãy cho biết Giả sử cây tìm kiếm đều có hệ số phân nhánh b=3 và lời giải nông nhất ở độ sâu d=6. BFS sẽ sinh tối đa bao nhiêu nút (từ độ sâu 0 đến d)?,Số nút tối đa là 1 + 3 + 3^2 + … + 3^6 = (b^(d+1)−1)/(b−1) = 1093.,Search
+Bạn hãy nêu Giả sử cây tìm kiếm đều có hệ số phân nhánh b=4 và lời giải nông nhất ở độ sâu d=6. BFS sẽ sinh tối đa bao nhiêu nút (từ độ sâu 0 đến d)?,Số nút tối đa là 1 + 4 + 4^2 + … + 4^6 = (b^(d+1)−1)/(b−1) = 5461.,Search
+Bạn hãy định nghĩa Một ví dụ điển hình của AI trong đời sống,"Ví dụ: hệ thống gợi ý sản phẩm/phim, trợ lý ảo, dịch máy, nhận diện khuôn mặt, lọc thư rác.",IntroAI
+"Bạn hãy nêu Trong thị giác máy tính, object detection khác classification như thế nào?",Classification chỉ dự đoán lớp của ảnh; detection vừa dự đoán lớp vừa xác định vị trí (bounding boxes) của đối tượng.,Applications
+"Trong phân tích không gian của DFS, nếu hệ số phân nhánh b=9 và độ sâu cực đại m=23, ước lượng O(bm) tương ứng với b·m bằng bao nhiêu?","O(bm) cho biết bộ nhớ tỷ lệ với b·m. Với b=9, m=23 thì b·m = 207 (đơn vị tỷ lệ, bỏ hằng số).",Search
+Bạn hãy nêu Thế nào là tác tử hợp lý (rational agent)?,Tác tử hợp lý chọn hành động tối đa hóa kỳ vọng theo tiêu chí hiệu quả dựa trên chuỗi nhận thức và tri thức hiện có.,Agents
+"Bạn hãy giải thích Trong A*, nếu một nút có chi phí đã đi g(n)=43 và heuristic h(n)=35, giá trị f(n) bằng bao nhiêu?",f(n)=g(n)+h(n)=43+35=78.,SearchInformed
+Bạn hãy giải thích Giả sử cây tìm kiếm đều có hệ số phân nhánh b=3 và lời giải nông nhất ở độ sâu d=9. BFS sẽ sinh tối đa bao nhiêu nút (từ độ sâu 0 đến d)?,Số nút tối đa là 1 + 3 + 3^2 + … + 3^9 = (b^(d+1)−1)/(b−1) = 29524.,Search
+"Bạn hãy nêu Trong phân tích không gian của DFS, nếu hệ số phân nhánh b=9 và độ sâu cực đại m=11, ước lượng O(bm) tương ứng với b·m bằng bao nhiêu?","O(bm) cho biết bộ nhớ tỷ lệ với b·m. Với b=9, m=11 thì b·m = 99 (đơn vị tỷ lệ, bỏ hằng số).",Search
+"Bạn hãy cho biết Trong A*, nếu một nút có chi phí đã đi g(n)=1 và heuristic h(n)=8, giá trị f(n) bằng bao nhiêu?",f(n)=g(n)+h(n)=1+8=9.,SearchInformed
+"Hãy trình bày Trong Iterative Deepening Search (IDS), với cây đều b=3 và độ sâu lời giải d=5, tổng số nút được sinh (tính cả các lần lặp) xấp xỉ bao nhiêu theo công thức tổng (d−i+1)·b^i?","Tổng số nút ≈ ∑_{i=0..d} (d−i+1)·b^i. Với b=3, d=5 thì giá trị là 543.",Search
+Bạn hãy cho biết Heuristic LCV (Least Constraining Value) chọn giá trị như thế nào?,"Chọn giá trị loại bỏ ít lựa chọn nhất của các biến láng giềng, tăng cơ hội hoàn thành gán.",CSP
+"Bạn hãy cho biết Hãy viết phủ định tương đương của công thức ∃m ∀n Likes(m,n).","Phủ định: ¬∃m∀nLikes(m,n) ≡ ∀m ∃n ¬Likes(m,n).",LogicFOL
+"Trong A*, nếu một nút có chi phí đã đi g(n)=80 và heuristic h(n)=46, giá trị f(n) bằng bao nhiêu?",f(n)=g(n)+h(n)=80+46=126.,SearchInformed
+"Bạn có thể cho biết Trong A*, nếu một nút có chi phí đã đi g(n)=57 và heuristic h(n)=21, giá trị f(n) bằng bao nhiêu?",f(n)=g(n)+h(n)=57+21=78.,SearchInformed
+"Bạn hãy nêu Trong A*, nếu một nút có chi phí đã đi g(n)=64 và heuristic h(n)=38, giá trị f(n) bằng bao nhiêu?",f(n)=g(n)+h(n)=64+38=102.,SearchInformed
+"Bạn hãy giải thích Trong A*, nếu một nút có chi phí đã đi g(n)=3 và heuristic h(n)=16, giá trị f(n) bằng bao nhiêu?",f(n)=g(n)+h(n)=3+16=19.,SearchInformed
+"Bạn hãy cho biết Trong phân tích không gian của DFS, nếu hệ số phân nhánh b=6 và độ sâu cực đại m=8, ước lượng O(bm) tương ứng với b·m bằng bao nhiêu?","O(bm) cho biết bộ nhớ tỷ lệ với b·m. Với b=6, m=8 thì b·m = 48 (đơn vị tỷ lệ, bỏ hằng số).",Search
+Mạng ngữ nghĩa (semantic network) biểu diễn gì?,"Biểu diễn khái niệm và quan hệ dưới dạng đồ thị, hỗ trợ suy diễn bằng lan truyền thuộc tính và quan hệ IS-A/PART-OF.",Knowledge
+"Hãy trình bày Trong phân tích không gian của DFS, nếu hệ số phân nhánh b=7 và độ sâu cực đại m=5, ước lượng O(bm) tương ứng với b·m bằng bao nhiêu?","O(bm) cho biết bộ nhớ tỷ lệ với b·m. Với b=7, m=5 thì b·m = 35 (đơn vị tỷ lệ, bỏ hằng số).",Search
+"Bạn có thể cho biết Trong A*, nếu một nút có chi phí đã đi g(n)=73 và heuristic h(n)=31, giá trị f(n) bằng bao nhiêu?",f(n)=g(n)+h(n)=73+31=104.,SearchInformed
+"Bạn hãy cho biết Hãy viết phủ định tương đương của công thức ∃x ∀y Teaches(x,y).","Phủ định: ¬∃x∀yTeaches(x,y) ≡ ∀x ∃y ¬Teaches(x,y).",LogicFOL
+"Bạn có thể cho biết Trong A*, nếu một nút có chi phí đã đi g(n)=15 và heuristic h(n)=16, giá trị f(n) bằng bao nhiêu?",f(n)=g(n)+h(n)=15+16=31.,SearchInformed
+"Bạn hãy giải thích Trong phân tích không gian của DFS, nếu hệ số phân nhánh b=3 và độ sâu cực đại m=5, ước lượng O(bm) tương ứng với b·m bằng bao nhiêu?","O(bm) cho biết bộ nhớ tỷ lệ với b·m. Với b=3, m=5 thì b·m = 15 (đơn vị tỷ lệ, bỏ hằng số).",Search
+"Bạn hãy nêu Hãy viết phủ định tương đương của công thức ∀a ∃b R(a,b).","Phủ định: ¬∀a∃bR(a,b) ≡ ∃a ∀b ¬R(a,b).",LogicFOL
+"Hãy trình bày Trong Iterative Deepening Search (IDS), với cây đều b=4 và độ sâu lời giải d=7, tổng số nút được sinh (tính cả các lần lặp) xấp xỉ bao nhiêu theo công thức tổng (d−i+1)·b^i?","Tổng số nút ≈ ∑_{i=0..d} (d−i+1)·b^i. Với b=4, d=7 thì giá trị là 29124.",Search
+"Bạn có thể cho biết Trong Iterative Deepening Search (IDS), với cây đều b=4 và độ sâu lời giải d=2, tổng số nút được sinh (tính cả các lần lặp) xấp xỉ bao nhiêu theo công thức tổng (d−i+1)·b^i?","Tổng số nút ≈ ∑_{i=0..d} (d−i+1)·b^i. Với b=4, d=2 thì giá trị là 27.",Search
+Hãy trình bày Skolem hóa (Skolemization) dùng để làm gì?,Loại lượng từ tồn tại bằng cách thay bằng hằng/hàm Skolem để đưa công thức về dạng thuận lợi cho suy diễn.,LogicFOL
+Bạn hãy cho biết Giả sử cây tìm kiếm đều có hệ số phân nhánh b=4 và lời giải nông nhất ở độ sâu d=5. BFS sẽ sinh tối đa bao nhiêu nút (từ độ sâu 0 đến d)?,Số nút tối đa là 1 + 4 + 4^2 + … + 4^5 = (b^(d+1)−1)/(b−1) = 1365.,Search
+"Bạn hãy giải thích Hãy viết phủ định tương đương của công thức ∀m ∃n R(m,n).","Phủ định: ¬∀m∃nR(m,n) ≡ ∃m ∀n ¬R(m,n).",LogicFOL
+Bạn hãy nêu Giả sử cây tìm kiếm đều có hệ số phân nhánh b=6 và lời giải nông nhất ở độ sâu d=1. BFS sẽ sinh tối đa bao nhiêu nút (từ độ sâu 0 đến d)?,Số nút tối đa là 1 + 6 + 6^2 + … + 6^1 = (b^(d+1)−1)/(b−1) = 7.,Search
+Hãy trình bày Transformer khác RNN truyền thống ở điểm cốt lõi nào?,"Dựa hoàn toàn trên cơ chế attention thay vì hồi tiếp theo thời gian, cho phép song song hóa và học phụ thuộc dài tốt hơn.",DeepLearning
+Bạn hãy nêu Greedy Best-First Search khác A* ở điểm nào?,"Greedy chọn nút có h(n) nhỏ nhất (bỏ qua g), nên có thể nhanh nhưng không tối ưu; A* cân bằng g và h.",SearchInformed
+Hãy trình bày Giả sử cây tìm kiếm đều có hệ số phân nhánh b=3 và lời giải nông nhất ở độ sâu d=4. BFS sẽ sinh tối đa bao nhiêu nút (từ độ sâu 0 đến d)?,Số nút tối đa là 1 + 3 + 3^2 + … + 3^4 = (b^(d+1)−1)/(b−1) = 121.,Search
+Bạn hãy nêu A* dùng hàm đánh giá f(n) như thế nào?,"A* chọn nút có f(n)=g(n)+h(n), với g là chi phí đã đi và h là ước lượng đến đích.",SearchInformed
+"Bạn có thể cho biết Trong A*, nếu một nút có chi phí đã đi g(n)=29 và heuristic h(n)=34, giá trị f(n) bằng bao nhiêu?",f(n)=g(n)+h(n)=29+34=63.,SearchInformed
+"Bạn hãy giải thích Trong A*, nếu một nút có chi phí đã đi g(n)=53 và heuristic h(n)=22, giá trị f(n) bằng bao nhiêu?",f(n)=g(n)+h(n)=53+22=75.,SearchInformed
+"Bạn hãy nêu Trong Iterative Deepening Search (IDS), với cây đều b=2 và độ sâu lời giải d=5, tổng số nút được sinh (tính cả các lần lặp) xấp xỉ bao nhiêu theo công thức tổng (d−i+1)·b^i?","Tổng số nút ≈ ∑_{i=0..d} (d−i+1)·b^i. Với b=2, d=5 thì giá trị là 120.",Search
+Bạn hãy cho biết PEAS được dùng để làm gì khi thiết kế tác tử?,"PEAS giúp mô tả bài toán môi trường công việc: tiêu chí hiệu quả, môi trường, bộ chấp hành và cảm biến, từ đó thiết kế tác tử phù hợp.",Agents
+"Hãy trình bày Hãy viết phủ định tương đương của công thức ∀m ∃n Teaches(m,n).","Phủ định: ¬∀m∃nTeaches(m,n) ≡ ∃m ∀n ¬Teaches(m,n).",LogicFOL
+"Bạn hãy cho biết Trong A*, nếu một nút có chi phí đã đi g(n)=38 và heuristic h(n)=6, giá trị f(n) bằng bao nhiêu?",f(n)=g(n)+h(n)=38+6=44.,SearchInformed
+AI winter được định nghĩa như thế nào?,Là các giai đoạn suy giảm đầu tư và kỳ vọng vào AI do hạn chế công nghệ/tính toán và kết quả không như hứa hẹn.,IntroAI
+Logic vị từ (FOL) mở rộng logic mệnh đề bằng gì?,"Bằng biến, hằng, hàm, quan hệ (predicate) và lượng từ ∀, ∃ để biểu diễn cấu trúc đối tượng và quan hệ.",LogicFOL
+Bạn hãy cho biết Mạng ngữ nghĩa (semantic network) biểu diễn gì?,"Biểu diễn khái niệm và quan hệ dưới dạng đồ thị, hỗ trợ suy diễn bằng lan truyền thuộc tính và quan hệ IS-A/PART-OF.",Knowledge
+"Bạn hãy cho biết Trong phân tích không gian của DFS, nếu hệ số phân nhánh b=3 và độ sâu cực đại m=26, ước lượng O(bm) tương ứng với b·m bằng bao nhiêu?","O(bm) cho biết bộ nhớ tỷ lệ với b·m. Với b=3, m=26 thì b·m = 78 (đơn vị tỷ lệ, bỏ hằng số).",Search
+"Bạn hãy cho biết Trong A*, nếu một nút có chi phí đã đi g(n)=57 và heuristic h(n)=27, giá trị f(n)=g(n)+h(n) bằng bao nhiêu?",f(n) = g(n) + h(n) = 57 + 27 = 84.,SearchInformed
+Bạn hãy nêu Overfitting có thể phát hiện qua dấu hiệu nào?,"Lỗi huấn luyện thấp nhưng lỗi kiểm thử/validation cao, cho thấy mô hình học quá sát dữ liệu huấn luyện.",MachineLearning
+"Bạn có thể cho biết Trong thị giác máy tính, object detection khác classification như thế nào?",Classification chỉ dự đoán lớp của ảnh; detection vừa dự đoán lớp vừa xác định vị trí (bounding boxes) của đối tượng.,Applications
+Hãy trình bày Gradient descent cập nhật tham số theo công thức tổng quát nào?,"θ ← θ − η ∇θ J(θ), trong đó η là learning rate và J là hàm mất mát/cost.",MachineLearning
+"Bạn hãy giải thích Trong A*, nếu một nút có chi phí đã đi g(n)=24 và heuristic h(n)=11, giá trị f(n) bằng bao nhiêu?",f(n)=g(n)+h(n)=24+11=35.,SearchInformed
+Hãy trình bày IDS (Iterative Deepening Search) kết hợp lợi ích gì của BFS và DFS?,IDS có bộ nhớ như DFS nhưng tính hoàn chỉnh như BFS và tối ưu theo độ sâu khi chi phí bước bằng nhau.,Search
+"Hãy trình bày Hãy viết phủ định tương đương của công thức ∃a ∀b Teaches(a,b).","Phủ định: ¬∃a∀bTeaches(a,b) ≡ ∀a ∃b ¬Teaches(a,b).",LogicFOL
+"Bạn có thể cho biết Trong phân tích không gian của DFS, nếu hệ số phân nhánh b=5 và độ sâu cực đại m=14, ước lượng O(bm) tương ứng với b·m bằng bao nhiêu?","O(bm) cho biết bộ nhớ tỷ lệ với b·m. Với b=5, m=14 thì b·m = 70 (đơn vị tỷ lệ, bỏ hằng số).",Search
+"Bạn hãy giải thích Hãy viết phủ định tương đương của công thức ∀x ∃y Teaches(x,y).","Phủ định: ¬∀x∃yTeaches(x,y) ≡ ∃x ∀y ¬Teaches(x,y).",LogicFOL
+"Bạn hãy giải thích Trong A*, nếu một nút có chi phí đã đi g(n)=13 và heuristic h(n)=34, giá trị f(n) bằng bao nhiêu?",f(n)=g(n)+h(n)=13+34=47.,SearchInformed
+Bạn hãy cho biết Học phần IT3160 tập trung vào những mảng chính nào của AI?,"Tập trung vào tác tử thông minh, giải quyết vấn đề bằng tìm kiếm, logic & suy diễn, biểu diễn tri thức và giới thiệu học máy.",IntroAI
+Bạn hãy giải thích Heuristic MRV (Minimum Remaining Values) chọn biến như thế nào?,Chọn biến có ít giá trị hợp lệ còn lại nhất để phát hiện bế tắc sớm.,CSP
+"Bạn có thể cho biết Trong phân tích không gian của DFS, nếu hệ số phân nhánh b=3 và độ sâu cực đại m=11, ước lượng O(bm) tương ứng với b·m bằng bao nhiêu?","O(bm) cho biết bộ nhớ tỷ lệ với b·m. Với b=3, m=11 thì b·m = 33 (đơn vị tỷ lệ, bỏ hằng số).",Search
+"Bạn hãy giải thích Trong A*, nếu một nút có chi phí đã đi g(n)=8 và heuristic h(n)=18, giá trị f(n) bằng bao nhiêu?",f(n)=g(n)+h(n)=8+18=26.,SearchInformed
+"Bạn hãy nêu Trong A*, nếu một nút có chi phí đã đi g(n)=21 và heuristic h(n)=35, giá trị f(n)=g(n)+h(n) bằng bao nhiêu?",f(n) = g(n) + h(n) = 21 + 35 = 56.,SearchInformed
+Bạn hãy định nghĩa Naive Bayes,"Naive Bayes là thuật toán phân loại dựa trên định lý Bayes với giả định độc lập giữa các đặc trưng, thường dùng trong phân loại văn bản và xử lý ngôn ngữ tự nhiên.",NaiveBayes
+"Trong NLP, bài toán gán nhãn thực thể (NER) được định nghĩa như thế nào?","Nhận diện và phân loại các thực thể có tên trong văn bản như người, tổ chức, địa điểm, thời gian…",Applications
+"Trong A*, nếu một nút có chi phí đã đi g(n)=16 và heuristic h(n)=30, giá trị f(n)=g(n)+h(n) bằng bao nhiêu?",f(n) = g(n) + h(n) = 16 + 30 = 46.,SearchInformed
+Thuật ngữ Giải quyết xung đột (conflict resolution) trong hệ luật là gì?,"Là chiến lược chọn luật sẽ áp dụng khi có nhiều luật cùng thỏa điều kiện, ví dụ ưu tiên luật cụ thể nhất hoặc mới nhất.",Knowledge
+"Bạn hãy cho biết Trong Iterative Deepening Search (IDS), với cây đều b=2 và độ sâu lời giải d=7, tổng số nút được sinh (tính cả các lần lặp) xấp xỉ bao nhiêu theo công thức tổng (d−i+1)·b^i?","Tổng số nút ≈ ∑_{i=0..d} (d−i+1)·b^i. Với b=2, d=7 thì giá trị là 502.",Search
+Bạn có thể cho biết Vì sao AI cần tri thức và suy diễn?,Tri thức giúp mô tả thế giới và nhiệm vụ; suy diễn giúp rút ra kết luận/ra quyết định từ tri thức và quan sát.,IntroAI
+"Hãy trình bày Trong A*, nếu một nút có chi phí đã đi g(n)=10 và heuristic h(n)=31, giá trị f(n) bằng bao nhiêu?",f(n)=g(n)+h(n)=10+31=41.,SearchInformed
+Hợp nhất (unification) trong FOL nghĩa là gì?,"Là tìm phép thế (substitution) cho biến để hai biểu thức trở nên đồng nhất, thường dùng trong resolution và suy diễn.",LogicFOL
+Hãy trình bày Luật De Morgan áp dụng cho phủ định hội/tuyển như thế nào?,¬(A∧B) tương đương ¬A∨¬B; ¬(A∨B) tương đương ¬A∧¬B.,Logic
+"Hãy trình bày Trong A*, nếu một nút có chi phí đã đi g(n)=58 và heuristic h(n)=24, giá trị f(n) bằng bao nhiêu?",f(n)=g(n)+h(n)=58+24=82.,SearchInformed
+"Bạn hãy giải thích Trong A*, nếu một nút có chi phí đã đi g(n)=6 và heuristic h(n)=17, giá trị f(n) bằng bao nhiêu?",f(n)=g(n)+h(n)=6+17=23.,SearchInformed
+Bạn hãy nêu Giả sử cây tìm kiếm đều có hệ số phân nhánh b=3 và lời giải nông nhất ở độ sâu d=9. BFS sẽ sinh tối đa bao nhiêu nút (từ độ sâu 0 đến d)?,Số nút tối đa là 1 + 3 + 3^2 + … + 3^9 = (b^(d+1)−1)/(b−1) = 29524.,Search
+"Bạn hãy cho biết Trong A*, nếu một nút có chi phí đã đi g(n)=73 và heuristic h(n)=31, giá trị f(n) bằng bao nhiêu?",f(n)=g(n)+h(n)=73+31=104.,SearchInformed
+"Bạn hãy cho biết Trong phân tích không gian của DFS, nếu hệ số phân nhánh b=3 và độ sâu cực đại m=23, ước lượng O(bm) tương ứng với b·m bằng bao nhiêu?","O(bm) cho biết bộ nhớ tỷ lệ với b·m. Với b=3, m=23 thì b·m = 69 (đơn vị tỷ lệ, bỏ hằng số).",Search
+"Bạn hãy nêu Trong phân tích không gian của DFS, nếu hệ số phân nhánh b=2 và độ sâu cực đại m=23, ước lượng O(bm) tương ứng với b·m bằng bao nhiêu?","O(bm) cho biết bộ nhớ tỷ lệ với b·m. Với b=2, m=23 thì b·m = 46 (đơn vị tỷ lệ, bỏ hằng số).",Search
+"Bạn có thể cho biết Trong Iterative Deepening Search (IDS), với cây đều b=2 và độ sâu lời giải d=3, tổng số nút được sinh (tính cả các lần lặp) xấp xỉ bao nhiêu theo công thức tổng (d−i+1)·b^i?","Tổng số nút ≈ ∑_{i=0..d} (d−i+1)·b^i. Với b=2, d=3 thì giá trị là 26.",Search
+Giả sử cây tìm kiếm đều có hệ số phân nhánh b=2 và lời giải nông nhất ở độ sâu d=6. BFS sẽ sinh tối đa bao nhiêu nút (từ độ sâu 0 đến d)?,Số nút tối đa là 1 + 2 + 2^2 + … + 2^6 = (b^(d+1)−1)/(b−1) = 127.,Search
+Giả sử cây tìm kiếm đều có hệ số phân nhánh b=6 và lời giải nông nhất ở độ sâu d=5. BFS sẽ sinh tối đa bao nhiêu nút (từ độ sâu 0 đến d)?,Số nút tối đa là 1 + 6 + 6^2 + … + 6^5 = (b^(d+1)−1)/(b−1) = 9331.,Search
+"Bạn có thể cho biết Hãy viết phủ định tương đương của công thức ∀u ∃v S(u,v).","Phủ định: ¬∀u∃vS(u,v) ≡ ∃u ∀v ¬S(u,v).",LogicFOL
+"Bạn có thể cho biết Hãy viết phủ định tương đương của công thức ∃i ∀j Knows(i,j).","Phủ định: ¬∃i∀jKnows(i,j) ≡ ∀i ∃j ¬Knows(i,j).",LogicFOL
+"Bạn hãy nêu Trong Iterative Deepening Search (IDS), với cây đều b=5 và độ sâu lời giải d=7, tổng số nút được sinh (tính cả các lần lặp) xấp xỉ bao nhiêu theo công thức tổng (d−i+1)·b^i?","Tổng số nút ≈ ∑_{i=0..d} (d−i+1)·b^i. Với b=5, d=7 thì giá trị là 122068.",Search
+"Bạn hãy giải thích Trong phân tích không gian của DFS, nếu hệ số phân nhánh b=8 và độ sâu cực đại m=23, ước lượng O(bm) tương ứng với b·m bằng bao nhiêu?","O(bm) cho biết bộ nhớ tỷ lệ với b·m. Với b=8, m=23 thì b·m = 184 (đơn vị tỷ lệ, bỏ hằng số).",Search
+"Trong A*, nếu một nút có chi phí đã đi g(n)=53 và heuristic h(n)=22, giá trị f(n) bằng bao nhiêu?",f(n)=g(n)+h(n)=53+22=75.,SearchInformed
+"Hãy trình bày Trong A*, nếu một nút có chi phí đã đi g(n)=64 và heuristic h(n)=38, giá trị f(n) bằng bao nhiêu?",f(n)=g(n)+h(n)=64+38=102.,SearchInformed
+"Bạn hãy nêu Trong A*, nếu một nút có chi phí đã đi g(n)=76 và heuristic h(n)=20, giá trị f(n) bằng bao nhiêu?",f(n)=g(n)+h(n)=76+20=96.,SearchInformed
+"Bạn hãy nêu Trong A*, nếu một nút có chi phí đã đi g(n)=13 và heuristic h(n)=34, giá trị f(n) bằng bao nhiêu?",f(n)=g(n)+h(n)=13+34=47.,SearchInformed
+Bạn có thể cho biết Luật sản xuất IF–THEN biểu diễn tri thức kiểu gì?,"Biểu diễn tri thức dạng điều kiện–kết luận/hành động, phù hợp hệ chuyên gia và suy diễn dựa trên luật.",Knowledge
+"Bạn hãy nêu Trong A*, nếu một nút có chi phí đã đi g(n)=0 và heuristic h(n)=50, giá trị f(n) bằng bao nhiêu?",f(n)=g(n)+h(n)=0+50=50.,SearchInformed
+Naive Bayes là gì?,"Naive Bayes là thuật toán phân loại dựa trên định lý Bayes với giả định độc lập giữa các đặc trưng, thường dùng trong phân loại văn bản và xử lý ngôn ngữ tự nhiên.",NaiveBayes
+"Bạn hãy giải thích Trong A*, nếu một nút có chi phí đã đi g(n)=15 và heuristic h(n)=16, giá trị f(n) bằng bao nhiêu?",f(n)=g(n)+h(n)=15+16=31.,SearchInformed
+"Hãy trình bày Trong Iterative Deepening Search (IDS), với cây đều b=6 và độ sâu lời giải d=5, tổng số nút được sinh (tính cả các lần lặp) xấp xỉ bao nhiêu theo công thức tổng (d−i+1)·b^i?","Tổng số nút ≈ ∑_{i=0..d} (d−i+1)·b^i. Với b=6, d=5 thì giá trị là 11196.",Search
+Bạn hãy cho biết Bài toán tìm kiếm có đối thủ (adversarial search) khác gì tìm kiếm thường?,Có hai (hoặc nhiều) tác tử với mục tiêu xung đột; kết quả phụ thuộc hành động đối thủ nên dùng mô hình trò chơi.,Adversarial
+"Trong A*, nếu một nút có chi phí đã đi g(n)=64 và heuristic h(n)=12, giá trị f(n) bằng bao nhiêu?",f(n)=g(n)+h(n)=64+12=76.,SearchInformed
+"Bạn hãy giải thích Hãy viết phủ định tương đương của công thức ∀x ∃y S(x,y).","Phủ định: ¬∀x∃yS(x,y) ≡ ∃x ∀y ¬S(x,y).",LogicFOL
+"Trong phân tích không gian của DFS, nếu hệ số phân nhánh b=7 và độ sâu cực đại m=8, ước lượng O(bm) tương ứng với b·m bằng bao nhiêu?","O(bm) cho biết bộ nhớ tỷ lệ với b·m. Với b=7, m=8 thì b·m = 56 (đơn vị tỷ lệ, bỏ hằng số).",Search
+"Bạn hãy giải thích Trong A*, nếu một nút có chi phí đã đi g(n)=3 và heuristic h(n)=40, giá trị f(n) bằng bao nhiêu?",f(n)=g(n)+h(n)=3+40=43.,SearchInformed
+"Trong phân tích không gian của DFS, nếu hệ số phân nhánh b=7 và độ sâu cực đại m=5, ước lượng O(bm) tương ứng với b·m bằng bao nhiêu?","O(bm) cho biết bộ nhớ tỷ lệ với b·m. Với b=7, m=5 thì b·m = 35 (đơn vị tỷ lệ, bỏ hằng số).",Search
+Bạn hãy cho biết Giả sử cây tìm kiếm đều có hệ số phân nhánh b=4 và lời giải nông nhất ở độ sâu d=3. BFS sẽ sinh tối đa bao nhiêu nút (từ độ sâu 0 đến d)?,Số nút tối đa là 1 + 4 + 4^2 + … + 4^3 = (b^(d+1)−1)/(b−1) = 85.,Search
+"Bạn hãy giải thích Trong A*, nếu một nút có chi phí đã đi g(n)=16 và heuristic h(n)=30, giá trị f(n)=g(n)+h(n) bằng bao nhiêu?",f(n) = g(n) + h(n) = 16 + 30 = 46.,SearchInformed
+"Bạn có thể cho biết Trong A*, nếu một nút có chi phí đã đi g(n)=64 và heuristic h(n)=46, giá trị f(n) bằng bao nhiêu?",f(n)=g(n)+h(n)=64+46=110.,SearchInformed
+"Bạn hãy nêu Trong A*, nếu một nút có chi phí đã đi g(n)=30 và heuristic h(n)=47, giá trị f(n) bằng bao nhiêu?",f(n)=g(n)+h(n)=30+47=77.,SearchInformed
+Bạn có thể cho biết BFS đảm bảo tối ưu trong điều kiện nào?,"BFS tối ưu khi mọi bước đi có cùng chi phí (chi phí bước bằng nhau), vì BFS tìm lời giải nông nhất.",Search
+"Bạn hãy nêu Trong phân tích không gian của DFS, nếu hệ số phân nhánh b=9 và độ sâu cực đại m=20, ước lượng O(bm) tương ứng với b·m bằng bao nhiêu?","O(bm) cho biết bộ nhớ tỷ lệ với b·m. Với b=9, m=20 thì b·m = 180 (đơn vị tỷ lệ, bỏ hằng số).",Search
+Bạn hãy cho biết Giả sử cây tìm kiếm đều có hệ số phân nhánh b=3 và lời giải nông nhất ở độ sâu d=3. BFS sẽ sinh tối đa bao nhiêu nút (từ độ sâu 0 đến d)?,Số nút tối đa là 1 + 3 + 3^2 + … + 3^3 = (b^(d+1)−1)/(b−1) = 40.,Search
+"Bạn hãy nêu Trong A*, nếu một nút có chi phí đã đi g(n)=38 và heuristic h(n)=6, giá trị f(n) bằng bao nhiêu?",f(n)=g(n)+h(n)=38+6=44.,SearchInformed
+"Bạn có thể cho biết Trong phân tích không gian của DFS, nếu hệ số phân nhánh b=8 và độ sâu cực đại m=23, ước lượng O(bm) tương ứng với b·m bằng bao nhiêu?","O(bm) cho biết bộ nhớ tỷ lệ với b·m. Với b=8, m=23 thì b·m = 184 (đơn vị tỷ lệ, bỏ hằng số).",Search
+Bạn hãy cho biết Vì sao cần chuẩn hóa đặc trưng khi dùng KNN hoặc gradient descent?,Vì khoảng cách/gradient bị chi phối bởi thang đo; chuẩn hóa giúp các đặc trưng đóng góp cân bằng.,MachineLearning
+"Bạn hãy cho biết Trong A*, nếu một nút có chi phí đã đi g(n)=17 và heuristic h(n)=29, giá trị f(n) bằng bao nhiêu?",f(n)=g(n)+h(n)=17+29=46.,SearchInformed
+"Trong A*, nếu một nút có chi phí đã đi g(n)=58 và heuristic h(n)=23, giá trị f(n) bằng bao nhiêu?",f(n)=g(n)+h(n)=58+23=81.,SearchInformed
+"Hãy trình bày Trò chơi deterministic, zero-sum, perfect information có ý nghĩa gì?",Deterministic: không ngẫu nhiên; zero-sum: lợi ích tổng bằng 0; perfect information: mọi trạng thái đều quan sát được đầy đủ.,Adversarial
+"Hãy trình bày Trong phân tích không gian của DFS, nếu hệ số phân nhánh b=3 và độ sâu cực đại m=29, ước lượng O(bm) tương ứng với b·m bằng bao nhiêu?","O(bm) cho biết bộ nhớ tỷ lệ với b·m. Với b=3, m=29 thì b·m = 87 (đơn vị tỷ lệ, bỏ hằng số).",Search
+"Trong A*, nếu một nút có chi phí đã đi g(n)=0 và heuristic h(n)=27, giá trị f(n) bằng bao nhiêu?",f(n)=g(n)+h(n)=0+27=27.,SearchInformed
+Hãy trình bày Biểu diễn tri thức bằng khung (frame) nhấn mạnh cấu trúc nào?,"Nhấn mạnh biểu diễn hướng đối tượng với các slot–filler, có thể kế thừa từ khung tổng quát (IS-A) xuống khung cụ thể.",Knowledge
+"Bạn hãy giải thích Trong phân tích không gian của DFS, nếu hệ số phân nhánh b=4 và độ sâu cực đại m=17, ước lượng O(bm) tương ứng với b·m bằng bao nhiêu?","O(bm) cho biết bộ nhớ tỷ lệ với b·m. Với b=4, m=17 thì b·m = 68 (đơn vị tỷ lệ, bỏ hằng số).",Search
+Bạn hãy giải thích Giả sử cây tìm kiếm đều có hệ số phân nhánh b=4 và lời giải nông nhất ở độ sâu d=6. BFS sẽ sinh tối đa bao nhiêu nút (từ độ sâu 0 đến d)?,Số nút tối đa là 1 + 4 + 4^2 + … + 4^6 = (b^(d+1)−1)/(b−1) = 5461.,Search
+"Bạn hãy cho biết Trong A*, nếu một nút có chi phí đã đi g(n)=16 và heuristic h(n)=30, giá trị f(n)=g(n)+h(n) bằng bao nhiêu?",f(n) = g(n) + h(n) = 16 + 30 = 46.,SearchInformed
+"Trong phân tích không gian của DFS, nếu hệ số phân nhánh b=7 và độ sâu cực đại m=29, ước lượng O(bm) tương ứng với b·m bằng bao nhiêu?","O(bm) cho biết bộ nhớ tỷ lệ với b·m. Với b=7, m=29 thì b·m = 203 (đơn vị tỷ lệ, bỏ hằng số).",Search
+"Hãy trình bày Trong A*, nếu một nút có chi phí đã đi g(n)=51 và heuristic h(n)=1, giá trị f(n) bằng bao nhiêu?",f(n)=g(n)+h(n)=51+1=52.,SearchInformed
+"Bạn hãy giải thích Trong A*, nếu một nút có chi phí đã đi g(n)=56 và heuristic h(n)=38, giá trị f(n)=g(n)+h(n) bằng bao nhiêu?",f(n) = g(n) + h(n) = 56 + 38 = 94.,SearchInformed
+"Trong phân tích không gian của DFS, nếu hệ số phân nhánh b=3 và độ sâu cực đại m=29, ước lượng O(bm) tương ứng với b·m bằng bao nhiêu?","O(bm) cho biết bộ nhớ tỷ lệ với b·m. Với b=3, m=29 thì b·m = 87 (đơn vị tỷ lệ, bỏ hằng số).",Search
+"Trong A*, nếu một nút có chi phí đã đi g(n)=53 và heuristic h(n)=24, giá trị f(n) bằng bao nhiêu?",f(n)=g(n)+h(n)=53+24=77.,SearchInformed
+Hãy trình bày Heuristic MRV (Minimum Remaining Values) chọn biến như thế nào?,Chọn biến có ít giá trị hợp lệ còn lại nhất để phát hiện bế tắc sớm.,CSP
+"Trong NLP, bài toán gán nhãn thực thể (NER) nghĩa là gì?","Nhận diện và phân loại các thực thể có tên trong văn bản như người, tổ chức, địa điểm, thời gian…",Applications
+Bạn hãy cho biết Hệ thống gợi ý (recommendation) thường dựa trên hai hướng tiếp cận chính nào?,Filtering cộng tác (dựa trên hành vi người dùng tương tự) và filtering theo nội dung (dựa trên thuộc tính mục).,Applications
+Bạn có thể cho biết Giả sử cây tìm kiếm đều có hệ số phân nhánh b=7 và lời giải nông nhất ở độ sâu d=5. BFS sẽ sinh tối đa bao nhiêu nút (từ độ sâu 0 đến d)?,Số nút tối đa là 1 + 7 + 7^2 + … + 7^5 = (b^(d+1)−1)/(b−1) = 19608.,Search
+"Bạn có thể cho biết Trong phân tích không gian của DFS, nếu hệ số phân nhánh b=9 và độ sâu cực đại m=26, ước lượng O(bm) tương ứng với b·m bằng bao nhiêu?","O(bm) cho biết bộ nhớ tỷ lệ với b·m. Với b=9, m=26 thì b·m = 234 (đơn vị tỷ lệ, bỏ hằng số).",Search
+Bạn hãy nêu Giả sử cây tìm kiếm đều có hệ số phân nhánh b=5 và lời giải nông nhất ở độ sâu d=5. BFS sẽ sinh tối đa bao nhiêu nút (từ độ sâu 0 đến d)?,Số nút tối đa là 1 + 5 + 5^2 + … + 5^5 = (b^(d+1)−1)/(b−1) = 3906.,Search
+"Hãy trình bày Trong A*, nếu một nút có chi phí đã đi g(n)=20 và heuristic h(n)=8, giá trị f(n) bằng bao nhiêu?",f(n)=g(n)+h(n)=20+8=28.,SearchInformed
+"Hãy trình bày Trong phân tích không gian của DFS, nếu hệ số phân nhánh b=9 và độ sâu cực đại m=17, ước lượng O(bm) tương ứng với b·m bằng bao nhiêu?","O(bm) cho biết bộ nhớ tỷ lệ với b·m. Với b=9, m=17 thì b·m = 153 (đơn vị tỷ lệ, bỏ hằng số).",Search
+Bạn hãy cho biết Giả sử cây tìm kiếm đều có hệ số phân nhánh b=2 và lời giải nông nhất ở độ sâu d=5. BFS sẽ sinh tối đa bao nhiêu nút (từ độ sâu 0 đến d)?,Số nút tối đa là 1 + 2 + 2^2 + … + 2^5 = (b^(d+1)−1)/(b−1) = 63.,Search
+Bạn hãy nêu Giả sử cây tìm kiếm đều có hệ số phân nhánh b=4 và lời giải nông nhất ở độ sâu d=5. BFS sẽ sinh tối đa bao nhiêu nút (từ độ sâu 0 đến d)?,Số nút tối đa là 1 + 4 + 4^2 + … + 4^5 = (b^(d+1)−1)/(b−1) = 1365.,Search
+"Bạn hãy cho biết Trong phân tích không gian của DFS, nếu hệ số phân nhánh b=6 và độ sâu cực đại m=17, ước lượng O(bm) tương ứng với b·m bằng bao nhiêu?","O(bm) cho biết bộ nhớ tỷ lệ với b·m. Với b=6, m=17 thì b·m = 102 (đơn vị tỷ lệ, bỏ hằng số).",Search
+"Bạn có thể cho biết Trong A*, nếu một nút có chi phí đã đi g(n)=53 và heuristic h(n)=20, giá trị f(n) bằng bao nhiêu?",f(n)=g(n)+h(n)=53+20=73.,SearchInformed
+"Trong A*, nếu một nút có chi phí đã đi g(n)=21 và heuristic h(n)=35, giá trị f(n)=g(n)+h(n) bằng bao nhiêu?",f(n) = g(n) + h(n) = 21 + 35 = 56.,SearchInformed
+Bạn có thể cho biết Học không giám sát thường nhằm mục tiêu gì?,"Tìm cấu trúc ẩn như phân cụm, giảm chiều, phát hiện bất thường… từ dữ liệu không nhãn.",MachineLearning
+Bạn hãy giải thích Giả sử cây tìm kiếm đều có hệ số phân nhánh b=5 và lời giải nông nhất ở độ sâu d=3. BFS sẽ sinh tối đa bao nhiêu nút (từ độ sâu 0 đến d)?,Số nút tối đa là 1 + 5 + 5^2 + … + 5^3 = (b^(d+1)−1)/(b−1) = 156.,Search
+"Bạn hãy nêu Trong A*, nếu một nút có chi phí đã đi g(n)=58 và heuristic h(n)=12, giá trị f(n) bằng bao nhiêu?",f(n)=g(n)+h(n)=58+12=70.,SearchInformed
+"Bạn hãy cho biết Trong Iterative Deepening Search (IDS), với cây đều b=4 và độ sâu lời giải d=2, tổng số nút được sinh (tính cả các lần lặp) xấp xỉ bao nhiêu theo công thức tổng (d−i+1)·b^i?","Tổng số nút ≈ ∑_{i=0..d} (d−i+1)·b^i. Với b=4, d=2 thì giá trị là 27.",Search
+Giải quyết xung đột (conflict resolution) trong hệ luật là gì?,"Là chiến lược chọn luật sẽ áp dụng khi có nhiều luật cùng thỏa điều kiện, ví dụ ưu tiên luật cụ thể nhất hoặc mới nhất.",Knowledge
+Hãy trình bày Bài toán tìm kiếm có đối thủ (adversarial search) khác gì tìm kiếm thường?,Có hai (hoặc nhiều) tác tử với mục tiêu xung đột; kết quả phụ thuộc hành động đối thủ nên dùng mô hình trò chơi.,Adversarial
+Hãy trình bày Giả sử cây tìm kiếm đều có hệ số phân nhánh b=2 và lời giải nông nhất ở độ sâu d=2. BFS sẽ sinh tối đa bao nhiêu nút (từ độ sâu 0 đến d)?,Số nút tối đa là 1 + 2 + 2^2 + … + 2^2 = (b^(d+1)−1)/(b−1) = 7.,Search
+"Hãy trình bày Trong A*, nếu một nút có chi phí đã đi g(n)=15 và heuristic h(n)=16, giá trị f(n) bằng bao nhiêu?",f(n)=g(n)+h(n)=15+16=31.,SearchInformed
+"Bạn hãy giải thích Trong A*, nếu một nút có chi phí đã đi g(n)=48 và heuristic h(n)=23, giá trị f(n) bằng bao nhiêu?",f(n)=g(n)+h(n)=48+23=71.,SearchInformed
+"Trong A*, nếu một nút có chi phí đã đi g(n)=53 và heuristic h(n)=0, giá trị f(n) bằng bao nhiêu?",f(n)=g(n)+h(n)=53+0=53.,SearchInformed
+Giả sử cây tìm kiếm đều có hệ số phân nhánh b=7 và lời giải nông nhất ở độ sâu d=3. BFS sẽ sinh tối đa bao nhiêu nút (từ độ sâu 0 đến d)?,Số nút tối đa là 1 + 7 + 7^2 + … + 7^3 = (b^(d+1)−1)/(b−1) = 400.,Search
+"Bạn hãy nêu Trong A*, nếu một nút có chi phí đã đi g(n)=58 và heuristic h(n)=23, giá trị f(n) bằng bao nhiêu?",f(n)=g(n)+h(n)=58+23=81.,SearchInformed
+Bạn hãy cho biết Giả sử cây tìm kiếm đều có hệ số phân nhánh b=6 và lời giải nông nhất ở độ sâu d=7. BFS sẽ sinh tối đa bao nhiêu nút (từ độ sâu 0 đến d)?,Số nút tối đa là 1 + 6 + 6^2 + … + 6^7 = (b^(d+1)−1)/(b−1) = 335923.,Search
+Bạn hãy giải thích Giả sử cây tìm kiếm đều có hệ số phân nhánh b=7 và lời giải nông nhất ở độ sâu d=6. BFS sẽ sinh tối đa bao nhiêu nút (từ độ sâu 0 đến d)?,Số nút tối đa là 1 + 7 + 7^2 + … + 7^6 = (b^(d+1)−1)/(b−1) = 137257.,Search
+"Bạn hãy giải thích Trong A*, nếu một nút có chi phí đã đi g(n)=43 và heuristic h(n)=33, giá trị f(n) bằng bao nhiêu?",f(n)=g(n)+h(n)=43+33=76.,SearchInformed
+"Bạn có thể cho biết Trong phân tích không gian của DFS, nếu hệ số phân nhánh b=8 và độ sâu cực đại m=11, ước lượng O(bm) tương ứng với b·m bằng bao nhiêu?","O(bm) cho biết bộ nhớ tỷ lệ với b·m. Với b=8, m=11 thì b·m = 88 (đơn vị tỷ lệ, bỏ hằng số).",Search
+"Trong phân tích không gian của DFS, nếu hệ số phân nhánh b=2 và độ sâu cực đại m=8, ước lượng O(bm) tương ứng với b·m bằng bao nhiêu?","O(bm) cho biết bộ nhớ tỷ lệ với b·m. Với b=2, m=8 thì b·m = 16 (đơn vị tỷ lệ, bỏ hằng số).",Search
+"Bạn hãy giải thích Trong A*, nếu một nút có chi phí đã đi g(n)=18 và heuristic h(n)=27, giá trị f(n)=g(n)+h(n) bằng bao nhiêu?",f(n) = g(n) + h(n) = 18 + 27 = 45.,SearchInformed
+"Bạn hãy cho biết Trong A*, nếu một nút có chi phí đã đi g(n)=46 và heuristic h(n)=0, giá trị f(n) bằng bao nhiêu?",f(n)=g(n)+h(n)=46+0=46.,SearchInformed
+"Hãy trình bày Trong A*, nếu một nút có chi phí đã đi g(n)=73 và heuristic h(n)=31, giá trị f(n) bằng bao nhiêu?",f(n)=g(n)+h(n)=73+31=104.,SearchInformed
+"Bạn có thể cho biết Trong phân tích không gian của DFS, nếu hệ số phân nhánh b=3 và độ sâu cực đại m=14, ước lượng O(bm) tương ứng với b·m bằng bao nhiêu?","O(bm) cho biết bộ nhớ tỷ lệ với b·m. Với b=3, m=14 thì b·m = 42 (đơn vị tỷ lệ, bỏ hằng số).",Search
+Một ví dụ điển hình của AI trong đời sống được định nghĩa như thế nào?,"Ví dụ: hệ thống gợi ý sản phẩm/phim, trợ lý ảo, dịch máy, nhận diện khuôn mặt, lọc thư rác.",IntroAI
+"Bạn có thể cho biết Trong A*, nếu một nút có chi phí đã đi g(n)=18 và heuristic h(n)=27, giá trị f(n)=g(n)+h(n) bằng bao nhiêu?",f(n) = g(n) + h(n) = 18 + 27 = 45.,SearchInformed
+Hãy trình bày Giải CSP khác gì tìm kiếm đường đi truyền thống?,"CSP tìm gán giá trị cho biến thỏa mọi ràng buộc; đường đi không quan trọng, thường dùng backtracking và suy luận ràng buộc.",CSP
+"Bạn hãy nêu Trong phân tích không gian của DFS, nếu hệ số phân nhánh b=8 và độ sâu cực đại m=26, ước lượng O(bm) tương ứng với b·m bằng bao nhiêu?","O(bm) cho biết bộ nhớ tỷ lệ với b·m. Với b=8, m=26 thì b·m = 208 (đơn vị tỷ lệ, bỏ hằng số).",Search
+"Bạn hãy nêu Trong A*, nếu một nút có chi phí đã đi g(n)=71 và heuristic h(n)=21, giá trị f(n) bằng bao nhiêu?",f(n)=g(n)+h(n)=71+21=92.,SearchInformed
+Bias–variance tradeoff mô tả đánh đổi nào?,"Mô hình đơn giản có bias cao, variance thấp; mô hình phức tạp giảm bias nhưng tăng variance và dễ overfit.",MachineLearning
+"Bạn hãy giải thích Trong phân tích không gian của DFS, nếu hệ số phân nhánh b=6 và độ sâu cực đại m=29, ước lượng O(bm) tương ứng với b·m bằng bao nhiêu?","O(bm) cho biết bộ nhớ tỷ lệ với b·m. Với b=6, m=29 thì b·m = 174 (đơn vị tỷ lệ, bỏ hằng số).",Search
+Backpropagation tính toán gì trong mạng nơ-ron?,Tính gradient của hàm mất mát theo từng trọng số bằng quy tắc dây chuyền để cập nhật tham số.,DeepLearning
+Tác tử phản xạ dựa trên mô hình khác gì phản xạ đơn giản?,"Có trạng thái nội bộ và mô hình cập nhật để theo dõi phần thế giới không quan sát trực tiếp, từ đó ra hành động.",Agents
+"Bạn có thể cho biết Hãy viết phủ định tương đương của công thức ∃a ∀b R(a,b).","Phủ định: ¬∃a∀bR(a,b) ≡ ∀a ∃b ¬R(a,b).",LogicFOL
+"Bạn hãy giải thích Trong phân tích không gian của DFS, nếu hệ số phân nhánh b=9 và độ sâu cực đại m=26, ước lượng O(bm) tương ứng với b·m bằng bao nhiêu?","O(bm) cho biết bộ nhớ tỷ lệ với b·m. Với b=9, m=26 thì b·m = 234 (đơn vị tỷ lệ, bỏ hằng số).",Search
+"Bạn hãy cho biết Trong phân tích không gian của DFS, nếu hệ số phân nhánh b=8 và độ sâu cực đại m=23, ước lượng O(bm) tương ứng với b·m bằng bao nhiêu?","O(bm) cho biết bộ nhớ tỷ lệ với b·m. Với b=8, m=23 thì b·m = 184 (đơn vị tỷ lệ, bỏ hằng số).",Search
+Bạn có thể cho biết Giả sử cây tìm kiếm đều có hệ số phân nhánh b=6 và lời giải nông nhất ở độ sâu d=7. BFS sẽ sinh tối đa bao nhiêu nút (từ độ sâu 0 đến d)?,Số nút tối đa là 1 + 6 + 6^2 + … + 6^7 = (b^(d+1)−1)/(b−1) = 335923.,Search
+Bạn hãy nêu Ví dụ PEAS cho tác tử taxi tự động gồm những thành phần nào?,"P: an toàn/nhanh/đúng luật; E: đường phố, xe khác, người đi bộ; A: vô-lăng, ga, phanh; S: camera, GPS, cảm biến khoảng cách, tốc độ.",Agents
+Bạn hãy giải thích BFS đảm bảo tối ưu trong điều kiện nào?,"BFS tối ưu khi mọi bước đi có cùng chi phí (chi phí bước bằng nhau), vì BFS tìm lời giải nông nhất.",Search
+"Trong A*, nếu một nút có chi phí đã đi g(n)=73 và heuristic h(n)=31, giá trị f(n) bằng bao nhiêu?",f(n)=g(n)+h(n)=73+31=104.,SearchInformed
+Bạn hãy nêu Giả sử cây tìm kiếm đều có hệ số phân nhánh b=6 và lời giải nông nhất ở độ sâu d=2. BFS sẽ sinh tối đa bao nhiêu nút (từ độ sâu 0 đến d)?,Số nút tối đa là 1 + 6 + 6^2 + … + 6^2 = (b^(d+1)−1)/(b−1) = 43.,Search
+Bạn hãy cho biết Bias–variance tradeoff mô tả đánh đổi nào?,"Mô hình đơn giản có bias cao, variance thấp; mô hình phức tạp giảm bias nhưng tăng variance và dễ overfit.",MachineLearning
+Bạn có thể cho biết Giả sử cây tìm kiếm đều có hệ số phân nhánh b=7 và lời giải nông nhất ở độ sâu d=6. BFS sẽ sinh tối đa bao nhiêu nút (từ độ sâu 0 đến d)?,Số nút tối đa là 1 + 7 + 7^2 + … + 7^6 = (b^(d+1)−1)/(b−1) = 137257.,Search
+"Bạn hãy cho biết Trong Iterative Deepening Search (IDS), với cây đều b=5 và độ sâu lời giải d=8, tổng số nút được sinh (tính cả các lần lặp) xấp xỉ bao nhiêu theo công thức tổng (d−i+1)·b^i?","Tổng số nút ≈ ∑_{i=0..d} (d−i+1)·b^i. Với b=5, d=8 thì giá trị là 610349.",Search
+"Bạn hãy nêu Trong phân tích không gian của DFS, nếu hệ số phân nhánh b=8 và độ sâu cực đại m=8, ước lượng O(bm) tương ứng với b·m bằng bao nhiêu?","O(bm) cho biết bộ nhớ tỷ lệ với b·m. Với b=8, m=8 thì b·m = 64 (đơn vị tỷ lệ, bỏ hằng số).",Search
+"Bạn hãy cho biết Trong A*, nếu một nút có chi phí đã đi g(n)=0 và heuristic h(n)=27, giá trị f(n) bằng bao nhiêu?",f(n)=g(n)+h(n)=0+27=27.,SearchInformed
+"Bạn hãy giải thích Trong A*, nếu một nút có chi phí đã đi g(n)=17 và heuristic h(n)=6, giá trị f(n)=g(n)+h(n) bằng bao nhiêu?",f(n) = g(n) + h(n) = 17 + 6 = 23.,SearchInformed
+Tác tử học (learning agent) gồm những thành phần nào?,"Thường gồm phần thực thi (performance element), phần học (learning element), phần phê bình (critic) và phần tạo trải nghiệm (problem generator).",Agents
+"Trong Iterative Deepening Search (IDS), với cây đều b=2 và độ sâu lời giải d=5, tổng số nút được sinh (tính cả các lần lặp) xấp xỉ bao nhiêu theo công thức tổng (d−i+1)·b^i?","Tổng số nút ≈ ∑_{i=0..d} (d−i+1)·b^i. Với b=2, d=5 thì giá trị là 120.",Search
