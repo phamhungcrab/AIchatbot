@@ -50,6 +50,31 @@ class TextPreprocessor:
             'làm', 'khi', 'lúc', 'nơi', 'tại', 'đã', 'đang', 'sẽ', 'muốn', 
             'phải', 'biết', 'hãy', 'rồi', 'chứ', 'nhỉ'
         }
+        
+        # 🆕 Từ khóa quan trọng KHÔNG được xóa khi preprocessing cho KNN
+        # Sử dụng cho semantic matching - cần giữ context
+        self.CRITICAL_KEYWORDS = {
+            # Thuật toán AI/ML
+            'knn', 'bfs', 'dfs', 'svm', 'cnn', 'rnn', 'lstm', 'transformer',
+            'naive', 'bayes', 'decision', 'tree', 'random', 'forest',
+            'gradient', 'descent', 'backpropagation', 'softmax', 'sigmoid',
+            # Search algorithms
+            'minimax', 'alpha', 'beta', 'heuristic', 'admissible', 'consistent',
+            'ucs', 'ids', 'a*', 'greedy',
+            # Logic
+            'modus', 'ponens', 'resolution', 'cnf', 'fol', 'kb',
+            # Từ khóa hỏi đáp quan trọng (giữ cho KNN)
+            'là', 'gì', 'khác', 'giống', 'so', 'sánh', 'tại', 'sao', 'như', 'nào',
+            # Topics
+            'agent', 'tác', 'tử', 'môi', 'trường', 'học', 'máy', 'sâu'
+        }
+        
+        # Stopwords nhẹ cho KNN - chỉ xóa các từ thực sự là noise
+        self.LIGHT_STOPWORDS = {
+            'thì', 'mà', 'và', 'của', 'những', 'các', 'được', 'cho', 'tôi', 'bạn',
+            'cậu', 'tớ', 'mình', 'nó', 'hắn', 'cái', 'con', 'sự', 'việc',
+            'đó', 'đây', 'kia', 'này', 'nhé', 'ạ', 'ơi', 'đi', 'rồi', 'chứ', 'nhỉ'
+        }
 
         self.SYNONYMS = {
             # 1. Thuật toán & Khái niệm cơ bản
@@ -130,6 +155,48 @@ class TextPreprocessor:
         ]
 
         return ' '.join(filtered_tokens)
+
+    def preprocess_for_knn(self, text: str) -> str:
+        """
+        🆕 Preprocessing nhẹ cho KNN - giữ lại từ khóa quan trọng.
+        
+        Khác với preprocess_text (NB):
+        - Dùng LIGHT_STOPWORDS thay vì VIETNAMESE_STOPWORDS 
+        - Giữ lại CRITICAL_KEYWORDS (thuật ngữ AI/ML)
+        - Mở rộng với synonyms để tăng matching
+        
+        Args:
+            text: Câu hỏi gốc của user
+            
+        Returns:
+            str: Câu đã preprocess, phù hợp cho cosine similarity
+        """
+        if not text: return ""
+
+        # 1. Lowercase & Clean (giữ nguyên như preprocess_text)
+        text = text.lower()
+        text = self.re_special_chars.sub('', text)
+        # KHÔNG xóa số cho KNN (có thể quan trọng: k=5, top-5, etc.)
+        
+        # 2. Tokenize (PyVi)
+        tokenized_text = ViTokenizer.tokenize(text)
+        
+        # 3. Filter với LIGHT_STOPWORDS - giữ lại nhiều context hơn
+        tokens = tokenized_text.split()
+        filtered_tokens = []
+        
+        for word in tokens:
+            # Giữ lại nếu là critical keyword HOẶC không phải light stopword
+            if word in self.CRITICAL_KEYWORDS:
+                filtered_tokens.append(word)  # Luôn giữ critical keywords
+            elif word not in self.LIGHT_STOPWORDS and len(word) > 1:
+                filtered_tokens.append(word)
+        
+        # 4. Mở rộng với synonyms (tăng khả năng matching)
+        processed_text = ' '.join(filtered_tokens)
+        expanded_text = self.expand_query(processed_text)
+        
+        return expanded_text
 
     def expand_query(self, text: str) -> str:
         """Mở rộng truy vấn bằng cách thêm từ đồng nghĩa (Optimized)."""
@@ -222,6 +289,10 @@ preprocessor = TextPreprocessor()
 # Expose các hàm để các module khác import như cũ
 def preprocess_text(text: str) -> str:
     return preprocessor.preprocess_text(text)
+
+def preprocess_for_knn(text: str) -> str:
+    """🆕 Preprocessing nhẹ cho KNN - giữ từ khóa quan trọng."""
+    return preprocessor.preprocess_for_knn(text)
 
 def expand_query(text: str) -> str:
     return preprocessor.expand_query(text)

@@ -1,0 +1,340 @@
+{
+  "evaluation_timestamp": "2025-12-23 17:33:33",
+  "summary": {
+    "description": "Đánh giá hệ thống AI Chatbot với 2 model: Naive Bayes (phân loại topic) và KNN (tìm câu trả lời)",
+    "data_source": "qa_valid.csv",
+    "total_test_samples": 474
+  },
+  "preprocessing_pipeline": {
+    "description": "Quy trình tiền xử lý văn bản tiếng Việt",
+    "steps": [
+      "1. Lowercase: Chuyển về chữ thường",
+      "2. Special Char Removal: Xóa ký tự đặc biệt bằng Regex r\"[^\\w\\s]\"",
+      "3. Number Removal: Xóa số bằng Regex r\"\\d+\"",
+      "4. PyVi Tokenizer: Tách từ tiếng Việt (ViTokenizer.tokenize)",
+      "5. Stopword Removal: Lọc các từ dừng tiếng Việt (52 từ)"
+    ],
+    "vectorization": {
+      "method": "TF-IDF (Term Frequency - Inverse Document Frequency)",
+      "params": {
+        "max_features": 800,
+        "ngram_range": "(1, 2) - unigram + bigram",
+        "min_df": 1,
+        "sublinear_tf": true,
+        "formula": "TF-IDF(t,d) = (1 + log(tf)) × log(N/df)"
+      }
+    }
+  },
+  "models": {
+    "naive_bayes": {
+      "model": "Naive Bayes (Topic Classification)",
+      "technique": {
+        "algorithm": "Custom Multinomial Naive Bayes",
+        "formula": "P(topic|X) ∝ P(topic) × ∏ P(word_i|topic)",
+        "smoothing": "Laplace Smoothing (alpha=0.1)",
+        "vectorizer": "TF-IDF (800 features, unigram+bigram, sublinear_tf=True)",
+        "preprocessing": [
+          "Lowercase",
+          "Xóa ký tự đặc biệt & số",
+          "PyVi Tokenizer (tách từ tiếng Việt)",
+          "Lọc Vietnamese Stopwords"
+        ]
+      },
+      "confidence_calibration": {
+        "method": "Temperature Scaling",
+        "formula": "P_calibrated(c|X) = exp(log P(c|X) / T) / Σ exp(log P(k|X) / T)",
+        "temperature": 1.5,
+        "interpretation": "T > 1 làm mềm distribution → confidence thực tế hơn"
+      },
+      "metrics": {
+        "raw": {
+          "accuracy": 46.835443037974684,
+          "average_confidence": 64.57782700421942,
+          "expected_calibration_error": 25.73635021097047,
+          "coverage_at_threshold": {
+            "0.3": 99.15611814345992,
+            "0.5": 58.22784810126582,
+            "0.7": 45.358649789029535,
+            "0.9": 9.915611814345992
+          },
+          "accuracy_at_threshold": {
+            "0.3": 47.23404255319149,
+            "0.5": 76.81159420289855,
+            "0.7": 93.02325581395348,
+            "0.9": 95.74468085106383
+          },
+          "total_samples": 474
+        },
+        "calibrated": {
+          "accuracy": 46.835443037974684,
+          "average_confidence": 48.57330315907957,
+          "expected_calibration_error": 28.27270609175967,
+          "coverage_at_threshold": {
+            "0.3": 91.56118143459916,
+            "0.5": 45.56962025316456,
+            "0.7": 10.126582278481013,
+            "0.9": 0.21097046413502107
+          },
+          "accuracy_at_threshold": {
+            "0.3": 50.92165898617511,
+            "0.5": 93.05555555555556,
+            "0.7": 93.75,
+            "0.9": 100.0
+          },
+          "total_samples": 474
+        }
+      },
+      "sample_results": [
+        {
+          "question": "Bạn hãy nêu Backpropagation tính toán gì trong mạn...",
+          "true_topic": "DeepLearning",
+          "predicted_topic": "DeepLearning",
+          "raw_confidence": 0.3931,
+          "calibrated_confidence": 0.30617280548293535,
+          "correct": true
+        },
+        {
+          "question": "Bạn hãy cho biết Trong phân tích không gian của DF...",
+          "true_topic": "Search",
+          "predicted_topic": "Search",
+          "raw_confidence": 0.8175,
+          "calibrated_confidence": 0.6019732248687851,
+          "correct": true
+        },
+        {
+          "question": "Bạn hãy cho biết IDS (Iterative Deepening Search) ...",
+          "true_topic": "Search",
+          "predicted_topic": "Search",
+          "raw_confidence": 0.9692,
+          "calibrated_confidence": 0.8458424480836373,
+          "correct": true
+        },
+        {
+          "question": "Bạn hãy giải thích Trong phân tích không gian của ...",
+          "true_topic": "Search",
+          "predicted_topic": "Search",
+          "raw_confidence": 0.8175,
+          "calibrated_confidence": 0.6019732248687851,
+          "correct": true
+        },
+        {
+          "question": "Bạn có thể cho biết Hãy viết phủ định tương đương ...",
+          "true_topic": "LogicFOL",
+          "predicted_topic": "Logic",
+          "raw_confidence": 0.517,
+          "calibrated_confidence": 0.3677437894311261,
+          "correct": false
+        },
+        {
+          "question": "Bạn hãy giải thích Trong Iterative Deepening Searc...",
+          "true_topic": "Search",
+          "predicted_topic": "Search",
+          "raw_confidence": 0.9354,
+          "calibrated_confidence": 0.7665949236391951,
+          "correct": true
+        },
+        {
+          "question": "Bạn có thể cho biết Trong A*, nếu một nút có chi p...",
+          "true_topic": "SearchInformed",
+          "predicted_topic": "Search",
+          "raw_confidence": 0.3884,
+          "calibrated_confidence": 0.297996152109993,
+          "correct": false
+        },
+        {
+          "question": "Bạn có thể cho biết Overfitting có thể phát hiện q...",
+          "true_topic": "MachineLearning",
+          "predicted_topic": "MachineLearning",
+          "raw_confidence": 0.3163,
+          "calibrated_confidence": 0.25389600927872197,
+          "correct": true
+        },
+        {
+          "question": "Hãy trình bày Trong phân tích không gian của DFS, ...",
+          "true_topic": "Search",
+          "predicted_topic": "Search",
+          "raw_confidence": 0.8175,
+          "calibrated_confidence": 0.6019732248687851,
+          "correct": true
+        },
+        {
+          "question": "Bạn hãy cho biết Giả sử cây tìm kiếm đều có hệ số ...",
+          "true_topic": "Search",
+          "predicted_topic": "Search",
+          "raw_confidence": 0.8393,
+          "calibrated_confidence": 0.6281355258968466,
+          "correct": true
+        }
+      ]
+    },
+    "knn": {
+      "model": "KNN (Answer Retrieval)",
+      "technique": {
+        "algorithm": "Custom K-Nearest Neighbors",
+        "distance_metric": "Cosine Distance = 1 - (A·B)/(||A||×||B||)",
+        "raw_confidence_formula": "Raw Confidence = 1 - Cosine Distance = Cosine Similarity",
+        "k_neighbors": 5,
+        "vectorizer": "TF-IDF (800 features, unigram+bigram, sublinear_tf=True)",
+        "preprocessing": [
+          "Lowercase",
+          "Xóa ký tự đặc biệt (KHÔNG xóa số)",
+          "PyVi Tokenizer (tách từ tiếng Việt)",
+          "LIGHT_STOPWORDS (giữ từ khóa quan trọng)",
+          "Synonym Expansion (mở rộng với từ đồng nghĩa)"
+        ]
+      },
+      "confidence_calibration": {
+        "method": "Sigmoid Scaling",
+        "formula": "calibrated = 1 / (1 + exp(-k × (similarity - midpoint)))",
+        "k": 10.0,
+        "midpoint": 0.4,
+        "interpretation": "Chuyển similarity từ [0.2-0.6] về [0-1] hợp lý hơn"
+      },
+      "metrics": {
+        "raw": {
+          "exact_match_accuracy": 0.0,
+          "average_confidence": 42.83630045611852,
+          "coverage_at_threshold": {
+            "0.3": 55.06329113924051,
+            "0.5": 25.738396624472575,
+            "0.7": 8.016877637130802,
+            "0.9": 2.109704641350211
+          },
+          "accuracy_at_threshold": {
+            "0.3": 0.0,
+            "0.5": 0.0,
+            "0.7": 0.0,
+            "0.9": 0.0
+          },
+          "total_samples": 474
+        },
+        "calibrated": {
+          "exact_match_accuracy": 0.0,
+          "average_confidence": 50.45313843100112,
+          "coverage_at_threshold": {
+            "0.3": 54.85232067510548,
+            "0.5": 51.47679324894515,
+            "0.7": 25.949367088607595,
+            "0.9": 21.308016877637133
+          },
+          "accuracy_at_threshold": {
+            "0.3": 0.0,
+            "0.5": 0.0,
+            "0.7": 0.0,
+            "0.9": 0.0
+          },
+          "total_samples": 474
+        }
+      },
+      "sample_results": [
+        {
+          "question": "Bạn hãy nêu Backpropagation tính toán gì trong mạn...",
+          "true_answer": "Tính gradient của hàm mất mát theo từng trọng số b...",
+          "predicted_answer": "Là thuật toán tính gradient bằng chain rule để cập...",
+          "matched_question": "backpropagation",
+          "raw_confidence": 0.7333447766035899,
+          "calibrated_confidence": 0.9655586100167277,
+          "exact_match": false,
+          "cosine_distance": 0.2667
+        },
+        {
+          "question": "Bạn hãy cho biết Trong phân tích không gian của DF...",
+          "true_answer": "O(bm) cho biết bộ nhớ tỷ lệ với b·m. Với b=9, m=17...",
+          "predicted_answer": "O(bm) với b là branching factor và m là độ sâu lớn...",
+          "matched_question": "độ phức_tạp không_gian dfs",
+          "raw_confidence": 0.4261580437582222,
+          "calibrated_confidence": 0.5650247586029365,
+          "exact_match": false,
+          "cosine_distance": 0.5738
+        },
+        {
+          "question": "Bạn hãy cho biết IDS (Iterative Deepening Search) ...",
+          "true_answer": "IDS có bộ nhớ như DFS nhưng tính hoàn chỉnh như BF...",
+          "predicted_answer": "BFS mở rộng các nút ở cùng độ sâu trước khi đi sâu...",
+          "matched_question": "tìm_kiếm theo chiều rộng bfs",
+          "raw_confidence": 0.641321439431815,
+          "calibrated_confidence": 0.9178294327014378,
+          "exact_match": false,
+          "cosine_distance": 0.3587
+        },
+        {
+          "question": "Bạn hãy giải thích Trong phân tích không gian của ...",
+          "true_answer": "O(bm) cho biết bộ nhớ tỷ lệ với b·m. Với b=3, m=29...",
+          "predicted_answer": "O(bm) với b là branching factor và m là độ sâu lớn...",
+          "matched_question": "độ phức_tạp không_gian dfs",
+          "raw_confidence": 0.4261580437582222,
+          "calibrated_confidence": 0.5650247586029365,
+          "exact_match": false,
+          "cosine_distance": 0.5738
+        },
+        {
+          "question": "Bạn có thể cho biết Hãy viết phủ định tương đương ...",
+          "true_answer": "Phủ định: ¬∃i∀jLikes(i,j) ≡ ∀i ∃j ¬Likes(i,j).",
+          "predicted_answer": "P ↔ Q đúng khi P và Q có cùng giá trị chân lý.",
+          "matched_question": "phép tương_đương",
+          "raw_confidence": 0.3471359775482946,
+          "calibrated_confidence": 0.37083408987602606,
+          "exact_match": false,
+          "cosine_distance": 0.6529
+        },
+        {
+          "question": "Bạn hãy giải thích Trong Iterative Deepening Searc...",
+          "true_answer": "Tổng số nút ≈ ∑_{i=0..d} (d−i+1)·b^i. Với b=4, d=8...",
+          "predicted_answer": "Là thuật toán tìm kiếm chỉ giữ trạng thái hiện tại...",
+          "matched_question": "local search",
+          "raw_confidence": 0.21784362698293191,
+          "calibrated_confidence": 0.13924634351721443,
+          "exact_match": false,
+          "cosine_distance": 0.7822
+        },
+        {
+          "question": "Bạn có thể cho biết Trong A*, nếu một nút có chi p...",
+          "true_answer": "f(n)=g(n)+h(n)=8+32=40.",
+          "predicted_answer": "Là tổng chi phí của các hành động từ trạng thái gố...",
+          "matched_question": "chi_phí đường",
+          "raw_confidence": 0.2644566102636957,
+          "calibrated_confidence": 0.20498341586083163,
+          "exact_match": false,
+          "cosine_distance": 0.7355
+        },
+        {
+          "question": "Bạn có thể cho biết Overfitting có thể phát hiện q...",
+          "true_answer": "Lỗi huấn luyện thấp nhưng lỗi kiểm thử/validation ...",
+          "predicted_answer": "Là hiện tượng mô hình học quá sát dữ liệu huấn luy...",
+          "matched_question": "overfitting",
+          "raw_confidence": 0.5085423203783268,
+          "calibrated_confidence": 0.7475189016959457,
+          "exact_match": false,
+          "cosine_distance": 0.4915
+        },
+        {
+          "question": "Hãy trình bày Trong phân tích không gian của DFS, ...",
+          "true_answer": "O(bm) cho biết bộ nhớ tỷ lệ với b·m. Với b=9, m=23...",
+          "predicted_answer": "O(bm) với b là branching factor và m là độ sâu lớn...",
+          "matched_question": "độ phức_tạp không_gian dfs",
+          "raw_confidence": 0.4261580437582222,
+          "calibrated_confidence": 0.5650247586029365,
+          "exact_match": false,
+          "cosine_distance": 0.5738
+        },
+        {
+          "question": "Bạn hãy cho biết Giả sử cây tìm kiếm đều có hệ số ...",
+          "true_answer": "Số nút tối đa là 1 + 4 + 4^2 + … + 4^4 = (b^(d+1)−...",
+          "predicted_answer": "BFS mở rộng các nút ở cùng độ sâu trước khi đi sâu...",
+          "matched_question": "tìm_kiếm theo chiều rộng bfs",
+          "raw_confidence": 0.6879422037978333,
+          "calibrated_confidence": 0.9468197695183501,
+          "exact_match": false,
+          "cosine_distance": 0.3121
+        }
+      ]
+    }
+  },
+  "confidence_metrics_explanation": {
+    "accuracy": "Tỷ lệ % dự đoán đúng",
+    "average_confidence": "Giá trị confidence trung bình của model",
+    "expected_calibration_error": "ECE - đo mức độ tin cậy của confidence (càng thấp càng tốt, <5% là tốt)",
+    "coverage_at_threshold": "Tỷ lệ % mẫu có confidence >= threshold",
+    "accuracy_at_threshold": "Accuracy chỉ tính trên các mẫu có confidence >= threshold"
+  }
+}
