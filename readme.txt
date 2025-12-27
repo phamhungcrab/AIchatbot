@@ -64,6 +64,7 @@ AICHATBOT/
 ---------------------------------------------------------------
 py -3.12 -m venv venv
 venv\Scripts\activate.bat       (Windows)
+.\venv\Scripts\activate
 source venv/bin/activate    (Linux/Mac)
 
 2️⃣. Cài đặt thư viện cần thiết
@@ -73,10 +74,7 @@ python -m nltk.downloader stopwords punkt wordnet omw-1.4
 pip install pyvi
 python -m nltk.downloader punkt punkt_tab
 
-.\venv\Scripts\activate
 pip install google-generativeai
-pip install -r requirements.txt
-pip install flask==3.0.0
 pip install pyvi
 pip install python-dotenv
 
