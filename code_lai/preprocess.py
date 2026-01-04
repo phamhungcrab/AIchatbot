@@ -1,38 +1,32 @@
-# -------------------------------
-# 🧹 preprocess.py — Tiền xử lý văn bản Tiếng Việt tối ưu (Refactored)
-# -------------------------------
+#preprocess.py - Tiền xử lý văn bản Tiếng Việt
 
+# Phase 1: Imports
+# TODO: import re, pyvi, sklearn
 import re
-from pyvi import ViTokenizer 
+from pyvi import ViTokenizer
 from sklearn.feature_extraction.text import TfidfVectorizer
 
-# =========================================================
-# 🧠 CLASS TEXT PREPROCESSOR (SINGLETON)
-# =========================================================
+
+# Phase 2: Class TextPreprocessor (Singleton)
+# TODO: Tạo class với __new__ và _initialize
+
 class TextPreprocessor:
     _instance = None
-
-    def __new__(cls):
+    def __new__ (cls):
         if cls._instance is None:
-            cls._instance = super(TextPreprocessor, cls).__new__(cls)
+            cls._instance = super().__new__(cls)
             cls._instance._initialize()
         return cls._instance
-
-    def _initialize(self):
-        """Khởi tạo các tài nguyên, compile regex một lần duy nhất."""
         
-        # 1. Compile Regex Patterns (Tối ưu tốc độ)
+    def _initialize(self):
         self.re_special_chars = re.compile(r'[^\w\s]')
         self.re_numbers = re.compile(r'\d+')
-        
-        # 2. Load Data Dictionaries
+
         self._load_dictionaries()
-        
-        # 3. Build Synonym Regex (Tối ưu tìm kiếm O(1))
-        # Tạo pattern dạng: \b(phrase1|phrase2|...)\b
-        # Sắp xếp theo độ dài giảm dần để ưu tiên cụm từ dài trước (Longest Match)
+        ##Làm để không phải duyệt lại từ đầu mỗi lần tìm kiếm từ so sánh
         all_phrases = [p for p in self.SYNONYMS.keys() if " " in p]
         all_phrases.sort(key=len, reverse=True)
+
         if all_phrases:
             pattern = r'\b(' + '|'.join(map(re.escape, all_phrases)) + r')\b'
             self.re_synonym_phrases = re.compile(pattern, re.IGNORECASE)
@@ -127,195 +121,146 @@ class TextPreprocessor:
 
         self.NEGATION_WORDS = {"không", "chẳng", "chả", "đừng", "chưa", "kém", "đâu"}
 
-        # Tạo mapping ngược (Canonicalization)
         self.REVERSE_SYNONYMS = {}
+        ## TÌm mấy cái từ REVERSE truy ngược lại key
         for canonical, variations in self.SYNONYMS.items():
             for var in variations:
                 self.REVERSE_SYNONYMS[var] = canonical
             self.REVERSE_SYNONYMS[canonical] = canonical
 
     def preprocess_text(self, text: str) -> str:
-        """Quy trình: Lowercase -> Xóa ký tự lạ -> Tách từ (PyVi) -> Lọc Stopwords"""
         if not text: return ""
 
-        # 1. Lowercase & Clean (Dùng Compiled Regex)
         text = text.lower()
         text = self.re_special_chars.sub('', text)
-        text = self.re_numbers.sub('', text)
-
-        # 2. Tokenize (PyVi)
-        tokenized_text = ViTokenizer.tokenize(text)
-
-        # 3. Filter Stopwords
-        tokens = tokenized_text.split()
-        filtered_tokens = [
-            word for word in tokens 
-            if word not in self.VIETNAMESE_STOPWORDS and len(word) > 1
-        ]
-
-        return ' '.join(filtered_tokens)
-
-    def preprocess_for_knn(self, text: str) -> str:
-        """
-        🆕 Preprocessing nhẹ cho KNN - giữ lại từ khóa quan trọng.
+        text = self.re_numbers.sub("", text)
         
-        Khác với preprocess_text (NB):
-        - Dùng LIGHT_STOPWORDS thay vì VIETNAMESE_STOPWORDS 
-        - Giữ lại CRITICAL_KEYWORDS (thuật ngữ AI/ML)
-        - Mở rộng với synonyms để tăng matching
-        
-        Args:
-            text: Câu hỏi gốc của user
-            
-        Returns:
-            str: Câu đã preprocess, phù hợp cho cosine similarity
-        """
+        text_tokenized = ViTokenizer.tokenize(text)
+
+        tokens = text_tokenized.split()
+
+        filtered = [token for token in tokens if token not in self.VIETNAMESE_STOPWORDS and len(token) > 1]
+    
+        return " ".join(filtered)
+
+    def preprocess_knn(self, text: str) -> str:
         if not text: return ""
 
-        # 1. Lowercase & Clean (giữ nguyên như preprocess_text)
         text = text.lower()
-        text = self.re_special_chars.sub('', text)
-        # KHÔNG xóa số cho KNN (có thể quan trọng: k=5, top-5, etc.)
-        
-        # 2. Tokenize (PyVi)
+        text = self.re_special_chars.sub("", text)
+
         tokenized_text = ViTokenizer.tokenize(text)
         
-        # 3. Filter với LIGHT_STOPWORDS - giữ lại nhiều context hơn
         tokens = tokenized_text.split()
-        filtered_tokens = []
-        
-        for word in tokens:
-            # Giữ lại nếu là critical keyword HOẶC không phải light stopword
-            if word in self.CRITICAL_KEYWORDS:
-                filtered_tokens.append(word)  # Luôn giữ critical keywords
-            elif word not in self.LIGHT_STOPWORDS and len(word) > 1:
-                filtered_tokens.append(word)
-        
-        # 4. Mở rộng với synonyms (tăng khả năng matching)
-        processed_text = ' '.join(filtered_tokens)
-        expanded_text = self.expand_query(processed_text)
-        
-        return expanded_text
 
-    def expand_query(self, text: str) -> str:
-        """Mở rộng truy vấn bằng cách thêm từ đồng nghĩa (Optimized)."""
-        if not text: return ""
-        
-        expanded_words = []
-        text_lower = text.lower()
-        
-        # 1. Mở rộng từ đơn
+        filtered = [token for token in tokens if token in self.CRITICAL_KEYWORDS or (token not in self.LIGHT_STOPWORDS and len(token) > 1)]
+
+        expended_text = self.expand_query(" ".join(filtered))
+        return expended_text
+
+    def expand_query(self, query) -> str:
+        if not query: return ""
+
+        text = query.lower()
+        expanded_tokens = []
         words = text.split()
+
         for word in words:
-            expanded_words.append(word)
-            if word.lower() in self.SYNONYMS:
-                expanded_words.extend(self.SYNONYMS[word.lower()])
+            expanded_tokens.append(word)
+            if word in self.SYNONYMS:
+                expanded_tokens.extend(self.SYNONYMS[word])
         
-        # 2. Mở rộng cụm từ (Dùng Regex thay vì Loop)
+        
         if self.re_synonym_phrases:
-            matches = self.re_synonym_phrases.findall(text_lower)
+            matches = self.re_synonym_phrases.findall(text)
             for match in matches:
-                # match là cụm từ tìm thấy (ví dụ "xe hơi") -> lấy synonyms của nó
-                if match in self.SYNONYMS:
-                    expanded_words.extend(self.SYNONYMS[match])
-
-        return " ".join(expanded_words)
-
+                if match.lower() in self.SYNONYMS:
+                    expanded_tokens.extend(self.SYNONYMS[match.lower()])
+                    
+        return " ".join(expanded_tokens)
+            
     def detect_negation(self, text: str) -> str:
-        """Phát hiện và xử lý phủ định."""
         if not text: return ""
+
         tokens = text.split()
+        negation = False
         processed = []
-        negation_active = False
-        
+
         for token in tokens:
             if token.lower() in self.NEGATION_WORDS:
-                negation_active = True
+                negation = True
                 processed.append(token)
-            elif negation_active:
+            elif negation:
                 processed.append(f"NOT_{token}")
-                negation_active = False
             else:
                 processed.append(token)
+            
         return " ".join(processed)
 
-    def weighted_keyword_match(self, text: str) -> float:
-        """Tính điểm khớp từ khóa quan trọng."""
-        if not text: return 0.0
+    def weighted_keywords(self, text: str) -> float:
+
+        if not text : return 0.0
         score = 0.0
         text_lower = text.lower()
+
         for kw, weight in self.WEIGHTED_KEYWORDS.items():
             if kw in text_lower:
                 score += weight
         return score
-
+        
     def canonicalize_text(self, text: str) -> set:
-        """Chuẩn hóa văn bản về dạng từ khóa gốc."""
-        if not text: return set()
-        
-        # Gọi preprocess_text nội bộ
-        tokens = self.preprocess_text(text).split()
+        if not text: return ""
+
+        text_lower = text.lower()
         canonical_tokens = set()
+
+        if self.re_synonym_phrases:
+            matches = self.re_synonym_phrases.findall(text_lower)
+            for match in matches:
+                if match.lower() in self.REVERSE_SYNONYMS:
+                    canonical_tokens.add(self.REVERSE_SYNONYMS[match.lower()])
         
-        for token in tokens:
+        for token in text_lower.split():
             if token in self.REVERSE_SYNONYMS:
                 canonical_tokens.add(self.REVERSE_SYNONYMS[token])
-            else:
-                canonical_tokens.add(token)
+
         return canonical_tokens
 
+
+
     def calculate_jaccard_similarity(self, text1: str, text2: str) -> float:
-        """Tính độ tương đồng Jaccard trên tập từ đã chuẩn hóa."""
         if not text1 or not text2: return 0.0
-        
+
         set1 = self.canonicalize_text(text1)
         set2 = self.canonicalize_text(text2)
-        
+
         if not set1 and not set2: return 0.0
-        
+
         intersection = set1.intersection(set2)
         union = set1.union(set2)
-        
+
         return len(intersection) / len(union) if union else 0.0
-
-# =========================================================
-# 🚀 MODULE LEVEL INTERFACE (BACKWARD COMPATIBILITY)
-# =========================================================
-
-# Khởi tạo Singleton
+# ============================================
+# Phase 6: Module-Level Interface
+# ============================================
 preprocessor = TextPreprocessor()
 
-# Expose các hàm để các module khác import như cũ
-def preprocess_text(text: str) -> str:
-    return preprocessor.preprocess_text(text)
-
-def preprocess_for_knn(text: str) -> str:
-    """🆕 Preprocessing nhẹ cho KNN - giữ từ khóa quan trọng."""
-    return preprocessor.preprocess_for_knn(text)
-
-def expand_query(text: str) -> str:
-    return preprocessor.expand_query(text)
-
-def detect_negation(text: str) -> str:
-    return preprocessor.detect_negation(text)
-
-def weighted_keyword_match(text: str) -> float:
-    return preprocessor.weighted_keyword_match(text)
-
-def calculate_jaccard_similarity(text1: str, text2: str) -> float:
-    return preprocessor.calculate_jaccard_similarity(text1, text2)
+def preprocess_text(text): return preprocessor.preprocess_text(text)
+def preprocess_knn(text): return preprocessor.preprocess_knn(text)
+def expand_query(text): return preprocessor.expand_query(text)
+def detect_negation(text): return preprocessor.detect_negation(text)
+def weighted_keywords(text): return preprocessor.weighted_keywords(text)
+def calculate_jaccard_similarity(text1, text2): return preprocessor.calculate_jaccard_similarity(text1, text2)
+def canonicalize_text(text): return preprocessor.canonicalize_text(text)
 
 def train_vectorizer(corpus):
-    """Giữ nguyên hàm train_vectorizer vì nó độc lập."""
-    vectorizer = TfidfVectorizer(
-        max_features=800,
-        ngram_range=(1, 2),
-        min_df=1,
-        sublinear_tf=True
-    )
+    vectorizer = TfidfVectorizer(max_features=800, ngram_range=(1, 2))
     vectorizer.fit(corpus)
     return vectorizer
 
+# ============================================
+# Phase 7: Sanity Check
+# ============================================
 if __name__ == "__main__":
     print("🧪 Testing preprocess.py...\n")
     

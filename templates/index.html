@@ -68,43 +68,18 @@
                 <div class="text">
                     {{ msg.bot }}
 
-                    <!-- Confidence Info -->
+                    <!-- Confidence Info (KNN only) -->
                     {% if msg.confidence is defined and msg.confidence > 0 %}
                     <div class="confidence-info">
                         <div class="confidence-bar-container">
                             <div class="confidence-bar" style="width: {{ (msg.confidence * 100)|round }}%"></div>
                         </div>
-
-                        {% if msg.winner is defined %}
-                        <span
-                            class="confidence-badge {{ 'high' if msg.winner == 'Naive Bayes' else 'medium' if msg.winner == 'KNN' else 'low' }}">
-                            🏆 Winner: {{ msg.winner }}
+                        <span class="confidence-badge {{ 'high' if msg.confidence >= 0.8 else 'medium' if msg.confidence >= 0.5 else 'low' }}">
+                            🎯 Độ tin cậy: {{ (msg.confidence * 100)|round }}%
                         </span>
-                        {% endif %}
-
-                        <details class="confidence-details">
-                            <summary>📊 So sánh Model</summary>
-                            <table style="width:100%; margin-top:8px; font-size:0.85em;">
-                                <tr style="border-bottom:1px solid rgba(255,255,255,0.1);">
-                                    <th style="text-align:left; padding:4px;">Model</th>
-                                    <th style="text-align:right; padding:4px;">Confidence</th>
-                                </tr>
-                                <tr
-                                    style="{{ 'background:rgba(16,185,129,0.2);' if msg.winner == 'Naive Bayes' else '' }}">
-                                    <td style="padding:4px;">🧠 Naive Bayes</td>
-                                    <td style="text-align:right; padding:4px;">{{ (msg.nb_conf * 100)|round if
-                                        msg.nb_conf else 0 }}%</td>
-                                </tr>
-                                <tr style="{{ 'background:rgba(139,92,246,0.2);' if msg.winner == 'KNN' else '' }}">
-                                    <td style="padding:4px;">🔍 KNN</td>
-                                    <td style="text-align:right; padding:4px;">{{ (msg.knn_conf * 100)|round if
-                                        msg.knn_conf else 0 }}%</td>
-                                </tr>
-                            </table>
-                            <div style="margin-top:8px; color: var(--text-secondary);">
-                                Topic: <strong>{{ msg.topic }}</strong>
-                            </div>
-                        </details>
+                        <div style="margin-top:4px; color: var(--text-secondary); font-size:0.85em;">
+                            Topic: <strong>{{ msg.topic }}</strong>
+                        </div>
                     </div>
                     {% endif %}
                 </div>

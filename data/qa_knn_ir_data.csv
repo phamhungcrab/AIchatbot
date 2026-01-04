@@ -1,0 +1,252 @@
+
+question,answer,topic
+KNN (k-nearest neighbors) là gì?,"KNN, hay k-nearest neighbors, là một kỹ thuật phân loại không tham số dựa trên việc tìm k láng giềng gần nhất và sử dụng voting đa số để quyết định nhãn.",KNN
+Thuật toán k-NN hoạt động ra sao?,"KNN tính khoảng cách (thường là Euclid) giữa điểm mới và toàn bộ dữ liệu huấn luyện, chọn k láng giềng gần nhất và sử dụng cơ chế voting để gán nhãn.",KNN
+KNN được dùng để làm gì trong học máy?,Thuật toán k-nearest neighbors được áp dụng cho bài toán phân loại và hồi quy bằng cách dựa vào nhãn của các láng giềng gần nhất để dự đoán.,KNN
+KNN khác thuật toán Naive Bayes ở điểm nào?,"KNN là phương pháp instance-based dựa vào khoảng cách, trong khi Naive Bayes là mô hình xác suất sử dụng định lý Bayes và giả định độc lập giữa các đặc trưng.",KNN
+Ưu điểm và hạn chế của phương pháp k nearest neighbors là gì?,Ưu điểm của k-NN là đơn giản và không cần huấn luyện mô hình phức tạp; nhược điểm là tốn thời gian tính toán với dữ liệu lớn và nhạy cảm với curse of dimensionality.,KNN
+Tham số k trong k-NN được định nghĩa như thế nào?,Tham số k trong k-NN là số lượng láng giềng gần nhất được xem xét để dự đoán nhãn cho một điểm mới.,KNN
+Việc chọn số k ảnh hưởng ra sao đến k-nearest neighbors?,"Nếu k nhỏ, mô hình nhạy cảm với nhiễu; nếu k lớn, vùng lân cận rộng hơn và giảm nguy cơ quá khớp nhưng có thể bỏ qua chi tiết cục bộ.",KNN
+Mục đích của voting trong phương pháp láng giềng gần nhất là gì?,"Voting trong KNN dùng để tổng hợp nhãn của k điểm láng giềng, nhờ đó xác định nhãn cuối cùng dựa trên đa số hoặc trọng số khoảng cách.",KNN
+So sánh k nhỏ và k lớn trong thuật toán nearest neighbors?,K nhỏ giúp mô hình phản ứng nhanh với thay đổi nhưng dễ bị nhiễu; k lớn làm mượt dự đoán nhưng có thể mất các mẫu hiếm.,KNN
+Điểm mạnh và yếu của việc chọn k phù hợp trong k-NN là gì?,Việc chọn k phù hợp giúp cân bằng giữa độ chính xác và độ mượt; lựa chọn không đúng có thể dẫn đến overfitting hoặc underfitting.,KNN
+Khoảng cách Euclid trong k-nearest neighbors là gì?,"Khoảng cách Euclid trong KNN là phép đo khoảng cách thẳng giữa hai điểm trong không gian đặc trưng, thường dùng để xác định độ tương đồng.",KNN
+Thuật toán láng giềng gần nhất tính khoảng cách như thế nào?,"Trong k-NN, khoảng cách được tính bằng công thức Euclidean hoặc Manhattan để so sánh độ gần của điểm mới với các mẫu huấn luyện.",KNN
+Mục đích của việc dùng các metric như Euclidean và Manhattan trong KNN?,Việc sử dụng các metric như Euclidean hay Manhattan nhằm định lượng sự tương đồng giữa các điểm và giúp thuật toán chọn láng giềng gần nhất.,KNN
+So sánh khoảng cách Euclidean và Manhattan khi dùng trong phương pháp nearest neighbor.,"Khoảng cách Euclid đo tuyến tính, trong khi Manhattan tính tổng chênh lệch từng chiều; tùy dữ liệu mà mỗi loại cho kết quả khác nhau.",KNN
+Ưu điểm và hạn chế của metric Euclid trong tính toán khoảng cách là gì?,"Euclidean đơn giản và phù hợp khi dữ liệu được chuẩn hóa, nhưng kém hiệu quả với dữ liệu có thang đo khác nhau hoặc số chiều lớn.",KNN
+KNN phân loại là gì?,KNN phân loại là phương pháp dự đoán nhãn của một điểm bằng cách nhìn vào k láng giềng gần nhất và voting đa số.,KNN
+KNN hồi quy vận hành ra sao?,KNN hồi quy dự đoán giá trị liên tục bằng cách lấy trung bình giá trị của k láng giềng gần nhất thay vì voting.,KNN
+Mục tiêu của việc dùng k-nearest neighbors cho hồi quy là gì?,Sử dụng KNN cho hồi quy nhằm ước lượng giá trị liên tục của đối tượng mới dựa trên giá trị trung bình của các láng giềng gần nhất.,KNN
+So sánh KNN khi sử dụng cho phân loại và khi áp dụng cho hồi quy.,"Trong phân loại, KNN dùng voting để chọn nhãn rời rạc; trong hồi quy, nó dùng trung bình để dự đoán giá trị liên tục.",KNN
+Ưu và nhược điểm của KNN khi dùng cho phân loại so với hồi quy là gì?,"Phân loại bằng KNN thường ổn định hơn vì nhãn rời rạc, còn hồi quy có thể nhạy cảm với ngoại lệ; cả hai đều đơn giản nhưng kém hiệu quả ở dữ liệu lớn.",KNN
+Curse of dimensionality trong KNN nghĩa là gì?,"Curse of dimensionality đề cập tới hiện tượng dữ liệu trở nên thưa thớt khi số chiều tăng, khiến khoảng cách giữa các điểm trở nên tương đương và làm giảm hiệu quả của KNN.",KNN
+Tại sao curse of dimensionality ảnh hưởng tới thuật toán láng giềng gần nhất?,"Khi số chiều lớn, tính khoảng cách Euclidean ít phân biệt được các điểm và KNN phải xử lý nhiều đặc trưng, dẫn đến chi phí tính toán cao và giảm chính xác.",KNN
+Mục đích của việc giảm số chiều khi áp dụng k-NN là gì?,Giảm số chiều bằng chọn lọc đặc trưng hoặc giảm chiều giúp KNN tập trung vào đặc trưng quan trọng và cải thiện hiệu suất.,KNN
+So sánh hiệu suất KNN khi số chiều tăng cao và khi giảm số chiều.,"Trong không gian cao chiều, KNN cần nhiều dữ liệu và thời gian để duyệt; khi giảm số chiều, khoảng cách trở nên có ý nghĩa hơn và dự đoán tốt hơn.",KNN
+Điểm mạnh và hạn chế của k-nearest neighbors trong không gian nhiều chiều là gì?,KNN trong không gian nhiều chiều có thể tận dụng thông tin phong phú nhưng dễ bị curse of dimensionality; giảm chiều giúp cải thiện nhưng có nguy cơ mất thông tin.,KNN
+Thuật toán Naive Bayes là gì?,Naive Bayes là thuật toán phân loại dựa trên định lý Bayes và giả định các đặc trưng độc lập có điều kiện.,NaiveBayes
+Naive Bayes hoạt động thế nào?,Thuật toán tính xác suất hậu nghiệm của mỗi lớp dựa trên xác suất tiên nghiệm (prior) và likelihood rồi chọn lớp có xác suất cao nhất.,NaiveBayes
+Naive Bayes dùng để làm gì trong phân loại?,"Naive Bayes được sử dụng để phân loại văn bản, lọc spam và các bài toán phân loại nhanh với giả định độc lập.",NaiveBayes
+Naive Bayes khác KNN như thế nào?,"Naive Bayes là mô hình xác suất sử dụng thông tin thống kê, trong khi KNN dựa trên khoảng cách và không xây dựng mô hình explicit.",NaiveBayes
+Ưu điểm và hạn chế của mô hình Naive Bayes là gì?,Naive Bayes đơn giản và hiệu quả trên dữ liệu lớn; nhược điểm là giả định độc lập hiếm khi đúng và có thể giảm chính xác.,NaiveBayes
+Giả định độc lập trong Naive Bayes được hiểu như thế nào?,"Giả định độc lập cho rằng các đặc trưng đầu vào không phụ thuộc lẫn nhau khi tính xác suất điều kiện, giúp đơn giản hóa mô hình.",NaiveBayes
+Làm thế nào giả định độc lập ảnh hưởng đến cách Naive Bayes tính toán?,"Nhờ giả định này, Naive Bayes nhân các xác suất của từng đặc trưng để tính xác suất chung, giảm chi phí tính toán.",NaiveBayes
+Mục đích của việc giả định các đặc trưng độc lập trong thuật toán Naive Bayes là gì?,Giả định độc lập cho phép mô hình học nhanh từ ít dữ liệu và giảm số lượng tham số cần ước lượng trong Bayes classifier.,NaiveBayes
+So sánh giả định độc lập của Naive Bayes với các thuật toán khác không đưa ra giả định này.,"Các mô hình như logistic regression không giả định độc lập và có thể nắm bắt tương tác giữa đặc trưng, do đó thường chính xác hơn trên dữ liệu phụ thuộc.",NaiveBayes
+Điểm mạnh và yếu khi áp dụng giả định độc lập trong mô hình Naive Bayes là gì?,Ưu điểm là mô hình đơn giản và dễ giải thích; nhược điểm là hiệu năng kém khi các đặc trưng thực sự tương quan mạnh.,NaiveBayes
+Định lý Bayes trong Naive Bayes là gì?,Định lý Bayes nêu rằng xác suất hậu nghiệm P(C|X) bằng tích của xác suất tiên nghiệm P(C) và likelihood P(X|C) chia cho xác suất bằng chứng P(X).,NaiveBayes
+Naive Bayes tính xác suất hậu nghiệm như thế nào?,Naive Bayes tính posterior cho mỗi lớp bằng cách nhân xác suất prior với likelihood của các đặc trưng và so sánh các giá trị để chọn lớp có posterior cao nhất.,NaiveBayes
+Mục đích của việc sử dụng prior và likelihood trong thuật toán Naive Bayes là gì?,Việc sử dụng prior và likelihood giúp cân bằng giữa kiến thức trước và thông tin từ dữ liệu khi dự đoán lớp cho một mẫu mới.,NaiveBayes
+So sánh posterior và prior trong mô hình Naive Bayes.,"Prior phản ánh kiến thức trước về phân bố lớp, trong khi posterior kết hợp prior và dữ liệu; posterior được dùng để đưa ra dự đoán cuối cùng.",NaiveBayes
+Ưu nhược điểm của việc tính posterior trong thuật toán Naive Bayes là gì?,"Ưu điểm là tính toán posterior cho phép phân loại nhanh; nhược điểm là nếu prior không chính xác hoặc dữ liệu không thỏa giả định độc lập, posterior có thể sai lệch.",NaiveBayes
+Các biến thể của mô hình Naive Bayes bao gồm những gì?,"Các biến thể của Naive Bayes gồm Gaussian, Multinomial và Bernoulli, mỗi loại giả định phân bố xác suất khác nhau cho đặc trưng.",NaiveBayes
+Gaussian Naive Bayes hoạt động như thế nào?,Gaussian Naive Bayes giả định dữ liệu số tuân theo phân bố chuẩn và tính likelihood bằng hàm mật độ chuẩn cho mỗi đặc trưng.,NaiveBayes
+Mục đích của Multinomial Naive Bayes trong xử lý văn bản là gì?,"Multinomial Naive Bayes được sử dụng cho dữ liệu đếm như phân loại văn bản, vì nó mô hình hóa số lần xuất hiện của từ trong tài liệu.",NaiveBayes
+So sánh Gaussian Naive Bayes và Bernoulli Naive Bayes.,"Gaussian phù hợp với dữ liệu liên tục, trong khi Bernoulli xử lý đặc trưng nhị phân; Multinomial làm việc với dữ liệu rời rạc và đếm.",NaiveBayes
+"Ưu điểm và hạn chế của từng loại Naive Bayes như Gaussian, Multinomial và Bernoulli là gì?",Gaussian dễ áp dụng trên dữ liệu liên tục nhưng nhạy cảm với ngoại lệ; Multinomial xử lý văn bản hiệu quả nhưng giả định độc lập; Bernoulli đơn giản cho dữ liệu nhị phân nhưng mất thông tin về tần suất.,NaiveBayes
+Naive Bayes được ứng dụng vào đâu?,"Naive Bayes được ứng dụng rộng rãi trong lọc email rác, phân loại văn bản, phân loại tin nhắn và dự đoán y tế.",NaiveBayes
+Làm sao Naive Bayes lọc thư rác?,"Trong spam filtering, Naive Bayes tính xác suất một email là spam dựa trên tần suất từ khóa, sử dụng prior và likelihood để quyết định.",NaiveBayes
+Mục đích của việc dùng Naive Bayes trong phân loại văn bản là gì?,Mục đích của việc dùng Naive Bayes trong phân loại văn bản là tận dụng mô hình xác suất đơn giản nhưng hiệu quả để gán nhãn nội dung.,NaiveBayes
+So sánh Naive Bayes với SVM trong bài toán phân loại văn bản.,"Naive Bayes đơn giản và nhanh trên dữ liệu lớn, trong khi SVM có thể cho độ chính xác cao hơn nhưng tốn thời gian huấn luyện và tinh chỉnh.",NaiveBayes
+Ưu nhược của việc áp dụng Naive Bayes cho spam filtering là gì?,Ưu điểm: spam filtering bằng Naive Bayes dễ triển khai và tốc độ cao; nhược điểm: giả định độc lập và thiếu linh hoạt khiến mô hình kém chính xác khi đặc trưng phụ thuộc.,NaiveBayes
+BFS (breadth-first search) là gì?,BFS là thuật toán duyệt hoặc tìm kiếm đồ thị bắt đầu từ nút gốc và khám phá toàn bộ các nút ở một mức trước khi chuyển sang mức tiếp theo.,Search
+Tìm kiếm theo chiều rộng hoạt động như thế nào?,"BFS sử dụng hàng đợi để lưu trữ các nút chưa xét; nó lấy nút đầu hàng đợi, thăm các nút kề chưa thăm và thêm vào cuối hàng đợi.",Search
+BFS dùng để làm gì trong duyệt đồ thị?,"Trong duyệt đồ thị, BFS dùng để tìm đường ngắn nhất trên đồ thị vô hướng không trọng số và kiểm tra sự liên thông giữa các nút.",Search
+So sánh BFS với DFS.,"BFS duyệt theo từng lớp và bảo đảm tìm đường ngắn nhất, còn DFS đi sâu vào từng nhánh trước và không bảo đảm đường ngắn nhất.",Search
+Ưu điểm và hạn chế của BFS là gì?,"BFS đảm bảo tìm đường ngắn nhất nhưng cần nhiều bộ nhớ, đặc biệt với đồ thị rộng; nhược điểm là tốc độ chậm khi số nút lớn.",Search
+DFS (depth-first search) là gì?,"DFS là thuật toán duyệt đồ thị đi sâu vào từng nhánh cho tới khi không còn nút chưa thăm, sau đó quay lui và tiếp tục nhánh khác.",Search
+Tìm kiếm theo chiều sâu hoạt động như thế nào?,"DFS sử dụng ngăn xếp (stack) hoặc đệ quy; nó thăm một nút, đánh dấu đã thăm, rồi đệ quy thăm các nút kề chưa thăm cho đến khi hết đường đi.",Search
+DFS dùng để làm gì trong thuật toán đồ thị?,"DFS giúp kiểm tra thành phần liên thông, tìm chu trình và hỗ trợ tô màu hoặc topological sort trong đồ thị có hướng.",Search
+So sánh DFS và BFS.,"DFS đi sâu và có thể tìm thấy lời giải nhanh trong cây tìm kiếm, trong khi BFS duyệt mức và phù hợp để tìm đường ngắn nhất.",Search
+Ưu điểm và hạn chế của DFS là gì?,"Ưu điểm của DFS là sử dụng ít bộ nhớ và có thể tìm lời giải nhanh nếu lời giải nằm sâu, nhược điểm là không đảm bảo tối ưu và dễ bị kẹt trong vòng lặp.",Search
+Sự khác biệt cơ bản giữa BFS và DFS là gì?,"BFS duyệt theo từng lớp từ gốc, còn DFS đi sâu vào một nhánh trước khi quay lui.",Search
+Cách hoạt động của BFS khác DFS ra sao?,BFS sử dụng hàng đợi trong khi DFS dùng ngăn xếp hoặc đệ quy để quản lý các nút cần thăm.,Search
+Khi nào nên dùng BFS thay vì DFS?,Dùng BFS khi cần đường đi ngắn nhất trên đồ thị không trọng số; dùng DFS để khám phá cấu trúc hoặc kiểm tra chu trình.,Search
+So sánh bộ nhớ cần dùng của DFS và BFS.,"BFS thường cần bộ nhớ nhiều hơn vì lưu trữ toàn bộ nút mỗi mức, còn DFS chỉ lưu đường hiện tại nên tốn ít bộ nhớ hơn.",Search
+Ưu nhược của việc dùng BFS so với DFS là gì?,BFS đảm bảo đường tối ưu nhưng tốn bộ nhớ; DFS tiết kiệm bộ nhớ và đơn giản nhưng không đảm bảo tối ưu.,Search
+Uniform-cost search là gì?,"Uniform-cost search (UCS) là thuật toán tìm kiếm trên đồ thị có trọng số, mở rộng nút theo chi phí đường đi tăng dần (g(n)).",Search
+Uniform-cost search hoạt động như thế nào?,UCS sử dụng hàng đợi ưu tiên để chọn nút có chi phí đường đi nhỏ nhất và mở rộng tới khi tìm tới đích.,Search
+Mục đích của uniform cost search so với breadth-first search là gì?,"UCS được dùng để tìm đường đi chi phí tối thiểu trong đồ thị có trọng số không âm, thay vì chỉ dựa trên số bậc như BFS.",Search
+So sánh uniform-cost search và BFS.,"BFS xem mọi bước đi có chi phí bằng nhau, còn UCS xét chi phí thực; UCS sẽ trở thành BFS khi mọi cạnh có trọng số như nhau.",Search
+Ưu điểm và nhược điểm của uniform-cost search là gì?,UCS tìm đường chi phí tối ưu nhưng chậm và dùng nhiều bộ nhớ; nhược điểm so với BFS là thời gian tăng với trọng số.,Search
+Duyệt đồ thị khác duyệt cây như thế nào?,"Duyệt đồ thị phải xử lý các cạnh và chu trình phức tạp, còn duyệt cây áp dụng cho cấu trúc phân cấp không có chu trình.",Search
+Cách hoạt động của duyệt đồ thị so với duyệt cây ra sao?,"Duyệt đồ thị cần đánh dấu nút đã thăm để tránh lặp lại, trong khi duyệt cây đơn giản hơn vì cấu trúc không có chu trình.",Search
+Mục đích của việc đánh dấu nút đã thăm trong duyệt đồ thị là gì?,Đánh dấu nút đã thăm giúp tránh lặp vô hạn và đảm bảo mỗi nút trong đồ thị chỉ được xử lý một lần.,Search
+So sánh độ phức tạp của duyệt cây và duyệt đồ thị.,"Duyệt đồ thị có độ phức tạp cao hơn do cần quản lý tập các nút đã thăm và tránh chu trình, trong khi duyệt cây tuyến tính với số nút.",Search
+Ưu nhược điểm khi duyệt đồ thị so với duyệt cây là gì?,Duyệt đồ thị linh hoạt để giải quyết nhiều bài toán nhưng phức tạp và tốn bộ nhớ; duyệt cây đơn giản hơn nhưng chỉ áp dụng cho cấu trúc phân cấp.,Search
+Heuristic trong tìm kiếm theo thông tin là gì?,Heuristic là hàm ước lượng chi phí từ trạng thái hiện tại đến mục tiêu nhằm hướng dẫn thuật toán tìm kiếm theo hướng hứa hẹn nhất.,SearchInformed
+Hàm heuristic hoạt động ra sao trong thuật toán tìm kiếm?,"Trong tìm kiếm, hàm heuristic h(n) được tính cho mỗi nút để ước lượng chi phí còn lại; thuật toán sử dụng giá trị này để ưu tiên mở rộng nút có h(n) thấp.",SearchInformed
+Mục đích của việc sử dụng hàm heuristic là gì?,Sử dụng heuristic giúp giảm số nút cần khám phá và tăng tốc độ tìm kiếm bằng cách tập trung vào những đường đi có triển vọng.,SearchInformed
+So sánh heuristic với hàm chi phí thực (g(n)).,"Heuristic h(n) chỉ ước lượng chi phí tương lai, trong khi g(n) là chi phí đã đi; tổng hợp cả h(n) và g(n) trong A* cho phép cân bằng giữa chi phí thực và ước lượng.",SearchInformed
+Ưu điểm và hạn chế của heuristic function là gì?,Ưu điểm: giảm không gian tìm kiếm và cải thiện hiệu suất; nhược điểm: nếu heuristic không chính xác có thể dẫn đến đường đi kém tối ưu hoặc tốn công tính toán.,SearchInformed
+Thuật toán A* là gì?,A* là thuật toán tìm kiếm theo thông tin sử dụng hàm đánh giá f(n)=g(n)+h(n) để tìm đường đi tối ưu.,SearchInformed
+A* hoạt động như thế nào?,"A* duyệt nút theo thứ tự tăng dần của f(n), trong đó g(n) là chi phí từ gốc đến n và h(n) là ước lượng chi phí còn lại; thuật toán kết thúc khi đạt mục tiêu.",SearchInformed
+A* dùng để làm gì trong tìm kiếm đường đi?,"A* được dùng để tìm đường đi ngắn nhất trong đồ thị có trọng số, kết hợp giữa tìm kiếm theo chi phí và heuristic để đạt hiệu quả cao.",SearchInformed
+So sánh A* với greedy best-first search.,"Greedy best-first search chỉ sử dụng heuristic h(n) nên không đảm bảo tối ưu, trong khi A* sử dụng cả g(n) và h(n) để bảo đảm tìm đường tối ưu nếu h(n) admissible.",SearchInformed
+Ưu và nhược điểm của thuật toán A* là gì?,A* đảm bảo tối ưu với heuristic phù hợp nhưng tiêu thụ nhiều bộ nhớ; trong khi greedy nhanh hơn nhưng có thể không tìm được đường ngắn nhất.,SearchInformed
+Heuristic admissible là gì trong A*?,"Heuristic admissible là hàm h(n) không bao giờ vượt quá chi phí thực từ n đến mục tiêu, bảo đảm không đánh giá thấp kết quả tối ưu.",SearchInformed
+Tính nhất quán của heuristic ảnh hưởng như thế nào đến A*?,"Tính nhất quán yêu cầu h(n) không lớn hơn chi phí của cạnh từ n đến n' cộng h(n'), giúp A* không phải mở lại nút đã mở và đảm bảo đường đi tối ưu.",SearchInformed
+Mục đích của việc dùng heuristic admissible và consistent trong thuật toán A* là gì?,"Heuristic admissible và consistent đảm bảo A* tìm đường tối ưu đồng thời giảm số lần mở lại nút, giúp thuật toán hiệu quả hơn.",SearchInformed
+So sánh heuristic admissible và heuristic không admissible.,"Nếu heuristic không admissible, nó có thể đánh giá quá thấp hoặc quá cao chi phí và khiến A* bỏ lỡ đường tối ưu; heuristic admissible luôn an toàn hơn.",SearchInformed
+Ưu và nhược điểm của heuristic consistent là gì?,Heuristic consistent đơn giản và bảo đảm tối ưu nhưng đôi khi kém chính xác; heuristic mạnh hơn có thể nhanh hơn nhưng cần kiểm tra admissibility.,SearchInformed
+Greedy best-first search là gì?,Greedy best-first search là thuật toán tìm kiếm thông tin chỉ dựa trên hàm heuristic h(n) để chọn nút hứa hẹn nhất.,SearchInformed
+Thuật toán greedy best-first search hoạt động ra sao?,"Thuật toán dùng hàng đợi ưu tiên để luôn chọn mở rộng nút có giá trị h(n) nhỏ nhất, bỏ qua chi phí g(n).",SearchInformed
+Mục đích của greedy best-first search là gì?,"Greedy best-first search nhắm tới việc nhanh chóng tìm đường có vẻ ngắn nhất, thích hợp khi cần giải nhanh hơn là chính xác tuyệt đối.",SearchInformed
+So sánh greedy best-first search với A*.,"Greedy chỉ xét h(n) nên có thể bỏ qua đường tối ưu, còn A* xét cả g(n) và h(n) nên đảm bảo tìm đường tối ưu nếu heuristic đúng.",SearchInformed
+Ưu và nhược điểm của greedy best-first search là gì?,Ưu điểm: chạy nhanh và ít bộ nhớ; nhược điểm: không đảm bảo tối ưu và dễ mắc kẹt ở đường cụt nếu heuristic kém chính xác.,SearchInformed
+Tìm kiếm thông tin (informed search) và tìm kiếm không thông tin khác nhau thế nào?,"Tìm kiếm thông tin sử dụng hàm heuristic để hướng dẫn việc mở rộng nút, còn tìm kiếm không thông tin như BFS chỉ dựa trên cấu trúc đồ thị.",SearchInformed
+Cách hoạt động của thuật toán có heuristic khác gì so với thuật toán không có heuristic?,"Thuật toán có heuristic tính h(n) và ưu tiên mở nút có giá trị h(n) thấp, trong khi thuật toán uninformed lần lượt mở nút theo mức hoặc chiều sâu.",SearchInformed
+Mục đích của việc dùng thông tin heuristic trong tìm kiếm là gì?,Thông tin heuristic giúp giảm không gian tìm kiếm và tìm giải nhanh hơn bằng cách hướng tới đích.,SearchInformed
+So sánh hiệu suất của tìm kiếm theo thông tin và tìm kiếm theo chiều rộng.,"Informed search thường nhanh hơn và ít bộ nhớ hơn do mở ít nút, còn uninformed search như BFS có thể mất nhiều thời gian nhưng đơn giản và không cần heuristic.",SearchInformed
+Ưu và nhược điểm của informed search so với uninformed search là gì?,Informed search hiệu quả nhưng phụ thuộc vào chất lượng heuristic; uninformed search ổn định hơn nhưng kém hiệu quả trên bài toán lớn.,SearchInformed
+Logic mệnh đề là gì?,"Logic mệnh đề là hệ thống logic mà công thức được xây dựng từ các mệnh đề nguyên kết hợp bằng các toán tử như AND, OR, NOT.",Logic
+Logic mệnh đề hoạt động như thế nào trong suy luận?,"Trong suy luận, logic mệnh đề biểu diễn tri thức dưới dạng mệnh đề và áp dụng các quy tắc suy diễn như modus ponens để rút ra kết luận.",Logic
+Logic mệnh đề được dùng để làm gì?,Logic mệnh đề dùng để biểu diễn và suy diễn tri thức trong hệ chuyên gia và chứng minh định lý trong toán học.,Logic
+So sánh logic mệnh đề với logic vị từ.,"Logic mệnh đề chỉ xử lý mệnh đề nguyên, trong khi logic vị từ (FOL) cho phép biến và lượng tử, do đó mạnh hơn.",Logic
+Ưu điểm và hạn chế của logic mệnh đề là gì?,Ưu điểm: đơn giản và dễ tự động hóa; nhược điểm: không thể biểu diễn quan hệ phức tạp và thiếu tính biểu đạt so với logic vị từ.,Logic
+CNF (dạng chuẩn hội) là gì?,"CNF, hay dạng chuẩn hội, là biểu thức logic được viết dưới dạng phép hội (AND) của các mệnh đề dạng phép tuyển (OR) của các literal.",Logic
+Làm thế nào để chuyển một công thức logic sang CNF?,"Để chuyển sang CNF, ta áp dụng các luật tương đương logic: đẩy NOT vào trong, dùng luật phân phối để đưa công thức về dạng hội của tuyển.",Logic
+Mục đích của dạng CNF trong suy diễn tự động là gì?,"CNF được dùng trong thuật toán suy diễn và kiểm tra tính thoả mãn, giúp các bộ giải SAT xử lý dễ dàng.",Logic
+So sánh CNF và DNF (dạng chuẩn disjunction).,DNF là phép tuyển các mệnh đề dạng phép hội; CNF phù hợp cho giải SAT trong khi DNF phù hợp cho biểu diễn hàm boolean đơn giản.,Logic
+Ưu và nhược điểm của việc sử dụng CNF là gì?,Ưu điểm: CNF chuẩn hoá biểu thức để áp dụng thuật toán SAT; nhược điểm: chuyển đổi có thể làm tăng kích thước biểu thức.,Logic
+Luật modus ponens là gì?,Modus ponens là quy tắc suy diễn: từ mệnh đề P và câu điều kiện (P → Q) có thể suy ra Q.,Logic
+Modus ponens được áp dụng như thế nào trong suy luận mệnh đề?,"Để áp dụng modus ponens, ta kiểm tra xem mệnh đề P đúng và có điều kiện P kéo theo Q; khi đó kết luận Q được rút ra.",Logic
+Mục đích của modus ponens trong logic là gì?,Mục đích của modus ponens là cho phép suy ra kết luận logic từ tiền đề và một luật kéo theo trong hệ thống suy luận.,Logic
+So sánh modus ponens và modus tollens.,"Modus ponens suy ra Q từ P và P→Q, còn modus tollens suy ra ¬P từ ¬Q và P→Q.",Logic
+Ưu nhược của việc sử dụng modus ponens là gì?,Modus ponens đơn giản và mạnh mẽ nhưng chỉ áp dụng cho cấu trúc điều kiện cơ bản; không dùng được cho lập luận không điều kiện.,Logic
+Quy tắc suy diễn resolution là gì?,"Resolution là quy tắc suy diễn cho biểu thức logic ở dạng CNF, kết hợp hai mệnh đề chứa literal bù trừ để suy ra mệnh đề mới.",Logic
+Resolution hoạt động như thế nào để chứng minh mệnh đề?,"Trong resolution, ta chọn hai clause chứa một literal và phủ định của nó, loại bỏ cặp này và hợp nhất các literal còn lại để tạo clause mới.",Logic
+Mục đích của quy tắc resolution trong giải thuật SAT là gì?,Resolution được sử dụng trong thuật toán kiểm tra tính thỏa mãn và chứng minh mệnh đề bằng cách thu hẹp dần đến mệnh đề rỗng (mâu thuẫn).,Logic
+So sánh resolution với modus ponens.,"Resolution làm việc trực tiếp trên CNF và có thể tự động hóa, trong khi modus ponens là quy tắc cơ bản hoạt động trên hàm kéo theo.",Logic
+Ưu và nhược điểm của resolution là gì?,Ưu điểm: resolution là kỹ thuật tổng quát cho chứng minh tự động; nhược điểm: có thể bùng nổ số clause và yêu cầu chuyển toàn bộ biểu thức sang CNF.,Logic
+So sánh logic mệnh đề và logic vị từ là gì?,"Logic mệnh đề biểu diễn câu đơn không có biến, còn logic vị từ (predicate logic) sử dụng biến, hàm và lượng tử để diễn tả quan hệ phức tạp.",Logic
+Cách biểu diễn tri thức khác nhau giữa logic mệnh đề và logic vị từ như thế nào?,"Trong logic vị từ, tri thức được biểu diễn bằng mệnh đề chứa biến và các lượng tử ∀, ∃; suy diễn cần thay thế và chuẩn hoá các biến để chứng minh.",Logic
+Khi nào nên sử dụng logic vị từ thay vì logic mệnh đề?,"Logic vị từ cho phép mô tả cấu trúc phức tạp như quan hệ giữa đối tượng và thuộc tính, nên được dùng cho các hệ tri thức tổng quát.",Logic
+Logic vị từ có ưu điểm gì so với mệnh đề?,Logic vị từ mạnh hơn logic mệnh đề vì nó có thể diễn tả quan hệ và lượng tử; logic mệnh đề đơn giản nhưng kém biểu đạt.,Logic
+Ưu nhược điểm khi sử dụng logic vị từ là gì?,Ưu điểm: logic vị từ có tính biểu đạt cao; nhược điểm: suy diễn phức tạp hơn và tiêu tốn tài nguyên tính toán.,Logic
+Overfitting và underfitting là gì?,"Overfitting xảy ra khi mô hình học cả nhiễu trong dữ liệu huấn luyện và không tổng quát hóa, còn underfitting khi mô hình quá đơn giản không học đủ cấu trúc dữ liệu.",MachineLearning
+Làm thế nào để nhận biết mô hình bị overfitting?,Nhận biết overfitting bằng cách thấy độ chính xác cao trên tập huấn luyện nhưng kém trên tập kiểm tra; khoảng cách giữa hai độ chính xác càng lớn càng cho thấy quá khớp.,MachineLearning
+Mục đích của việc tránh overfitting trong học máy là gì?,"Tránh overfitting nhằm tạo mô hình có khả năng tổng quát tốt, hoạt động hiệu quả trên dữ liệu chưa từng thấy.",MachineLearning
+So sánh overfitting và underfitting.,"Overfitting có lỗi huấn luyện thấp và lỗi kiểm tra cao, còn underfitting có cả hai lỗi cao vì mô hình quá đơn giản.",MachineLearning
+Ưu và nhược điểm của mô hình phức tạp trong học máy là gì?,Mô hình phức tạp có khả năng học pattern phức tạp nhưng dễ overfit; mô hình đơn giản ít overfit nhưng có thể underfit và bỏ lỡ cấu trúc dữ liệu quan trọng.,MachineLearning
+Tập huấn luyện (training set) là gì?,Tập huấn luyện là bộ dữ liệu được sử dụng trong quá trình học để điều chỉnh tham số của mô hình.,MachineLearning
+Tập huấn luyện được sử dụng như thế nào trong quá trình học máy?,Mô hình học máy sử dụng các ví dụ trong training set để cập nhật trọng số hoặc tham số nhằm tối ưu hàm mất mát.,MachineLearning
+Mục đích của việc chia dữ liệu thành tập huấn luyện là gì?,Chia dữ liệu thành training set giúp mô hình học được cấu trúc ẩn và tối ưu hoá tham số trước khi đánh giá trên dữ liệu chưa thấy.,MachineLearning
+So sánh tập huấn luyện và tập kiểm tra.,"Tập huấn luyện dùng để học các tham số, còn tập kiểm tra (test set) dùng để đánh giá hiệu suất mô hình trên dữ liệu độc lập.",MachineLearning
+Ưu nhược điểm của việc dùng tập huấn luyện lớn là gì?,"Tập huấn luyện lớn giúp mô hình học tốt hơn nhưng tăng chi phí tính toán; nếu dữ liệu không đa dạng, mô hình có thể không tổng quát hóa.",MachineLearning
+Validation set là gì?,Validation set là tập dữ liệu được tách ra từ dữ liệu ban đầu để hiệu chỉnh siêu tham số và đánh giá mô hình trong quá trình huấn luyện.,MachineLearning
+Tập validation được sử dụng như thế nào trong quy trình phát triển mô hình?,"Trong quy trình huấn luyện, mô hình được đào tạo trên training set và đánh giá trên validation set; các siêu tham số được điều chỉnh dựa trên kết quả này.",MachineLearning
+Mục đích của việc có tập validation riêng biệt là gì?,Tập validation giúp chọn mô hình hoặc cấu hình tốt nhất trước khi đánh giá cuối cùng trên test set.,MachineLearning
+So sánh validation set và test set.,Validation set dùng để tinh chỉnh mô hình trong khi test set chỉ sử dụng một lần để đánh giá cuối cùng; validation có thể bị mòn nếu dùng nhiều lần.,MachineLearning
+Ưu nhược điểm của việc sử dụng validation set là gì?,"Validation set giúp tối ưu mô hình nhưng tiêu tốn dữ liệu huấn luyện; nếu sử dụng lặp lại quá nhiều, mô hình có thể overfit vào validation set.",MachineLearning
+Cross-validation là gì?,"Cross-validation là kỹ thuật đánh giá hiệu suất mô hình bằng cách chia dữ liệu thành nhiều phần, huấn luyện và kiểm tra luân phiên trên các phần đó.",MachineLearning
+K-fold cross validation hoạt động ra sao?,"Trong k-fold cross-validation, dữ liệu được chia thành k phần bằng nhau; mô hình được huấn luyện trên k-1 phần và kiểm tra trên phần còn lại, lặp lại k lần và lấy trung bình kết quả.",MachineLearning
+Mục đích của việc dùng cross-validation trong học máy là gì?,Cross-validation giúp ước lượng khả năng tổng quát của mô hình trên dữ liệu chưa thấy và giảm nguy cơ overfitting khi chọn mô hình.,MachineLearning
+So sánh cross-validation và phương pháp holdout.,"Phương pháp holdout chỉ chia dữ liệu thành một tập huấn luyện và một tập kiểm tra duy nhất, trong khi cross-validation lặp lại nhiều lần để có đánh giá ổn định hơn.",MachineLearning
+Ưu và nhược điểm của cross-validation là gì?,Cross-validation cung cấp đánh giá tin cậy hơn nhưng tốn thời gian tính toán vì phải huấn luyện mô hình nhiều lần; holdout nhanh hơn nhưng có thể không đại diện cho toàn bộ dữ liệu.,MachineLearning
+Regularization trong học máy là gì?,Regularization là kỹ thuật thêm thuật ngữ phạt vào hàm mất mát nhằm giảm độ phức tạp của mô hình và ngăn overfitting.,MachineLearning
+Regularization hoạt động như thế nào để giảm overfitting?,"Regularization như L1 hoặc L2 làm giảm trọng số của tham số, ép mô hình chọn đặc trưng quan trọng và loại bỏ nhiễu trong dữ liệu.",MachineLearning
+Mục đích của việc sử dụng regularization là gì?,"Mục đích của regularization là cải thiện khả năng tổng quát, tránh mô hình học quá sâu các mẫu nhiễu và tăng ổn định dự đoán.",MachineLearning
+So sánh L1 regularization và L2 regularization.,"L1 regularization khuyến khích trọng số bằng 0 dẫn tới mô hình thưa (sparse), trong khi L2 phạt bình phương trọng số giúp phân bổ đều và tránh giá trị lớn.",MachineLearning
+Ưu và nhược điểm của regularization là gì?,Regularization nâng cao độ tổng quát nhưng có thể làm giảm độ chính xác trên tập huấn luyện; chọn hệ số phạt không phù hợp có thể gây underfitting.,MachineLearning
+Mạng neural (neural network) là gì?,"Mạng neural là mô hình học sâu mô phỏng hoạt động của não với nhiều lớp nơ-ron kết nối, có khả năng học các mẫu phi tuyến tính phức tạp.",DeepLearning
+Mạng neural hoạt động như thế nào?,"Mạng neural truyền dữ liệu qua các lớp nơ-ron, mỗi nơ-ron tính toán hàm kích hoạt của tổng trọng số đầu vào, rồi học trọng số bằng thuật toán backpropagation.",DeepLearning
+Mục đích của việc sử dụng mạng nơ-ron nhân tạo là gì?,"Mạng neural dùng để nhận dạng hình ảnh, xử lý ngôn ngữ tự nhiên, dự báo và các bài toán phức tạp cần mô hình phi tuyến.",DeepLearning
+So sánh mạng neural với mô hình logistic regression.,"Logistic regression là mô hình tuyến tính chỉ có một lớp, trong khi neural network có nhiều lớp và học các quan hệ phi tuyến, nên mạnh hơn nhưng phức tạp hơn.",DeepLearning
+Ưu nhược điểm của mạng neural là gì?,Neural network mạnh mẽ và linh hoạt nhưng đòi hỏi nhiều dữ liệu và tài nguyên tính toán; dễ overfitting nếu không regularization.,DeepLearning
+CNN (convolutional neural network) là gì?,CNN là mạng nơ-ron sâu được thiết kế để xử lý dữ liệu có cấu trúc lưới như hình ảnh bằng cách sử dụng các lớp convolution để trích xuất đặc trưng không gian.,DeepLearning
+CNN hoạt động như thế nào trên dữ liệu hình ảnh?,"CNN sử dụng các bộ lọc trượt (kernels) để thực hiện phép tích chập trên ảnh, sau đó dùng pooling để giảm chiều, cuối cùng nối vào các lớp fully connected để dự đoán.",DeepLearning
+Mục đích của việc sử dụng CNN là gì?,"CNN được dùng trong nhận dạng hình ảnh, phát hiện đối tượng và các bài toán thị giác máy tính khác nhờ khả năng học đặc trưng tự động.",DeepLearning
+So sánh CNN và RNN.,"CNN xử lý dữ liệu không gian và khai thác cấu trúc lưới, còn RNN xử lý dữ liệu tuần tự theo thời gian như chuỗi hoặc câu.",DeepLearning
+Ưu điểm và hạn chế của CNN là gì?,"CNN hiệu quả trong việc nhận dạng hình ảnh và ít tham số hơn so với fully connected network, nhưng đòi hỏi nhiều dữ liệu và tính toán trên GPU.",DeepLearning
+RNN (recurrent neural network) là gì?,"RNN là loại mạng neural có kết nối tuần hoàn, cho phép thông tin từ bước trước được đưa ngược vào mạng để xử lý dữ liệu tuần tự.",DeepLearning
+Cơ chế của RNN hoạt động như thế nào?,"RNN cập nhật trạng thái ẩn tại mỗi thời điểm bằng cách nhận đầu vào hiện tại và trạng thái trước đó, giúp lưu trữ bối cảnh ngắn hạn.",DeepLearning
+RNN được sử dụng trong những ứng dụng nào?,"RNN được dùng trong xử lý ngôn ngữ tự nhiên, dịch máy, nhận dạng giọng nói và các bài toán chuỗi thời gian.",DeepLearning
+So sánh RNN với CNN.,"RNN xử lý chuỗi thời gian và giữ trạng thái qua các bước, trong khi CNN xử lý ảnh và dữ liệu lưới; mỗi loại phù hợp với dạng dữ liệu khác nhau.",DeepLearning
+Ưu nhược điểm của RNN là gì?,Ưu điểm: RNN mô hình hóa mối quan hệ theo thời gian; nhược điểm: khó huấn luyện do gradient vanishing và hạn chế nhớ dài hạn.,DeepLearning
+Thuật toán backpropagation là gì?,Backpropagation là thuật toán lan truyền ngược lỗi để tính gradient của hàm mất mát theo trọng số trong mạng neural.,DeepLearning
+Backpropagation hoạt động như thế nào trong mạng neural?,"Thuật toán tính đạo hàm của hàm mất mát theo từng trọng số bằng quy tắc chuỗi, cập nhật trọng số từ lớp cuối về đầu để giảm lỗi.",DeepLearning
+Mục đích của backpropagation trong huấn luyện là gì?,Backpropagation giúp huấn luyện mạng neural bằng cách điều chỉnh trọng số để tối thiểu hóa hàm mất mát và học các mẫu phức tạp.,DeepLearning
+So sánh backpropagation và gradient descent thông thường.,Gradient descent là phương pháp tối ưu tìm cực tiểu hàm mất mát; backpropagation là kỹ thuật tính gradient cụ thể cho mạng neural để áp dụng gradient descent.,DeepLearning
+Ưu và nhược điểm của backpropagation là gì?,Ưu điểm: backpropagation cho phép huấn luyện mạng sâu hiệu quả; nhược điểm: dễ gặp vanishing/exploding gradients và yêu cầu tính toán lớn.,DeepLearning
+So sánh giữa CNN và RNN?,"CNN và RNN là hai loại mạng neural sâu: CNN dùng tích chập để xử lý dữ liệu không gian, RNN sử dụng vòng lặp để xử lý dữ liệu tuần tự.",DeepLearning
+Cách hoạt động khác nhau của CNN và RNN là gì?,"CNN áp dụng bộ lọc lên ma trận dữ liệu để trích đặc trưng, còn RNN cập nhật trạng thái ẩn từng bước dựa vào đầu vào và trạng thái trước đó.",DeepLearning
+Khi nào nên dùng CNN và khi nào nên dùng RNN?,Sử dụng CNN khi cần nhận dạng đặc trưng không gian như ảnh; dùng RNN khi cần xử lý chuỗi như văn bản hoặc âm thanh.,DeepLearning
+Những khác biệt chính giữa mô hình xử lý ảnh và mô hình xử lý chuỗi là gì?,"Mô hình xử lý ảnh (CNN) tập trung vào khu vực cục bộ và bất biến dịch chuyển, trong khi mô hình xử lý chuỗi (RNN) tập trung vào thứ tự và bối cảnh.",DeepLearning
+Ưu và nhược điểm của CNN so với RNN là gì?,CNN hiệu quả với dữ liệu lưới và có ít vấn đề gradient; RNN mô hình hóa chuỗi nhưng khó huấn luyện và có giới hạn trong nhớ dài hạn.,DeepLearning
+Tác tử thông minh là gì?,Tác tử thông minh là thực thể tự trị có khả năng cảm nhận môi trường bằng cảm biến và hành động qua cơ cấu chấp hành để đạt mục tiêu nhất định.,Agents
+Một tác tử thông minh hoạt động như thế nào?,"Tác tử thu thập dữ liệu từ cảm biến, sử dụng chương trình điều khiển hoặc mô hình để quyết định và thực hiện hành động qua bộ chấp hành.",Agents
+Tác tử thông minh được dùng để làm gì?,"Tác tử thông minh được dùng trong robot, trợ lý ảo và hệ thống tự động để thực hiện nhiệm vụ phức tạp một cách tự chủ.",Agents
+So sánh tác tử thông minh với chương trình truyền thống.,"Chương trình truyền thống thực hiện các lệnh tuần tự, còn tác tử thông minh phản ứng theo trạng thái môi trường và có thể học hỏi, thích nghi.",Agents
+Ưu nhược điểm của tác tử thông minh là gì?,"Ưu điểm: tác tử có tính linh hoạt, tự chủ; nhược điểm: thiết kế phức tạp và khó dự đoán hành vi trong môi trường không chắc chắn.",Agents
+PEAS trong trí tuệ nhân tạo là gì?,"PEAS là viết tắt của Performance measure, Environment, Actuators và Sensors; dùng để mô tả đầy đủ nhiệm vụ của một tác tử.",Agents
+PEAS hoạt động như thế nào khi thiết kế tác tử?,"Trong thiết kế tác tử, ta xác định tiêu chí đánh giá (performance), mô tả môi trường, liệt kê bộ chấp hành và cảm biến để xây dựng chức năng tác tử.",Agents
+Mục đích của khuôn khổ PEAS là gì?,PEAS giúp đặt ra yêu cầu rõ ràng và xác định các thành phần chính để thiết kế tác tử hiệu quả và phù hợp với nhiệm vụ.,Agents
+So sánh bốn thành phần của PEAS.,"Performance measure đánh giá thành công của tác tử, environment mô tả thế giới tác tử tồn tại, actuators là công cụ hành động và sensors là bộ phận cảm nhận dữ liệu.",Agents
+Ưu và nhược điểm của việc dùng PEAS để mô tả tác tử là gì?,Ưu điểm: PEAS cung cấp cấu trúc chuẩn hóa; nhược điểm: mô tả quá tổng quát có thể bỏ qua chi tiết kỹ thuật quan trọng.,Agents
+Tác tử hợp lý và tác tử phản ứng khác nhau thế nào?,"Tác tử hợp lý là tác tử chọn hành động tối đa hóa hiệu quả theo performance measure, còn tác tử phản ứng chỉ dựa trên cảm biến hiện tại để phản hồi tức thời.",Agents
+Cơ chế hoạt động của tác tử phản ứng là gì?,Tác tử phản ứng sử dụng hệ luật đơn giản ánh xạ trực tiếp trạng thái cảm biến sang hành động mà không giữ trạng thái bên trong.,Agents
+Mục đích của việc xây dựng tác tử hợp lý là gì?,"Tác tử hợp lý hướng tới tối ưu hóa kết quả dài hạn thông qua suy luận và kế hoạch, trong khi tác tử phản ứng phù hợp với nhiệm vụ đơn giản cần phản hồi nhanh.",Agents
+So sánh tác tử hợp lý và tác tử dựa trên mô hình.,"Tác tử dựa trên mô hình giữ trạng thái nội bộ của môi trường, còn tác tử phản ứng không duy trì mô hình và chỉ phản ứng tức thời.",Agents
+Ưu nhược điểm của tác tử phản ứng là gì?,Tác tử phản ứng đơn giản và nhanh nhưng thiếu khả năng xử lý nhiệm vụ phức tạp; tác tử hợp lý mạnh mẽ hơn nhưng tốn tài nguyên và yêu cầu lập trình phức tạp.,Agents
+Cảm biến (sensor) và cơ cấu chấp hành (actuator) là gì trong tác tử?,"Cảm biến là thiết bị thu thập dữ liệu từ môi trường, còn actuators là thiết bị thực hiện hành động do tác tử quyết định.",Agents
+Cảm biến và actuator hoạt động ra sao trong hệ thống tác tử?,Cảm biến thu nhận thông tin và gửi về bộ xử lý; actuators nhận lệnh từ bộ xử lý và thực thi hành động trên môi trường.,Agents
+Mục đích của cảm biến và actuators trong một tác tử là gì?,"Cảm biến và actuators giúp tác tử tương tác với môi trường: cảm biến để nhận biết trạng thái, actuators để thay đổi trạng thái.",Agents
+So sánh vai trò của cảm biến và actuators trong tác tử.,"Cảm biến đóng vai trò input thu thập dữ liệu, actuators đóng vai trò output thực hiện hành động; cả hai phối hợp để hoàn thành nhiệm vụ.",Agents
+Ưu và nhược điểm của việc thiết kế cảm biến và actuators phức tạp là gì?,Thiết kế cảm biến và actuators phức tạp giúp tác tử linh hoạt và chính xác hơn nhưng tăng chi phí và độ khó trong chế tạo.,Agents
+Performance measure trong tác tử là gì?,"Performance measure là tiêu chí đánh giá mức độ thành công của tác tử đối với nhiệm vụ, chẳng hạn như tốc độ hoàn thành hoặc mức tiêu hao năng lượng.",Agents
+Môi trường tác tử ảnh hưởng như thế nào đến hành vi của nó?,"Môi trường có thể xác định, không xác định, tĩnh hoặc động; tác tử phải thích nghi để hành động đạt performance measure tốt nhất.",Agents
+Mục đích của performance measure trong thiết kế tác tử là gì?,Performance measure giúp định hướng chiến lược của tác tử và đánh giá kết quả hoạt động theo mục tiêu đã đặt ra.,Agents
+So sánh môi trường xác định và môi trường không xác định.,"Môi trường xác định cho phép dự đoán kết quả hành động, còn môi trường không xác định cần kế hoạch linh hoạt và xử lý rủi ro.",Agents
+Ưu nhược điểm của việc định nghĩa performance measure rõ ràng là gì?,"Định nghĩa performance measure rõ ràng giúp tối ưu hóa hành động, nhưng nếu không toàn diện có thể khiến tác tử đạt mục tiêu phụ mà bỏ qua mục tiêu chính.",Agents
+Constraint Satisfaction Problem (CSP) là gì?,CSP là bài toán trong đó cần gán giá trị cho tập biến sao cho thoả mọi ràng buộc giữa các biến.,CSP
+CSP hoạt động như thế nào?,"Giải CSP bằng cách chọn biến, gán giá trị từ miền và kiểm tra ràng buộc; nếu vi phạm, quay lui để thử giá trị khác.",CSP
+CSP dùng để làm gì?,"CSP được dùng để giải sudoku, lập thời khóa biểu và bài toán ô chữ khi cần tìm nghiệm thỏa tất cả điều kiện.",CSP
+So sánh CSP với bài toán tìm kiếm thông thường.,"Bài toán tìm kiếm thông thường tìm đường đi hoặc trạng thái, còn CSP tìm gán giá trị đáp ứng ràng buộc; CSP thường mô tả bằng biến và miền giá trị.",CSP
+Ưu và nhược điểm của CSP là gì?,"Ưu điểm: CSP mô hình hóa vấn đề ràng buộc rõ ràng; nhược điểm: không gian tìm kiếm lớn, cần kỹ thuật heuristics để tăng tốc.",CSP
+Giải thuật quay lui (backtracking) là gì trong CSP?,"Backtracking là kỹ thuật tìm kiếm thử và sai: chọn biến, gán giá trị, kiểm tra ràng buộc; nếu vi phạm, quay lui để thử giá trị khác.",CSP
+Backtracking hoạt động thế nào khi giải CSP?,"Thuật toán duyệt theo chiều sâu, mỗi khi gán giá trị hợp lệ cho một biến sẽ chuyển sang biến tiếp theo; nếu hết giá trị hợp lệ, quay lui về bước trước.",CSP
+Mục đích của backtracking trong bài toán thỏa mãn ràng buộc là gì?,Backtracking giúp tìm nghiệm cho CSP bằng cách khám phá không gian gán giá trị một cách có hệ thống.,CSP
+So sánh backtracking với forward checking.,"Forward checking kiểm tra ràng buộc và loại bỏ giá trị không hợp lệ sớm hơn, giảm số trường hợp phải quay lui so với backtracking thuần.",CSP
+Ưu nhược điểm của backtracking là gì?,Backtracking đơn giản và dễ triển khai nhưng có thể bị bùng nổ số nhánh; forward checking cải thiện hiệu suất nhưng yêu cầu thêm xử lý.,CSP
+Propagation ràng buộc là gì trong CSP?,Constraint propagation là kỹ thuật suy diễn các giá trị có thể chấp nhận cho biến dựa trên ràng buộc để thu hẹp miền giá trị trước khi gán.,CSP
+Thuật toán propagation hoạt động như thế nào khi giải CSP?,"Thuật toán xét mỗi ràng buộc, loại bỏ giá trị không thỏa trong miền của biến, lặp lại cho đến khi không còn giá trị bị loại bỏ.",CSP
+Mục đích của constraint propagation là gì?,"Mục đích là giảm không gian tìm kiếm bằng cách loại bỏ giá trị không thể dẫn đến nghiệm, giúp giải CSP nhanh hơn.",CSP
+So sánh constraint propagation với backtracking thuần.,"Backtracking chỉ kiểm tra sau khi gán, còn constraint propagation loại bỏ giá trị trước khi gán, giảm số lần thử thất bại.",CSP
+Ưu nhược điểm của constraint propagation là gì?,Ưu điểm: giảm đáng kể không gian tìm kiếm; nhược điểm: tốn thời gian duy trì cấu trúc dữ liệu và không hiệu quả nếu ràng buộc yếu.,CSP
+Heuristic MRV (minimum remaining values) là gì?,Heuristic MRV là chiến lược chọn biến có số lượng giá trị còn lại ít nhất để gán trước trong CSP.,CSP
+MRV chọn biến như thế nào trong CSP?,"Trong backtracking, MRV đếm số giá trị hợp lệ còn lại cho mỗi biến và chọn biến với miền nhỏ nhất để gán, nhằm giảm nhánh tìm kiếm.",CSP
+Mục đích của heuristic MRV trong backtracking là gì?,"MRV nhằm thu hẹp nhanh không gian tìm kiếm, giảm khả năng phải quay lui sâu bằng cách giải quyết các biến khó nhất trước.",CSP
+So sánh heuristic MRV với chọn biến ngẫu nhiên.,Chọn biến ngẫu nhiên không xem xét miền giá trị nên có thể dẫn tới nhiều bước thử; MRV chọn biến hạn chế nhất nên thường hiệu quả hơn.,CSP
+Ưu và nhược điểm của heuristic MRV là gì?,Heuristic MRV tăng tốc giải bài toán khó nhưng yêu cầu tính toán miền giá trị sau mỗi bước; với bài toán đơn giản thì overhead có thể không cần thiết.,CSP
+Arc consistency (AC) là gì?,Arc consistency là tính chất trong CSP khi mỗi giá trị của một biến có ít nhất một giá trị phù hợp ở biến liên quan theo ràng buộc nhị phân.,CSP
+Thuật toán AC-3 hoạt động như thế nào?,"Thuật toán AC-3 duy trì một hàng đợi các cung (arc) và lặp lại xóa giá trị từ miền của biến khi không còn giá trị phù hợp ở biến kề, cập nhật hàng đợi cho các cung liên quan.",CSP
+Mục đích của arc consistency trong CSP là gì?,"Arc consistency giúp loại bỏ giá trị không hợp lệ trước khi thử gán, làm nhỏ miền giá trị và đơn giản hóa backtracking.",CSP
+So sánh arc consistency với constraint propagation.,Constraint propagation bao trùm nhiều kỹ thuật; AC-3 là một dạng cụ thể đảm bảo tính nhất quán cho ràng buộc nhị phân.,CSP
+Ưu và nhược điểm của AC-3 là gì?,"AC-3 giảm không gian tìm kiếm đáng kể nhưng tốn thời gian cập nhật miền và chỉ áp dụng cho ràng buộc nhị phân, cần kết hợp với kỹ thuật khác.",CSP
+Thuật toán minimax là gì?,"Minimax là thuật toán suy nghĩ hai người chơi trong trò chơi đối kháng, tối đa hóa điểm số tối thiểu có thể đạt được trước phản ứng của đối thủ.",Adversarial
+Minimax hoạt động như thế nào trong trò chơi đối kháng?,"Thuật toán xây dựng cây trò chơi, người chơi tối đa chọn nước đi với giá trị cao nhất trong các giá trị tối thiểu do đối thủ sẽ chọn, lặp lại cho đến lá.",Adversarial
+Mục đích của thuật toán minimax là gì?,"Minimax được dùng để tìm chiến lược tối ưu trong trò chơi zero-sum như cờ vua, nơi một bên cố gắng tối đa hóa lợi thế còn đối thủ cố gắng tối thiểu hóa nó.",Adversarial
+So sánh minimax và thuật toán alpha-beta pruning.,"Alpha-beta pruning tối ưu hóa minimax bằng cách cắt bỏ các nhánh không thể ảnh hưởng đến kết quả cuối, giúp giảm số trạng thái cần đánh giá.",Adversarial
+Ưu điểm và nhược điểm của minimax là gì?,Ưu điểm: minimax tìm chiến lược tối ưu nếu có đủ thời gian; nhược điểm: kích thước cây trò chơi lớn khiến thuật toán tốn thời gian và bộ nhớ.,Adversarial
+Alpha-beta pruning là gì?,Alpha-beta pruning là kỹ thuật cắt tỉa để giảm số nút trong cây minimax bằng cách loại bỏ các nhánh không thể ảnh hưởng tới quyết định cuối cùng.,Adversarial
+Thuật toán alpha-beta pruning hoạt động ra sao?,Thuật toán theo dõi hai giá trị alpha (giá trị tốt nhất cho người tối đa) và beta (tốt nhất cho người tối thiểu); nếu node có giá trị ngoài khoảng này thì cắt bỏ.,Adversarial
+Mục đích của alpha-beta pruning trong minimax là gì?,"Alpha-beta pruning nhằm tăng hiệu quả của minimax, cho phép xem xét sâu hơn hoặc kịp thời hạn thời gian trong trò chơi.",Adversarial
+So sánh alpha-beta pruning và minimax thuần.,"Minimax thuần duyệt toàn bộ cây trò chơi, còn alpha-beta pruning bỏ qua các nhánh dư thừa nhưng vẫn cho kết quả giống minimax.",Adversarial
+Ưu và nhược điểm của alpha-beta pruning là gì?,Ưu điểm: giảm đáng kể số nút cần đánh giá; nhược điểm: hiệu quả phụ thuộc vào thứ tự duyệt và không thay đổi kết quả tối ưu.,Adversarial
+Sự khác biệt giữa tìm kiếm trong trò chơi đối kháng và tìm kiếm thông thường là gì?,"Tìm kiếm trong trò chơi đối kháng xem xét hai hoặc nhiều người chơi với mục tiêu đối lập, còn tìm kiếm thông thường thường chỉ có một tác tử tìm đường tới mục tiêu.",Adversarial
+Thuật toán tìm kiếm trong game đối kháng hoạt động ra sao?,"Thuật toán game search như minimax xây dựng cây trò chơi, xen kẽ nước đi của người chơi tối đa và tối thiểu; đánh giá trạng thái để chọn hành động.",Adversarial
+Mục đích của tìm kiếm đối kháng trong AI là gì?,"Tìm kiếm đối kháng nhằm xác định chiến lược tối ưu khi đối thủ cũng phản ứng thông minh, ví dụ trong cờ vua hay cờ caro.",Adversarial
+So sánh chiến lược tìm kiếm trò chơi và tìm kiếm trong CSP.,"CSP tìm gán giá trị thoả ràng buộc, trong khi game search tính đến phản ứng đối thủ và ràng buộc thời gian; game search thường dùng minimax hoặc alpha-beta.",Adversarial
+Ưu nhược điểm của tìm kiếm trò chơi so với tìm kiếm thông thường là gì?,Tìm kiếm trò chơi xử lý môi trường đối kháng nhưng phức tạp và tốn tính toán; tìm kiếm thông thường đơn giản hơn nhưng không áp dụng cho trò chơi đối kháng.,Adversarial
+Hàm đánh giá heuristic trong trò chơi là gì?,Hàm đánh giá heuristic là hàm ước lượng giá trị của trạng thái trung gian trong trò chơi khi không thể tính toán hết đến trạng thái cuối.,Adversarial
+Heuristic evaluation hoạt động như thế nào trong minimax?,"Trong minimax cắt ngắn, khi đạt tới độ sâu giới hạn, thuật toán sử dụng heuristic evaluation để gán điểm cho trạng thái và tiếp tục tính ngược.",Adversarial
+Mục đích của việc sử dụng heuristic evaluation trong trò chơi là gì?,"Mục đích của heuristic evaluation là giảm thời gian tính toán bằng cách đánh giá trạng thái chưa hoàn kết dựa trên đặc trưng như vật cản, vị trí quân.",Adversarial
+So sánh heuristic evaluation và đánh giá chính xác trạng thái cuối.,"Đánh giá chính xác yêu cầu đi tới trạng thái cuối, trong khi heuristic evaluation chỉ cần tính gần đúng nên nhanh hơn nhưng kém chính xác.",Adversarial
+Ưu và nhược điểm của heuristic evaluation trong trò chơi là gì?,Ưu điểm: cho phép chơi trong thời gian hữu hạn và sâu; nhược điểm: kết quả phụ thuộc chất lượng hàm heuristic và có thể gây sai lệch chiến lược.,Adversarial
+Trò chơi zero-sum là gì?,Trò chơi zero-sum là trò chơi mà lợi ích của một người chơi bằng tổn thất của người chơi khác; tổng điểm bằng zero.,Adversarial
+Expectimax khác minimax như thế nào?,"Expectimax mở rộng minimax bằng cách thay thế nút đối thủ bằng nút kỳ vọng, tính giá trị trung bình có trọng số theo xác suất các hành động.",Adversarial
+Mục đích của expectimax trong trò chơi không zero-sum là gì?,"Expectimax được dùng khi đối thủ hoặc môi trường hành động ngẫu nhiên và không hoàn toàn đối kháng, như trong Pac-Man hoặc các trò chơi có yếu tố may rủi.",Adversarial
+So sánh trò chơi zero-sum và trò chơi không zero-sum.,"Trong trò chơi zero-sum, minimax là tối ưu; trong trò chơi không zero-sum hoặc ngẫu nhiên, expectimax xử lý xác suất và không giả định đối thủ tối thiểu hoá điểm.",Adversarial
+Ưu và nhược điểm của expectimax so với minimax là gì?,Ưu điểm: expectimax xử lý sự không chắc chắn nhưng tốn nhiều tính toán; minimax nhanh hơn nhưng chỉ phù hợp với trò chơi zero-sum.,Adversarial

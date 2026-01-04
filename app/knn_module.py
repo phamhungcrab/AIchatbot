@@ -135,6 +135,65 @@ class CustomKNN:
         
         return best['answer'], confidence, best['question'], best['topic']
     
+    def predict_voting(self, query_vector):
+        """
+        🆕 Dự đoán bằng Weighted Voting từ K neighbors.
+        
+        Thay vì chỉ lấy câu gần nhất, tính điểm cho từng đáp án
+        dựa trên khoảng cách của tất cả K neighbors.
+        
+        Args:
+            query_vector: TF-IDF vector của câu hỏi user
+            
+        Returns:
+            (best_answer, confidence, matched_question, topic)
+        """
+        # Chuẩn hóa shape
+        if hasattr(query_vector, 'toarray'):
+            query_vector = query_vector.toarray()
+        query_vector = np.array(query_vector).flatten()
+        
+        # Tính khoảng cách đến tất cả các câu hỏi
+        distances = []
+        for i in range(len(self.X_train)):
+            dist = self._compute_distance(query_vector, self.X_train[i])
+            distances.append({
+                'distance': dist,
+                'index': i,
+                'question': self.questions[i],
+                'answer': self.answers[i],
+                'topic': self.topics[i],
+                'weight': max(0, 1.0 - dist)  # Weight = similarity
+            })
+        
+        # Sắp xếp và lấy K nearest
+        distances.sort(key=lambda x: x['distance'])
+        k_nearest = distances[:self.k]
+        
+        # Weighted Voting: Tổng hợp điểm cho mỗi đáp án
+        answer_scores = {}
+        for neighbor in k_nearest:
+            ans = neighbor['answer']
+            weight = neighbor['weight']
+            if ans not in answer_scores:
+                answer_scores[ans] = {
+                    'score': 0,
+                    'question': neighbor['question'],
+                    'topic': neighbor['topic'],
+                    'count': 0
+                }
+            answer_scores[ans]['score'] += weight
+            answer_scores[ans]['count'] += 1
+        
+        # Chọn đáp án có tổng điểm cao nhất
+        best_answer = max(answer_scores.keys(), key=lambda x: answer_scores[x]['score'])
+        best_info = answer_scores[best_answer]
+        
+        # Confidence = tổng điểm / số K (normalized)
+        confidence = best_info['score'] / self.k
+        
+        return best_answer, confidence, best_info['question'], best_info['topic']
+    
     def score(self, X_test, y_test):
         """
         Đánh giá accuracy trên tập test.

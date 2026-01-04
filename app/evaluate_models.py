@@ -14,10 +14,7 @@ from datetime import datetime
 from preprocess import preprocess_text, preprocess_for_knn, train_vectorizer
 from nb_module import CustomMultinomialNB, predict_topic
 from knn_module import CustomKNN, find_answer_knn
-# CSV-based data loading (thay thế datastore.py)
-def get_all_qa():
-    \"\"\"Load toàn bộ Q&A từ CSV\"\"\"
-    return pd.read_csv(os.path.join(DATA_DIR, 'qa_train.csv'))
+from find_answer import find_best_answer
 from confidence_utils import UnifiedCalibrator, NaiveBayesCalibrator, KNNCalibrator
 
 # =========================================================
@@ -52,8 +49,8 @@ def load_models():
 
 
 def load_validation_data():
-    """Load dữ liệu validation từ CSV"""
-    valid_path = os.path.join(DATA_DIR, 'qa_valid.csv')
+    """Load dữ liệu test từ CSV"""
+    valid_path = os.path.join(DATA_DIR, 'qa_test.csv')
     df = pd.read_csv(valid_path)
     
     # Preprocess các câu hỏi
@@ -124,86 +121,120 @@ def calculate_confidence_metrics(predictions, ground_truth, confidences):
 # =========================================================
 # 🧪 3. ĐÁNH GIÁ NAIVE BAYES (TOPIC CLASSIFICATION)
 # =========================================================
-def evaluate_naive_bayes(nb_model, vectorizer, df, calibrator=None):
+def evaluate_naive_bayes(nb_model, vectorizer, df, df_train, calibrator=None):
     """
-    Đánh giá Naive Bayes trên task phân loại topic.
+    Đánh giá Naive Bayes trên task phân loại topic VÀ trả lời đúng.
     
-    📌 NB sử dụng:
-    - TF-IDF Vectorizer (unigram + bigram, max 800 features)
-    - CustomMultinomialNB với Laplace Smoothing (alpha=0.1)
-    - P(topic|words) = P(topic) * ∏P(word|topic)
+    📌 NB Pipeline:
+    1. NB phân loại topic
+    2. find_best_answer tìm đáp án trong topic đó
     
-    📌 Confidence Calibration (Temperature Scaling):
-    - raw_conf = max(softmax(log_proba))
-    - calibrated = max(softmax(log_proba / temperature))
-    - Temperature > 1 làm "mềm" distribution → confidence thực tế hơn
+    📌 Metrics mới:
+    - topic_accuracy: Phân loại đúng topic
+    - answer_accuracy: Trả đúng đáp án (exact match)
     """
     print("\n" + "="*60)
-    print("🔬 ĐÁNH GIÁ NAIVE BAYES (TOPIC CLASSIFICATION)")
+    print("🔬 ĐÁNH GIÁ NAIVE BAYES (TOPIC + ANSWER)")
     print("="*60)
     
-    predictions = []
-    raw_confidences = []
-    calibrated_confidences = []
+    topic_predictions = []
+    answer_predictions = []
+    answer_matches = []
+    answer_confidences = []  # 🆕 Confidence của câu trả lời (từ similarity score)
     details = []
     
     for idx, row in df.iterrows():
         clean_q = row['clean_question']
         true_topic = row['topic']
+        true_answer = row['answer']
         
-        # Predict với raw confidence
-        pred_topic, raw_conf = predict_topic(nb_model, vectorizer, clean_q)
+        # 1. NB predict topic
+        pred_topic, topic_conf = predict_topic(nb_model, vectorizer, clean_q)
         
-        # Calibrate confidence
-        if calibrator:
-            # Lấy full probability distribution
-            X = vectorizer.transform([clean_q])
-            proba = nb_model.predict_proba(X)[0]
-            calibrated_conf = calibrator.calibrate_nb(proba)
-        else:
-            calibrated_conf = raw_conf
+        # 2. find_best_answer trong topic đó
+        df_topic = df_train[df_train['topic'] == pred_topic]
+        if df_topic.empty:
+            df_topic = df_train  # Fallback to all data
         
-        predictions.append(pred_topic)
-        raw_confidences.append(raw_conf)
-        calibrated_confidences.append(calibrated_conf)
+        pred_answer, sim_score, matched_q = find_best_answer(
+            vectorizer, clean_q, df_topic,
+            original_query=row['question'], threshold=0.0  # Không filter, lấy hết
+        )
+        
+        # 3. Check exact match
+        answer_match = (pred_answer == true_answer) if pred_answer else False
+        
+        # 4. 🆕 Confidence = topic_conf × similarity_score (kết hợp cả 2)
+        raw_sim = sim_score if sim_score else 0.0
+        # Combined score: topic_conf * similarity
+        combined_score = topic_conf * raw_sim
+        # Sigmoid scaling: chuyển từ [0-1] về [0-1] với midpoint hợp lý
+        k = 10.0
+        midpoint = 0.4  # Midpoint cho combined score
+        answer_conf = 1.0 / (1.0 + np.exp(-k * (combined_score - midpoint)))
+        
+        topic_predictions.append(pred_topic)
+        answer_predictions.append(pred_answer)
+        answer_matches.append(answer_match)
+        answer_confidences.append(answer_conf)
         details.append({
             'question': row['question'][:50] + '...' if len(row['question']) > 50 else row['question'],
             'true_topic': true_topic,
             'predicted_topic': pred_topic,
-            'raw_confidence': raw_conf,
-            'calibrated_confidence': calibrated_conf,
-            'correct': pred_topic == true_topic
+            'topic_correct': pred_topic == true_topic,
+            'answer_correct': answer_match,
+            'topic_confidence': topic_conf,
+            'answer_confidence': answer_conf  # 🆕 Độ tin cậy câu trả lời
         })
     
-    # Tính metrics cho CẢ raw và calibrated
-    raw_metrics = calculate_confidence_metrics(predictions, df['topic'].values, raw_confidences)
-    calibrated_metrics = calculate_confidence_metrics(predictions, df['topic'].values, calibrated_confidences)
+    # 🆕 Tính metrics dựa trên ANSWER confidence (không phải topic confidence)
+    answer_matches_arr = np.array(answer_matches)
+    answer_confidences_arr = np.array(answer_confidences)
+    
+    # Accuracy at different thresholds
+    thresholds = [0.3, 0.5, 0.7, 0.9]
+    coverage = {}
+    accuracy_at_threshold = {}
+    
+    for thresh in thresholds:
+        mask = answer_confidences_arr >= thresh
+        coverage[thresh] = np.mean(mask) * 100
+        if np.sum(mask) > 0:
+            accuracy_at_threshold[thresh] = np.mean(answer_matches_arr[mask]) * 100
+        else:
+            accuracy_at_threshold[thresh] = 0.0
+    
+    # Overall metrics
+    topic_accuracy = np.mean(np.array(topic_predictions) == df['topic'].values) * 100
+    answer_accuracy = np.mean(answer_matches) * 100
+    avg_answer_confidence = np.mean(answer_confidences) * 100
+    
+    print(f"   Topic Accuracy: {topic_accuracy:.2f}%")
+    print(f"   Answer Accuracy: {answer_accuracy:.2f}%")
+    print(f"   Avg Answer Confidence: {avg_answer_confidence:.2f}%")
+    
+    # Build metrics dict
+    answer_metrics = {
+        'topic_accuracy': topic_accuracy,
+        'answer_accuracy': answer_accuracy,
+        'average_answer_confidence': avg_answer_confidence,
+        'coverage_at_threshold': coverage,
+        'accuracy_at_threshold': accuracy_at_threshold,
+        'total_samples': len(df)
+    }
     
     return {
-        'model': 'Naive Bayes (Topic Classification)',
+        'model': 'Naive Bayes Pipeline (Topic + Answer)',
         'technique': {
-            'algorithm': 'Custom Multinomial Naive Bayes',
-            'formula': 'P(topic|X) ∝ P(topic) × ∏ P(word_i|topic)',
+            'algorithm': 'NB Topic Classification + Cosine+Jaccard Answer Retrieval',
+            'nb_formula': 'P(topic|X) ∝ P(topic) × ∏ P(word_i|topic)',
+            'answer_formula': 'Score = 0.7×Cosine + 0.3×Jaccard',
             'smoothing': 'Laplace Smoothing (alpha=0.1)',
             'vectorizer': 'TF-IDF (800 features, unigram+bigram, sublinear_tf=True)',
-            'preprocessing': [
-                'Lowercase',
-                'Xóa ký tự đặc biệt & số',
-                'PyVi Tokenizer (tách từ tiếng Việt)',
-                'Lọc Vietnamese Stopwords'
-            ]
         },
-        'confidence_calibration': {
-            'method': 'Temperature Scaling',
-            'formula': 'P_calibrated(c|X) = exp(log P(c|X) / T) / Σ exp(log P(k|X) / T)',
-            'temperature': calibrator.nb_calibrator.temperature if calibrator else 1.0,
-            'interpretation': 'T > 1 làm mềm distribution → confidence thực tế hơn'
-        },
-        'metrics': {
-            'raw': raw_metrics,
-            'calibrated': calibrated_metrics
-        },
-        'sample_results': details[:10]  # Top 10 mẫu
+        'confidence_type': 'Answer Confidence (từ similarity score của find_answer)',
+        'metrics': answer_metrics,
+        'sample_results': details[:10]
     }
 
 
@@ -341,7 +372,7 @@ def generate_report(nb_results, knn_results):
         'summary': {
             'description': 'Đánh giá hệ thống AI Chatbot với 2 model: Naive Bayes (phân loại topic) và KNN (tìm câu trả lời)',
             'data_source': 'qa_valid.csv',
-            'total_test_samples': nb_results['metrics']['calibrated']['total_samples'],
+            'total_test_samples': nb_results['metrics']['total_samples'],
         },
         'preprocessing_pipeline': {
             'description': 'Quy trình tiền xử lý văn bản tiếng Việt',
@@ -551,6 +582,11 @@ if __name__ == "__main__":
     vectorizer, nb_model, knn_model = load_models()
     df_valid = load_validation_data()
     
+    # 🆕 Load training data cho NB find_answer
+    df_train = pd.read_csv(os.path.join(DATA_DIR, 'qa_train.csv'))
+    df_train['clean_question'] = df_train['question'].apply(preprocess_text)
+    print(f"📊 Đã load {len(df_train)} mẫu training cho answer lookup")
+    
     # 2. Khởi tạo Calibrator
     # - NB: Temperature=1.5 (làm mềm confidence)
     # - KNN: k=10, midpoint=0.4 (sigmoid scaling)
@@ -562,29 +598,26 @@ if __name__ == "__main__":
     print(f"📐 Calibrator: NB(T={calibrator.nb_calibrator.temperature}), KNN(k={calibrator.knn_calibrator.k}, mid={calibrator.knn_calibrator.midpoint})")
     
     # 3. Đánh giá từng model VỚI calibration
-    nb_results = evaluate_naive_bayes(nb_model, vectorizer, df_valid, calibrator)
+    nb_results = evaluate_naive_bayes(nb_model, vectorizer, df_valid, df_train, calibrator)
     knn_results = evaluate_knn(knn_model, vectorizer, df_valid, calibrator)
     
-    # 4. In kết quả tóm tắt - SO SÁNH RAW vs CALIBRATED
+    # 4. In kết quả tóm tắt
     print("\n" + "="*60)
-    print("📊 KẾT QUẢ TỔNG HỢP (RAW vs CALIBRATED)")
+    print("📊 KẾT QUẢ TỔNG HỢP")
     print("="*60)
     
-    print(f"\n🤖 NAIVE BAYES (Topic Classification):")
-    print(f"   • Accuracy: {nb_results['metrics']['raw']['accuracy']:.2f}%")
-    print(f"   • [RAW] Avg Confidence: {nb_results['metrics']['raw']['average_confidence']:.2f}%")
-    print(f"   • [CALIBRATED] Avg Confidence: {nb_results['metrics']['calibrated']['average_confidence']:.2f}%")
-    print(f"   • [RAW] ECE: {nb_results['metrics']['raw']['expected_calibration_error']:.2f}%")
-    print(f"   • [CALIBRATED] ECE: {nb_results['metrics']['calibrated']['expected_calibration_error']:.2f}%")
+    print(f"\n🤖 NAIVE BAYES PIPELINE:")
+    print(f"   • Topic Accuracy: {nb_results['metrics']['topic_accuracy']:.2f}%")
+    print(f"   • Answer Accuracy: {nb_results['metrics']['answer_accuracy']:.2f}%")
+    print(f"   • Avg Answer Confidence: {nb_results['metrics']['average_answer_confidence']:.2f}%")
     
     print(f"\n🔍 KNN (Answer Retrieval):")
     print(f"   • Exact Match: {knn_results['metrics']['raw']['exact_match_accuracy']:.2f}%")
-    print(f"   • [RAW] Avg Confidence: {knn_results['metrics']['raw']['average_confidence']:.2f}%")
-    print(f"   • [CALIBRATED] Avg Confidence: {knn_results['metrics']['calibrated']['average_confidence']:.2f}%")
+    print(f"   • Avg Confidence: {knn_results['metrics']['raw']['average_confidence']:.2f}%")
     
     # 5. Tạo và lưu báo cáo
     report = generate_report(nb_results, knn_results)
-    saved_path = save_report(report, format='both')
+    saved_path = save_report(report, format='json')  # Chỉ lưu JSON
     
     print("\n" + "="*60)
     print("✅ ĐÁNH GIÁ HOÀN TẤT!")

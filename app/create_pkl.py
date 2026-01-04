@@ -12,15 +12,15 @@ except AttributeError:
 else:
     ssl._create_default_https_context = _create_unverified_https_context
 
-# CSV-based data loading (thay thế datastore.py)
+# Paths
+BASE_DIR = os.path.dirname(__file__)
+MODEL_DIR = os.path.join(BASE_DIR, '..', 'models')
 DATA_DIR = os.path.join(BASE_DIR, '..', 'data')
 
-def get_all_qa():
-    \"\"\"Load toàn bộ Q&A từ CSV\"\"\"
-    return pd.read_csv(os.path.join(DATA_DIR, 'qa_train.csv'))
+# Imports
 from preprocess import preprocess_text, train_vectorizer
 from nb_module import train_naive_bayes
-from knn_module import train_knn_model  # 🆕 Import KNN
+from knn_module import train_knn_model
 
 # Download NLTK data
 nltk.download('punkt', quiet=True)
@@ -28,8 +28,11 @@ nltk.download('stopwords', quiet=True)
 nltk.download('wordnet', quiet=True)
 nltk.download('punkt_tab', quiet=True)
 
-BASE_DIR = os.path.dirname(__file__)
-MODEL_DIR = os.path.join(BASE_DIR, '..', 'models')
+
+def get_all_qa():
+    """Load toàn bộ Q&A từ CSV"""
+    return pd.read_csv(os.path.join(DATA_DIR, 'qa_train.csv'))
+
 
 def create_pkl_files():
     print('⏳ Đang tạo file .pkl...')
@@ -51,7 +54,7 @@ def create_pkl_files():
     # 4. Tạo Model Naive Bayes (phân loại topic)
     nb_model = train_naive_bayes(vectorizer, df['clean_text'], df['topic'])
     
-    # 5. 🆕 Tạo Model KNN (tìm câu hỏi gần nhất)
+    # 5. Tạo Model KNN (tìm câu hỏi gần nhất)
     print('\n🔍 Training KNN model...')
     knn_model = train_knn_model(
         vectorizer, 
@@ -63,6 +66,6 @@ def create_pkl_files():
 
     print('\n✅ Hoàn tất! Đã tạo vectorizer.pkl, nb_model.pkl và knn_model.pkl trong thư mục models/.')
 
+
 if __name__ == '__main__':
     create_pkl_files()
-

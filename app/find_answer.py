@@ -39,7 +39,7 @@ def find_best_answer(vectorizer, question, df_topic, original_query=None, thresh
     cosine_sim = cosine_similarity(user_vector, database_vectors).flatten()
     
     # 5. Re-ranking bằng Jaccard Similarity (từ preprocess)
-    from app.preprocess import calculate_jaccard_similarity
+    from preprocess import calculate_jaccard_similarity
     
     # Lấy Top 15 ứng viên có Cosine cao nhất để kiểm tra kỹ hơn
     top_k = 15
