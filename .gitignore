@@ -103,7 +103,7 @@ pnpm-debug.log*
 # =========================
 #  LARGE FILES (AI MODELS)
 # =========================
-models/
-*.pkl
+# models/  # Bỏ comment để Streamlit Cloud có thể load models
+# *.pkl
 *.safetensors
 *.bin
