@@ -1,0 +1,202 @@
+
+question,answer,topic,difficulty
+Bạn có thể giải thích về Game phi zero-sum,"Trong game phi zero-sum, Minimax có thể được điều chỉnh hoặc thay bằng thuật toán khác vì lợi ích của người chơi không đối nghịch hoàn toàn.",Adversarial,easy
+Bạn có thể giải thích về Cắt tỉa alpha,"Trong alpha-beta pruning, alpha đại diện cho giá trị tối tốt nhất của người chơi tối đa và được cập nhật để loại bỏ nhánh tồi.",Adversarial,easy
+Thuật toán Trí tuệ nhân tạo chơi cờ là gì?,Các chương trình chơi cờ sử dụng Minimax kết hợp alpha-beta pruning để đánh giá cây trò chơi khổng lồ trong môi trường đối kháng.,Adversarial,easy
+Thuật toán Hàm đánh giá nghĩa là gì?,Hàm đánh giá được dùng trong tìm kiếm đối kháng để ước lượng giá trị của trạng thái trung gian khi không thể mở rộng tới cuối game.,Adversarial,easy
+Thuật toán Giới hạn độ sâu dùng để làm gì?,Giới hạn độ sâu trong Minimax giúp cắt ngắn cây trò chơi và dùng hàm đánh giá heuristic để ước lượng giá trị khi game đối kháng quá lớn.,Adversarial,easy
+Thuật toán Hàm tiện ích trong Minimax dùng để làm gì?,Hàm tiện ích trong Minimax gán giá trị cho trạng thái cuối của game để đánh giá tốt xấu của nước đi cho người chơi tối đa.,Adversarial,easy
+Cách người chơi tối đa làm việc như thế nào?,"Trong Minimax, người chơi tối đa là agent cố gắng chọn nước đi đạt giá trị cao nhất trong game đối kháng.",Adversarial,easy
+Thuật toán Game phi zero-sum là gì?,"Trong game phi zero-sum, Minimax có thể được điều chỉnh hoặc thay bằng thuật toán khác vì lợi ích của người chơi không đối nghịch hoàn toàn.",Adversarial,easy
+Thuật toán Tìm kiếm đối kháng nghĩa là gì?,"Tìm kiếm đối kháng nghiên cứu cách tác tử đưa ra quyết định trong game khi đối thủ cố gắng tối thiểu hóa điểm, sử dụng Minimax và alpha-beta.",Adversarial,easy
+Thuật toán Minimax nghĩa là gì?,"Thuật toán Minimax là phương pháp tìm kiếm đối kháng trong game hai người, nơi người chơi tối đa chọn nước đi để tối đa hóa lợi ích và giả định đối thủ giảm lợi ích.",Adversarial,easy
+Bạn có thể giải thích về Cây trò chơi,"Cây trò chơi mô tả tất cả các trạng thái và nước đi có thể trong game, được dùng bởi thuật toán Minimax để đánh giá lựa chọn.",Adversarial,easy
+Thuật toán Trò chơi zero-sum là gì?,"Game zero-sum là môi trường đối kháng trong đó điểm số của người chơi này là âm điểm của người kia, phù hợp với mô hình Minimax.",Adversarial,easy
+Hãy mô tả minimax vận hành ra sao,"Expectimax là biến thể của Minimax dùng trong game có yếu tố ngẫu nhiên, kết hợp giá trị kỳ vọng thay vì chỉ tối thiểu và tối đa.",Adversarial,medium
+Bạn hiểu gì về đối kháng?,"Thuật toán Minimax là phương pháp tìm kiếm đối kháng trong game hai người, nơi người chơi tối đa chọn nước đi để tối đa hóa lợi ích và giả định đối thủ giảm lợi ích.",Adversarial,medium
+Hãy mô tả game hoạt động ra sao,"Game zero-sum là môi trường đối kháng trong đó điểm số của người chơi này là âm điểm của người kia, phù hợp với mô hình Minimax.",Adversarial,medium
+Định nghĩa đối kháng được hiểu thế nào,"Trong Minimax, người chơi tối thiểu đại diện cho đối thủ cố gắng làm giảm giá trị của người chơi tối đa trong game đối kháng.",Adversarial,medium
+Định nghĩa alpha-beta được hiểu thế nào,"Tìm kiếm đối kháng nghiên cứu cách tác tử đưa ra quyết định trong game khi đối thủ cố gắng tối thiểu hóa điểm, sử dụng Minimax và alpha-beta.",Adversarial,medium
+Phương pháp minimax nào hiệu quả hơn?,Giới hạn độ sâu trong Minimax giúp cắt ngắn cây trò chơi và dùng hàm đánh giá heuristic để ước lượng giá trị khi game đối kháng quá lớn.,Adversarial,hard
+Phương pháp đối kháng nào hiệu quả hơn?,"Thuật toán Minimax là phương pháp tìm kiếm đối kháng trong game hai người, nơi người chơi tối đa chọn nước đi để tối đa hóa lợi ích và giả định đối thủ giảm lợi ích.",Adversarial,hard
+Game có nghĩa là gì?,"Trong Minimax, người chơi tối thiểu đại diện cho đối thủ cố gắng làm giảm giá trị của người chơi tối đa trong game đối kháng.",Adversarial,hard
+Hãy giải thích về Môi trường rời rạc,"Môi trường rời rạc có số trạng thái và hành động hữu hạn, giúp tác tử chọn hành động dễ dàng hơn.",Agents,easy
+Bạn có thể giải thích về Môi trường xác định,"Môi trường xác định đưa ra kết quả chắc chắn cho mỗi hành động của tác tử, giúp agent dự đoán trước.",Agents,easy
+Thuật toán Môi trường tĩnh là gì?,"Môi trường tĩnh không thay đổi khi tác tử không hành động, giúp agent suy nghĩ mà không bị môi trường biến đổi.",Agents,easy
+Thuật toán Môi trường nhiều tác tử là gì?,"Môi trường nhiều tác tử có nhiều agent tương tác lẫn nhau, đòi hỏi xem xét hành động của các agent khác.",Agents,easy
+Thuật toán Môi trường một tác tử dùng để làm gì?,"Môi trường một tác tử chỉ có một agent tương tác, không có đối thủ cạnh tranh trong quá trình lựa chọn hành động.",Agents,easy
+Thuật toán Môi trường hoàn quan sát dùng để làm gì?,"Môi trường hoàn quan sát cho phép tác tử có cảm biến đầy đủ về trạng thái hiện tại, giúp agent quyết định tốt hơn.",Agents,easy
+Mô tả tác tử hướng mục tiêu hoạt động như thế nào?,Tác tử hướng mục tiêu lựa chọn hành động dựa trên việc đạt mục tiêu cụ thể trong môi trường bằng cảm biến và actuator.,Agents,easy
+Thuật toán Môi trường rời rạc nghĩa là gì?,"Môi trường rời rạc có số trạng thái và hành động hữu hạn, giúp tác tử chọn hành động dễ dàng hơn.",Agents,easy
+Thuật toán Tác tử phản xạ đơn giản nghĩa là gì?,"Tác tử phản xạ đơn giản dựa trên cảm biến hiện tại và không có bộ nhớ về môi trường, hoạt động theo agent rules.",Agents,easy
+Thuật toán Tác tử thông minh là gì?,Tác tử thông minh là thực thể (agent) nhận cảm biến từ môi trường và thực hiện hành động để đạt mục tiêu theo đo lường PEAS.,Agents,easy
+Hãy giải thích về Tác tử phản xạ có mô hình,Tác tử phản xạ có mô hình lưu trữ một mô hình môi trường và dùng cảm biến để cập nhật trạng thái trước khi ra quyết định.,Agents,easy
+Thuật toán Tác tử học là gì?,"Tác tử học sử dụng cảm biến và kinh nghiệm để cải thiện hành vi theo thời gian, điều chỉnh PEAS và hành động trong môi trường.",Agents,easy
+Hãy mô tả tác tử hoạt động ra sao,Môi trường liên tục có vô số trạng thái và yêu cầu tác tử xử lý tín hiệu cảm biến liên tục để hành động.,Agents,medium
+Hãy mô tả peas hoạt động ra sao,Tác tử thông minh là thực thể (agent) nhận cảm biến từ môi trường và thực hiện hành động để đạt mục tiêu theo đo lường PEAS.,Agents,medium
+Định nghĩa tác tử được hiểu thế nào,"Tác tử học sử dụng cảm biến và kinh nghiệm để cải thiện hành vi theo thời gian, điều chỉnh PEAS và hành động trong môi trường.",Agents,medium
+Định nghĩa môi trường được hiểu thế nào,"Tác tử hướng tiện ích không chỉ đạt mục tiêu mà còn tối đa hóa hàm tiện ích, sử dụng cảm biến để chọn hành động tốt nhất.",Agents,medium
+Định nghĩa agent được hiểu thế nào,"Tác tử phản xạ đơn giản dựa trên cảm biến hiện tại và không có bộ nhớ về môi trường, hoạt động theo agent rules.",Agents,medium
+Agent có nghĩa là gì?,"Môi trường một tác tử chỉ có một agent tương tác, không có đối thủ cạnh tranh trong quá trình lựa chọn hành động.",Agents,hard
+Tối ưu tác tử nhằm mục đích gì?,Tác tử thông minh là thực thể (agent) nhận cảm biến từ môi trường và thực hiện hành động để đạt mục tiêu theo đo lường PEAS.,Agents,hard
+Tối ưu agent nhằm mục đích gì?,"Tác tử hướng tiện ích không chỉ đạt mục tiêu mà còn tối đa hóa hàm tiện ích, sử dụng cảm biến để chọn hành động tốt nhất.",Agents,hard
+Bạn có thể giải thích về Đồ thị ràng buộc,"Đồ thị ràng buộc biểu diễn CSP bằng nút là biến và cạnh là ràng buộc giữa các biến, giúp trực quan hóa cấu trúc constraint.",CSP,easy
+Bạn có thể giải thích về Bài toán N nữ hoàng,"Bài toán N nữ hoàng là ví dụ kinh điển của CSP, yêu cầu đặt nữ hoàng lên bàn cờ sao cho ràng buộc không tấn công nhau.",CSP,easy
+Thuật toán Backjumping nghĩa là gì?,"Backjumping là cải tiến của backtracking trong CSP, cho phép quay lui nhiều biến khi phát hiện ràng buộc không khả thi.",CSP,easy
+Thuật toán Độ phức tạp CSP nghĩa là gì?,CSP thường có độ phức tạp cao và cần sử dụng heuristics và backtracking để tìm lời giải thỏa ràng buộc.,CSP,easy
+Thuật toán Tìm kiếm cục bộ dùng để làm gì?,"Tìm kiếm cục bộ giải CSP bằng cách bắt đầu với gán đầy đủ và sửa đổi cục bộ để giảm số constraint vi phạm, thay vì backtracking.",CSP,easy
+Thuật toán Propagation dùng để làm gì?,Propagation trong CSP lan truyền ràng buộc để thu hẹp miền giá trị và loại bỏ bất nhất trước khi sử dụng backtracking.,CSP,easy
+Cách backtracking hoạt động như thế nào?,Thuật toán backtracking giải CSP bằng cách gán giá trị cho biến theo thứ tự và quay lui khi ràng buộc bị vi phạm.,CSP,easy
+Thuật toán Đồ thị ràng buộc là gì?,"Đồ thị ràng buộc biểu diễn CSP bằng nút là biến và cạnh là ràng buộc giữa các biến, giúp trực quan hóa cấu trúc constraint.",CSP,easy
+Thuật toán Miền giá trị là gì?,"Miền giá trị trong CSP là tập các giá trị mà biến có thể nhận, giúp xác định không gian tìm kiếm cho constraint.",CSP,easy
+Thuật toán CSP là gì?,"CSP (constraint satisfaction problem) là bài toán ràng buộc gồm tập biến, miền giá trị và ràng buộc, yêu cầu tìm gán thoả mãn tất cả constraint.",CSP,easy
+Bạn có thể giải thích về Loại ràng buộc,"Ràng buộc trong CSP có thể là nhị phân hoặc đa ngôi, quy định các giá trị hợp lệ của biến.",CSP,easy
+Thuật toán Arc consistency là gì?,"Arc consistency là kỹ thuật đảm bảo mỗi giá trị trong miền biến đều có đối tác hợp lệ theo ràng buộc nhị phân, hỗ trợ giảm không gian tìm kiếm CSP.",CSP,easy
+Định nghĩa constraint được hiểu thế nào,Kiểm tra nhất quán đảm bảo gán hiện tại không vi phạm constraint và là bước quan trọng trong thuật toán backtracking CSP.,CSP,medium
+Cách csp hoạt động như thế nào,"CSP (constraint satisfaction problem) là bài toán ràng buộc gồm tập biến, miền giá trị và ràng buộc, yêu cầu tìm gán thoả mãn tất cả constraint.",CSP,medium
+Bạn hiểu gì về constraint?,"Arc consistency là kỹ thuật đảm bảo mỗi giá trị trong miền biến đều có đối tác hợp lệ theo ràng buộc nhị phân, hỗ trợ giảm không gian tìm kiếm CSP.",CSP,medium
+Bạn hiểu gì về backtracking?,"Forward checking trong CSP kiểm tra ràng buộc trước khi gán để loại bỏ giá trị không hợp lệ, giảm số lần backtracking.",CSP,medium
+Hãy mô tả ràng buộc làm việc ra sao,"Miền giá trị trong CSP là tập các giá trị mà biến có thể nhận, giúp xác định không gian tìm kiếm cho constraint.",CSP,medium
+Tối ưu ràng buộc nhằm mục đích gì?,"Tìm kiếm cục bộ giải CSP bằng cách bắt đầu với gán đầy đủ và sửa đổi cục bộ để giảm số constraint vi phạm, thay vì backtracking.",CSP,hard
+Tối ưu constraint nhằm mục đích gì?,"CSP (constraint satisfaction problem) là bài toán ràng buộc gồm tập biến, miền giá trị và ràng buộc, yêu cầu tìm gán thoả mãn tất cả constraint.",CSP,hard
+Tối ưu backtracking nhằm mục đích gì?,"Forward checking trong CSP kiểm tra ràng buộc trước khi gán để loại bỏ giá trị không hợp lệ, giảm số lần backtracking.",CSP,hard
+Hãy giải thích về Dropout,"Dropout là kỹ thuật regularization trong mạng neural, ngẫu nhiên bỏ qua một số nơron trong quá trình huấn luyện để tránh overfitting.",DeepLearning,easy
+Hãy giải thích về Thuật toán gradient descent,Gradient descent là phương pháp tối ưu hóa được dùng trong mạng neural để cập nhật trọng số dựa trên gradient tính từ backpropagation.,DeepLearning,easy
+Thuật toán Autoencoder nghĩa là gì?,Autoencoder là mạng neural học sâu tự giám sát có cấu trúc mã hóa và giải mã để nén và tái tạo dữ liệu.,DeepLearning,easy
+Thuật toán LSTM là gì?,LSTM là biến thể của RNN có cơ chế cổng giúp mạng neural ghi nhớ thông tin dài hạn và giảm vấn đề gradient biến mất.,DeepLearning,easy
+Thuật toán Mô hình chuỗi dùng để làm gì?,"RNN được dùng cho mô hình chuỗi như văn bản và âm thanh, vì nó duy trì trạng thái qua nhiều bước.",DeepLearning,easy
+Thuật toán Lớp pooling dùng để làm gì?,"Lớp pooling trong CNN giảm kích thước dữ liệu bằng cách lấy giá trị đại diện, giúp mạng neural giảm số tham số.",DeepLearning,easy
+Cách hàm kích hoạt hoạt động như thế nào?,"Hàm kích hoạt trong mạng neural giới thiệu tính phi tuyến vào nơron, cho phép mô hình học các mối quan hệ phức tạp.",DeepLearning,easy
+Thuật toán Dropout là gì?,"Dropout là kỹ thuật regularization trong mạng neural, ngẫu nhiên bỏ qua một số nơron trong quá trình huấn luyện để tránh overfitting.",DeepLearning,easy
+Thuật toán Mạng RNN là gì?,"Mạng RNN (recurrent neural network) xử lý dữ liệu tuần tự bằng cách giữ trạng thái qua các bước thời gian, phù hợp cho chuỗi và ngôn ngữ.",DeepLearning,easy
+Thuật toán Mạng neural nghĩa là gì?,"Mạng neural là mô hình học sâu bao gồm các lớp nơron liên kết, mô phỏng hệ thần kinh, giúp học các mẫu phức tạp trong dữ liệu.",DeepLearning,easy
+Bạn có thể giải thích về Thuật toán backpropagation,"Backpropagation là thuật toán lan truyền ngược lỗi để tính gradient và cập nhật trọng số trong mạng neural, giúp mô hình học sâu tối ưu.",DeepLearning,easy
+Thuật toán Lớp tích chập là gì?,"Trong CNN, lớp tích chập sử dụng bộ lọc để trích xuất đặc trưng cục bộ từ dữ liệu như hình ảnh.",DeepLearning,easy
+Giải thích cách backpropagation vận hành,"Học sâu đòi hỏi điều chỉnh siêu tham số như kích thước batch, tốc độ học và số lớp của mạng neural.",DeepLearning,medium
+Cách backpropagation làm việc như thế nào,"Mạng neural là mô hình học sâu bao gồm các lớp nơron liên kết, mô phỏng hệ thần kinh, giúp học các mẫu phức tạp trong dữ liệu.",DeepLearning,medium
+Định nghĩa backpropagation được hiểu thế nào,"Trong CNN, lớp tích chập sử dụng bộ lọc để trích xuất đặc trưng cục bộ từ dữ liệu như hình ảnh.",DeepLearning,medium
+Giải thích cách mạng nơ-ron hoạt động,"Lớp fully connected trong mạng neural kết nối mỗi nơron với tất cả nơron ở lớp kế tiếp, tổng hợp đặc trưng đã học.",DeepLearning,medium
+Định nghĩa deep learning được hiểu thế nào,"Mạng RNN (recurrent neural network) xử lý dữ liệu tuần tự bằng cách giữ trạng thái qua các bước thời gian, phù hợp cho chuỗi và ngôn ngữ.",DeepLearning,medium
+Deep learning có nghĩa là gì?,"RNN được dùng cho mô hình chuỗi như văn bản và âm thanh, vì nó duy trì trạng thái qua nhiều bước.",DeepLearning,hard
+Neural network có nghĩa là gì?,"Mạng neural là mô hình học sâu bao gồm các lớp nơron liên kết, mô phỏng hệ thần kinh, giúp học các mẫu phức tạp trong dữ liệu.",DeepLearning,hard
+Làm sao để chọn mô hình backpropagation phù hợp?,"Lớp fully connected trong mạng neural kết nối mỗi nơron với tất cả nơron ở lớp kế tiếp, tổng hợp đặc trưng đã học.",DeepLearning,hard
+Hãy giải thích về Dữ liệu huấn luyện với KNN,KNN lưu trữ toàn bộ dữ liệu huấn luyện và sử dụng nó làm tập các láng giềng khi thực hiện voting cho điểm mới.,KNN,easy
+Bạn có thể giải thích về Độ phức tạp tính toán KNN,Độ phức tạp tính toán của KNN cao vì phải tính khoảng cách Euclidean tới mọi điểm để xác định k láng giềng và thực hiện voting.,KNN,easy
+Thuật toán KNN và hệ thống khuyến nghị là gì?,KNN được dùng trong hệ thống khuyến nghị bằng cách tìm k láng giềng gần nhất của người dùng hoặc sản phẩm và sử dụng voting để đưa ra đề xuất.,KNN,easy
+Thuật toán Lựa chọn k trong KNN là gì?,"Lựa chọn k trong KNN ảnh hưởng tới kết quả: k nhỏ làm thuật toán nhạy với nhiễu, k lớn làm voting ổn định hơn nhưng có thể làm mờ ranh giới.",KNN,easy
+Thuật toán học lười KNN dùng để làm gì?,KNN là thuật toán học lười vì nó không xây dựng mô hình phức tạp mà giữ toàn bộ dữ liệu và tìm láng giềng tại thời điểm dự đoán bằng voting.,KNN,easy
+Thuật toán KNN cho hồi quy dùng để làm gì?,KNN cũng có thể thực hiện hồi quy bằng cách lấy trung bình giá trị của k láng giềng gần nhất thay vì voting nhãn.,KNN,easy
+Cách giá trị k trong KNN làm việc như thế nào?,Giá trị k trong KNN là số lượng láng giềng được xem xét trong voting và ảnh hưởng đến độ mượt của phân loại.,KNN,easy
+Thuật toán Dữ liệu huấn luyện với KNN là gì?,KNN lưu trữ toàn bộ dữ liệu huấn luyện và sử dụng nó làm tập các láng giềng khi thực hiện voting cho điểm mới.,KNN,easy
+Thuật toán Khoảng cách Euclidean nghĩa là gì?,Khoảng cách Euclidean là thước đo phổ biến trong KNN để đánh giá sự giống nhau giữa các điểm và xác định k láng giềng gần nhất.,KNN,easy
+Thuật toán KNN là gì?,"KNN là thuật toán phân loại dựa trên k láng giềng gần nhất bằng cách voting đa số, sử dụng khoảng cách Euclidean để đo sự tương đồng.",KNN,easy
+Bạn có thể giải thích về Voting KNN,Voting trong KNN là cơ chế bỏ phiếu của k láng giềng gần nhất để quyết định nhãn phân loại theo số lượng phiếu đa số.,KNN,easy
+Thuật toán Lời nguyền chiều trong KNN nghĩa là gì?,Lời nguyền chiều trong KNN đề cập tới việc khoảng cách Euclidean mất ý nghĩa khi số lượng thuộc tính cao làm k láng giềng gần nhất khó phân biệt.,KNN,easy
+Cách knn vận hành như thế nào,KNN là thuật toán không tham số nghĩa là nó dựa vào k láng giềng để voting mà không giả định mô hình phân phối dữ liệu.,KNN,medium
+Định nghĩa knn được hiểu thế nào,"KNN là thuật toán phân loại dựa trên k láng giềng gần nhất bằng cách voting đa số, sử dụng khoảng cách Euclidean để đo sự tương đồng.",KNN,medium
+Giải thích cách láng giềng hoạt động,Lời nguyền chiều trong KNN đề cập tới việc khoảng cách Euclidean mất ý nghĩa khi số lượng thuộc tính cao làm k láng giềng gần nhất khó phân biệt.,KNN,medium
+Hãy mô tả láng giềng làm việc ra sao,Chuẩn hóa dữ liệu giúp KNN sử dụng khoảng cách Euclidean chính xác hơn khi tìm láng giềng và thực hiện voting.,KNN,medium
+Cách knn hoạt động như thế nào,Khoảng cách Euclidean là thước đo phổ biến trong KNN để đánh giá sự giống nhau giữa các điểm và xác định k láng giềng gần nhất.,KNN,medium
+Phương pháp knn nào hiệu quả hơn?,KNN là thuật toán học lười vì nó không xây dựng mô hình phức tạp mà giữ toàn bộ dữ liệu và tìm láng giềng tại thời điểm dự đoán bằng voting.,KNN,hard
+Chiến lược k-nearest nổi trội ra sao?,"KNN là thuật toán phân loại dựa trên k láng giềng gần nhất bằng cách voting đa số, sử dụng khoảng cách Euclidean để đo sự tương đồng.",KNN,hard
+Tối ưu knn nhằm mục đích gì?,Chuẩn hóa dữ liệu giúp KNN sử dụng khoảng cách Euclidean chính xác hơn khi tìm láng giềng và thực hiện voting.,KNN,hard
+Bạn có thể giải thích về Vấn đề SAT,Vấn đề SAT yêu cầu xác định xem có gán giá trị chân lý nào làm cho công thức logic ở dạng CNF trở nên đúng hay không.,Logic,easy
+Bạn có thể giải thích về Chứng minh phản chứng,"Chứng minh phản chứng sử dụng mệnh đề phủ định giả thuyết để suy diễn mâu thuẫn, qua đó chứng minh mệnh đề ban đầu đúng.",Logic,easy
+Thuật toán Động cơ suy diễn là gì?,"Động cơ suy diễn là thành phần trong hệ thống logic tự động, áp dụng quy tắc suy diễn như modus ponens để suy ra mệnh đề mới.",Logic,easy
+Thuật toán Tính đúng đắn và đầy đủ là gì?,Một hệ thống suy diễn được gọi là đúng đắn nếu chỉ suy ra mệnh đề đúng và đầy đủ nếu suy ra được tất cả mệnh đề logic nào đúng theo ngữ nghĩa.,Logic,easy
+Thuật toán Hệ quả logic dùng để làm gì?,Hệ quả logic xảy ra khi một tập mệnh đề suy dẫn ra một mệnh đề khác thông qua quy tắc suy diễn.,Logic,easy
+Thuật toán Tương đương logic dùng để làm gì?,"Hai mệnh đề logic tương đương khi chúng có cùng giá trị chân lý trong mọi trường hợp, biểu thị sự tương đương trong suy diễn.",Logic,easy
+Cách modus ponens vận hành như thế nào?,"Modus ponens là quy tắc suy luận trong logic mệnh đề: nếu mệnh đề P kéo theo Q và P đúng, thì suy diễn kết luận Q đúng.",Logic,easy
+Thuật toán Vấn đề SAT là gì?,Vấn đề SAT yêu cầu xác định xem có gán giá trị chân lý nào làm cho công thức logic ở dạng CNF trở nên đúng hay không.,Logic,easy
+Thuật toán Chuẩn tắc CNF là gì?,"Biểu thức ở dạng chuẩn tắc CNF là phủ định hoặc mệnh đề kết hợp qua phép hoặc, và toàn bộ công thức là phép và của các mệnh đề, được sử dụng trong suy diễn logic.",Logic,easy
+Thuật toán Logic mệnh đề là gì?,"Logic mệnh đề là hệ thống suy luận sử dụng mệnh đề đúng sai và các phép toán logic như và, hoặc, không để thể hiện tri thức.",Logic,easy
+Hãy giải thích về Dạng DNF,Dạng DNF là biểu thức logic gồm phép hoặc của các mệnh đề kết hợp qua phép và; tuy không được sử dụng nhiều như CNF trong suy diễn.,Logic,easy
+Thuật toán Modus tollens nghĩa là gì?,"Modus tollens là quy tắc logic: nếu P kéo theo Q và Q sai, thì suy diễn rằng P sai.",Logic,easy
+Cách cnf làm việc như thế nào,"Trong hệ suy diễn, công thức CNF giúp áp dụng quy tắc resolution để chứng minh tính hợp lệ của mệnh đề.",Logic,medium
+Hãy mô tả modus ponens hoạt động ra sao,"Logic mệnh đề là hệ thống suy luận sử dụng mệnh đề đúng sai và các phép toán logic như và, hoặc, không để thể hiện tri thức.",Logic,medium
+Định nghĩa mệnh đề được hiểu thế nào,"Modus tollens là quy tắc logic: nếu P kéo theo Q và Q sai, thì suy diễn rằng P sai.",Logic,medium
+Cách logic vận hành như thế nào,"Resolution là quy tắc suy diễn trong logic, kết hợp hai mệnh đề ở dạng CNF để suy ra mệnh đề mới bằng cách loại bỏ các cặp mâu thuẫn.",Logic,medium
+Hãy mô tả mệnh đề vận hành ra sao,"Biểu thức ở dạng chuẩn tắc CNF là phủ định hoặc mệnh đề kết hợp qua phép hoặc, và toàn bộ công thức là phép và của các mệnh đề, được sử dụng trong suy diễn logic.",Logic,medium
+Phương pháp logic nào hiệu quả hơn?,Hệ quả logic xảy ra khi một tập mệnh đề suy dẫn ra một mệnh đề khác thông qua quy tắc suy diễn.,Logic,hard
+Làm sao để chọn mô hình logic phù hợp?,"Logic mệnh đề là hệ thống suy luận sử dụng mệnh đề đúng sai và các phép toán logic như và, hoặc, không để thể hiện tri thức.",Logic,hard
+Phương pháp cnf nào hiệu quả hơn?,"Resolution là quy tắc suy diễn trong logic, kết hợp hai mệnh đề ở dạng CNF để suy ra mệnh đề mới bằng cách loại bỏ các cặp mâu thuẫn.",Logic,hard
+Bạn có thể giải thích về Khả năng tổng quát,"Mục tiêu của học máy là đạt khả năng tổng quát, nghĩa là mô hình training trên dữ liệu mới mà không overfitting.",MachineLearning,easy
+Hãy giải thích về Cân bằng bias-variance,"Trong học máy, cân bằng giữa bias và variance giúp tránh overfitting và underfitting bằng cách chọn mô hình phù hợp và kiểm tra validation.",MachineLearning,easy
+Thuật toán Tiền xử lý dữ liệu là gì?,"Tiền xử lý dữ liệu trong học máy bao gồm làm sạch, chuyển đổi và chuẩn hóa dữ liệu training để cải thiện học và giảm overfitting.",MachineLearning,easy
+Thuật toán Regularization nghĩa là gì?,Regularization là kỹ thuật thêm ràng buộc vào hàm mất mát trong học máy để giảm overfitting khi training.,MachineLearning,easy
+Thuật toán Cross-validation dùng để làm gì?,Cross-validation là kỹ thuật chia dữ liệu thành nhiều phần để training và validation luân phiên nhằm giảm overfitting và đánh giá ổn định.,MachineLearning,easy
+Thuật toán Tập kiểm tra dùng để làm gì?,Tập kiểm tra được giữ riêng và chỉ dùng để đánh giá cuối cùng mô hình học máy sau khi training và validation hoàn tất.,MachineLearning,easy
+Cách underfitting vận hành như thế nào?,"Underfitting xảy ra khi mô hình học máy quá đơn giản, không nắm bắt được mẫu trong dữ liệu training và cho kết quả kém trên cả training và validation.",MachineLearning,easy
+Thuật toán Khả năng tổng quát là gì?,"Mục tiêu của học máy là đạt khả năng tổng quát, nghĩa là mô hình training trên dữ liệu mới mà không overfitting.",MachineLearning,easy
+Thuật toán Học không giám sát là gì?,Học không giám sát tìm kiếm cấu trúc tiềm ẩn trong dữ liệu không có nhãn bằng thuật toán học máy và cần tránh overfitting.,MachineLearning,easy
+Thuật toán Học máy nghĩa là gì?,"Học máy là lĩnh vực sử dụng thuật toán để học mẫu từ dữ liệu và đưa ra dự đoán, bao gồm quá trình training trên tập dữ liệu và tránh overfitting.",MachineLearning,easy
+Bạn có thể giải thích về Overfitting,"Overfitting xảy ra khi mô hình học máy học quá kỹ dữ liệu training, bao gồm cả nhiễu, khiến dự đoán kém trên dữ liệu validation.",MachineLearning,easy
+Thuật toán Tập validation là gì?,Tập validation được dùng để đánh giá mô hình học máy trong quá trình training và điều chỉnh tham số nhằm tránh overfitting.,MachineLearning,easy
+Bạn hiểu gì về training?,"Độ lệch cao trong học máy làm mô hình underfitting, không học đủ từ training và dẫn tới sai số trên validation.",MachineLearning,medium
+Giải thích cách validation vận hành,"Học máy là lĩnh vực sử dụng thuật toán để học mẫu từ dữ liệu và đưa ra dự đoán, bao gồm quá trình training trên tập dữ liệu và tránh overfitting.",MachineLearning,medium
+Bạn hiểu gì về học máy?,Tập validation được dùng để đánh giá mô hình học máy trong quá trình training và điều chỉnh tham số nhằm tránh overfitting.,MachineLearning,medium
+Hãy mô tả training hoạt động ra sao,Tập huấn luyện là tập dữ liệu dùng để training mô hình học máy nhằm học các tham số và tối ưu hóa dự đoán.,MachineLearning,medium
+Cách overfitting hoạt động như thế nào,Học không giám sát tìm kiếm cấu trúc tiềm ẩn trong dữ liệu không có nhãn bằng thuật toán học máy và cần tránh overfitting.,MachineLearning,medium
+Làm sao để chọn mô hình validation phù hợp?,Cross-validation là kỹ thuật chia dữ liệu thành nhiều phần để training và validation luân phiên nhằm giảm overfitting và đánh giá ổn định.,MachineLearning,hard
+Chiến lược training nổi trội ra sao?,"Học máy là lĩnh vực sử dụng thuật toán để học mẫu từ dữ liệu và đưa ra dự đoán, bao gồm quá trình training trên tập dữ liệu và tránh overfitting.",MachineLearning,hard
+Phương pháp overfitting nào hiệu quả hơn?,Tập huấn luyện là tập dữ liệu dùng để training mô hình học máy nhằm học các tham số và tối ưu hóa dự đoán.,MachineLearning,hard
+Hãy giải thích về Naive Bayes so với hồi quy logistic,"Naive Bayes là mô hình xác suất dựa trên định lý Bayes, trong khi hồi quy logistic dựa trên hàm logit và không giả định độc lập; Naive Bayes thường nhanh hơn.",NaiveBayes,easy
+Bạn có thể giải thích về Nhược điểm của Naive Bayes,"Nhược điểm của Naive Bayes là giả định thuộc tính độc lập có thể không chính xác, làm giảm độ chính xác của xác suất bayes.",NaiveBayes,easy
+Thuật toán Tính xác suất hậu nghiệm nghĩa là gì?,"Trong Naive Bayes, xác suất hậu nghiệm được tính bằng prior nhân likelihood theo định lý Bayes và sau đó chuẩn hóa.",NaiveBayes,easy
+Thuật toán Ưu điểm của Naive Bayes là gì?,Naive Bayes có ưu điểm về tốc độ và hiệu quả khi tính xác suất bằng công thức Bayes với prior và likelihood đơn giản.,NaiveBayes,easy
+Thuật toán Làm trơn Laplace dùng để làm gì?,Làm trơn Laplace được dùng trong Naive Bayes để tránh xác suất bằng không bằng cách điều chỉnh prior và likelihood.,NaiveBayes,easy
+Thuật toán Bernoulli Naive Bayes dùng để làm gì?,"Bernoulli Naive Bayes xử lý thuộc tính nhị phân bằng cách sử dụng xác suất xuất hiện và prior, likelihood trong khuôn khổ Naive Bayes.",NaiveBayes,easy
+Cách likelihood trong Naive Bayes hoạt động như thế nào?,Likelihood trong Naive Bayes là xác suất của dữ liệu cho mỗi lớp và được kết hợp với prior theo công thức Bayes.,NaiveBayes,easy
+Thuật toán Naive Bayes so với hồi quy logistic là gì?,"Naive Bayes là mô hình xác suất dựa trên định lý Bayes, trong khi hồi quy logistic dựa trên hàm logit và không giả định độc lập; Naive Bayes thường nhanh hơn.",NaiveBayes,easy
+Thuật toán Định lý Bayes là gì?,"Định lý Bayes cung cấp cơ sở xác suất cho Naive Bayes, cho phép cập nhật prior thành xác suất hậu nghiệm bằng cách nhân với likelihood.",NaiveBayes,easy
+Thuật toán Naive Bayes nghĩa là gì?,Naive Bayes là thuật toán phân loại dựa trên xác suất sử dụng định lý Bayes với giả định các thuộc tính độc lập và sử dụng prior và likelihood để tính toán.,NaiveBayes,easy
+Hãy giải thích về Prior trong Naive Bayes,Prior trong Naive Bayes là xác suất ban đầu của một lớp được sử dụng cùng với likelihood để tính xác suất hậu nghiệm.,NaiveBayes,easy
+Thuật toán Multinomial Naive Bayes nghĩa là gì?,"Multinomial Naive Bayes thích hợp cho phân loại văn bản, sử dụng xác suất đếm tần suất từ và prior, likelihood của mỗi lớp.",NaiveBayes,easy
+Hãy mô tả xác suất hoạt động ra sao,"Naive Bayes huấn luyện nhanh vì chỉ tính thống kê xác suất và prior, likelihood của từng lớp dựa trên dữ liệu.",NaiveBayes,medium
+Bạn hiểu gì về xác suất?,Naive Bayes là thuật toán phân loại dựa trên xác suất sử dụng định lý Bayes với giả định các thuộc tính độc lập và sử dụng prior và likelihood để tính toán.,NaiveBayes,medium
+Định nghĩa xác suất được hiểu thế nào,"Multinomial Naive Bayes thích hợp cho phân loại văn bản, sử dụng xác suất đếm tần suất từ và prior, likelihood của mỗi lớp.",NaiveBayes,medium
+Cách xác suất vận hành như thế nào,"Gaussian Naive Bayes là biến thể của Naive Bayes giả định rằng dữ liệu liên tục tuân theo phân bố chuẩn, sử dụng xác suất với prior và likelihood.",NaiveBayes,medium
+Bạn hiểu gì về bayes?,"Định lý Bayes cung cấp cơ sở xác suất cho Naive Bayes, cho phép cập nhật prior thành xác suất hậu nghiệm bằng cách nhân với likelihood.",NaiveBayes,medium
+Làm sao để chọn mô hình naive bayes phù hợp?,Làm trơn Laplace được dùng trong Naive Bayes để tránh xác suất bằng không bằng cách điều chỉnh prior và likelihood.,NaiveBayes,hard
+Làm sao để chọn mô hình xác suất phù hợp?,Naive Bayes là thuật toán phân loại dựa trên xác suất sử dụng định lý Bayes với giả định các thuộc tính độc lập và sử dụng prior và likelihood để tính toán.,NaiveBayes,hard
+Tối ưu naive bayes nhằm mục đích gì?,"Gaussian Naive Bayes là biến thể của Naive Bayes giả định rằng dữ liệu liên tục tuân theo phân bố chuẩn, sử dụng xác suất với prior và likelihood.",NaiveBayes,hard
+Bạn có thể giải thích về Phát hiện kết nối đồ thị,DFS có thể dùng để phát hiện thành phần liên thông trong đồ thị bằng cách tìm kiếm theo chiều sâu từ mỗi nút chưa được thăm.,Search,easy
+Hãy giải thích về DFS ứng dụng,"DFS được sử dụng trong sắp xếp topo, phát hiện chu trình và thăm dò toàn bộ đồ thị nhờ đi theo chiều sâu.",Search,easy
+Thuật toán Duyệt cây bằng DFS nghĩa là gì?,"Duyệt cây bằng DFS theo thứ tự tiền tự, trung tự hoặc hậu tự là ví dụ của tìm kiếm theo chiều sâu.",Search,easy
+Thuật toán BFS shortest path là gì?,"Trong đồ thị không trọng số, BFS có thể tìm đường đi ngắn nhất bằng cách duyệt theo chiều rộng và đo số bước đến đích.",Search,easy
+Thuật toán DFS completeness dùng để làm gì?,DFS có thể không hoàn chỉnh trên đồ thị vô hạn vì tìm kiếm theo chiều sâu có thể đi mãi một nhánh và không bao giờ quay lại.,Search,easy
+Thuật toán BFS completeness dùng để làm gì?,"BFS là thuật toán hoàn chỉnh trong đồ thị hữu hạn, luôn tìm được lời giải nếu tồn tại nhờ duyệt theo chiều rộng.",Search,easy
+Cách bFS vs DFS hoạt động như thế nào?,"So sánh BFS và DFS cho thấy BFS khám phá theo chiều rộng và tìm đường ngắn nhất trong đồ thị không trọng số, trong khi DFS đi theo chiều sâu và phù hợp cho duyệt toàn bộ.",Search,easy
+Thuật toán Phát hiện kết nối đồ thị nghĩa là gì?,DFS có thể dùng để phát hiện thành phần liên thông trong đồ thị bằng cách tìm kiếm theo chiều sâu từ mỗi nút chưa được thăm.,Search,easy
+Thuật toán BFS memory usage là gì?,Tìm kiếm BFS yêu cầu nhiều bộ nhớ hơn DFS vì nó lưu trữ toàn bộ hàng đợi các nút ở cùng mức trong quá trình tìm kiếm theo chiều rộng.,Search,easy
+Thuật toán Breadth-first search là gì?,"Breadth-first search (BFS) là thuật toán tìm kiếm theo chiều rộng, duyệt các nút theo mức bằng cách sử dụng hàng đợi để khám phá dần.",Search,easy
+Bạn có thể giải thích về DFS recursion,"DFS thường được cài đặt bằng đệ quy hoặc ngăn xếp, đi sâu vào cây tìm kiếm và quay lui khi không còn đường đi.",Search,easy
+Thuật toán Ngăn xếp trong DFS là gì?,Thuật toán DFS dùng ngăn xếp hoặc đệ quy để quản lý việc khám phá chiều sâu của cây hoặc đồ thị.,Search,easy
+Giải thích cách dfs làm việc,BFS có hạn chế về bộ nhớ vì hàng đợi có thể chứa rất nhiều nút khi tìm kiếm theo chiều rộng trong không gian lớn.,Search,medium
+Cách chiều sâu hoạt động như thế nào,"Breadth-first search (BFS) là thuật toán tìm kiếm theo chiều rộng, duyệt các nút theo mức bằng cách sử dụng hàng đợi để khám phá dần.",Search,medium
+Cách bfs làm việc như thế nào,Thuật toán DFS dùng ngăn xếp hoặc đệ quy để quản lý việc khám phá chiều sâu của cây hoặc đồ thị.,Search,medium
+Định nghĩa chiều sâu được hiểu thế nào,"Thuật toán BFS sử dụng hàng đợi để lưu trữ các nút cần duyệt, đảm bảo tìm kiếm theo chiều rộng từng lớp.",Search,medium
+Định nghĩa tìm kiếm được hiểu thế nào,Tìm kiếm BFS yêu cầu nhiều bộ nhớ hơn DFS vì nó lưu trữ toàn bộ hàng đợi các nút ở cùng mức trong quá trình tìm kiếm theo chiều rộng.,Search,medium
+Dfs có nghĩa là gì?,DFS có thể không hoàn chỉnh trên đồ thị vô hạn vì tìm kiếm theo chiều sâu có thể đi mãi một nhánh và không bao giờ quay lại.,Search,hard
+Làm sao để chọn mô hình chiều rộng phù hợp?,"Breadth-first search (BFS) là thuật toán tìm kiếm theo chiều rộng, duyệt các nút theo mức bằng cách sử dụng hàng đợi để khám phá dần.",Search,hard
+Chiến lược tìm kiếm nổi trội ra sao?,"Thuật toán BFS sử dụng hàng đợi để lưu trữ các nút cần duyệt, đảm bảo tìm kiếm theo chiều rộng từng lớp.",Search,hard
+Hãy giải thích về Tính hoàn chỉnh của A*,"A* là thuật toán hoàn chỉnh khi heuristic admissible và không có cung âm, bảo đảm tìm thấy lời giải nếu tồn tại.",SearchInformed,easy
+Bạn có thể giải thích về A* có trọng số,"A* có trọng số điều chỉnh h(n) bằng hệ số để tăng tốc tìm kiếm, nhưng có thể hy sinh tối ưu khi heuristic không admissible.",SearchInformed,easy
+Thuật toán Heuristic trong giải câu đố nghĩa là gì?,Giải câu đố như ô trượt và rubik sử dụng heuristic h(n) để hướng dẫn tìm kiếm A* đạt kết quả nhanh hơn.,SearchInformed,easy
+Thuật toán Hạn chế của heuristic search là gì?,Heuristic search có thể tiêu tốn bộ nhớ và phụ thuộc vào độ chính xác của heuristic; heuristic không admissible có thể dẫn tới kết quả không tối ưu.,SearchInformed,easy
+Thuật toán Lợi ích của heuristic search dùng để làm gì?,Tìm kiếm heuristic như A* giảm số nút cần mở rộng bằng cách sử dụng hàm heuristic để hướng dẫn thay vì tìm kiếm mù.,SearchInformed,easy
+Thuật toán greedy best-first search dùng để làm gì?,"Thuật toán greedy best-first search chọn mở rộng nút có giá trị heuristic thấp nhất, tập trung vào h(n) mà bỏ qua g(n).",SearchInformed,easy
+Cách ước lượng h(n) hoạt động như thế nào?,"Trong thuật toán A*, h(n) là hàm heuristic ước lượng chi phí rời đến mục tiêu và phải admissible để đảm bảo tối ưu.",SearchInformed,easy
+Thuật toán Tính hoàn chỉnh của A* nghĩa là gì?,"A* là thuật toán hoàn chỉnh khi heuristic admissible và không có cung âm, bảo đảm tìm thấy lời giải nếu tồn tại.",SearchInformed,easy
+Thuật toán Hàm đánh giá f(n) nghĩa là gì?,Hàm đánh giá f(n) trong A* được tính bằng chi phí đã đi g(n) cộng với ước lượng heuristic h(n) để xếp thứ tự mở rộng.,SearchInformed,easy
+Thuật toán A* nghĩa là gì?,Thuật toán A* là tìm kiếm heuristic kết hợp chi phí thực g(n) và ước lượng h(n) để tạo hàm đánh giá f(n) và mở rộng nút tốt nhất trước.,SearchInformed,easy
+Hãy giải thích về Chi phí g(n),"Trong A*, g(n) là chi phí đường đi từ nút khởi đầu đến nút hiện tại và là thành phần của hàm f(n).",SearchInformed,easy
+Thuật toán Heuristic consistent là gì?,"Heuristic consistent hoặc monotone thỏa mãn điều kiện tam giác, đảm bảo A* không cần mở rộng lại nút và duy trì admissible.",SearchInformed,easy
+Định nghĩa heuristic được hiểu thế nào,"Greedy best-first search chỉ xem xét h(n) nên có thể nhanh hơn nhưng không đảm bảo tối ưu, trong khi A* kết hợp g(n) và h(n) để tìm đường tốt.",SearchInformed,medium
+Cách heuristic làm việc như thế nào,Thuật toán A* là tìm kiếm heuristic kết hợp chi phí thực g(n) và ước lượng h(n) để tạo hàm đánh giá f(n) và mở rộng nút tốt nhất trước.,SearchInformed,medium
+Cách f(n) vận hành như thế nào,"Heuristic consistent hoặc monotone thỏa mãn điều kiện tam giác, đảm bảo A* không cần mở rộng lại nút và duy trì admissible.",SearchInformed,medium
+Cách a* vận hành như thế nào,"Heuristic admissible là hàm ước lượng không bao giờ vượt quá chi phí thực tế tới mục tiêu, giúp A* tìm đường tối ưu.",SearchInformed,medium
+Giải thích cách f(n) vận hành,Hàm đánh giá f(n) trong A* được tính bằng chi phí đã đi g(n) cộng với ước lượng heuristic h(n) để xếp thứ tự mở rộng.,SearchInformed,medium
+Heuristic có nghĩa là gì?,Tìm kiếm heuristic như A* giảm số nút cần mở rộng bằng cách sử dụng hàm heuristic để hướng dẫn thay vì tìm kiếm mù.,SearchInformed,hard
+Phương pháp a* nào hiệu quả hơn?,Thuật toán A* là tìm kiếm heuristic kết hợp chi phí thực g(n) và ước lượng h(n) để tạo hàm đánh giá f(n) và mở rộng nút tốt nhất trước.,SearchInformed,hard
+Làm sao để chọn mô hình admissible phù hợp?,"Heuristic admissible là hàm ước lượng không bao giờ vượt quá chi phí thực tế tới mục tiêu, giúp A* tìm đường tối ưu.",SearchInformed,hard
